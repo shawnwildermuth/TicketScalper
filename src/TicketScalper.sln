@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30114.105
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "API", "API", "{C1B7DA66-4BDF-451A-8435-08E524D7B588}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Clients", "Clients", "{D02F806B-147B-4023-A94E-A37E67D68C6D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TicketScalper.ShowsAPI", "TicketScalper.ShowsAPI\TicketScalper.ShowsAPI.csproj", "{0F5250A4-0184-4F4B-AD38-064C0711BC05}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{B6D74D78-740C-40B9-AFDB-2B13295F74F4}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0F5250A4-0184-4F4B-AD38-064C0711BC05}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0F5250A4-0184-4F4B-AD38-064C0711BC05}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0F5250A4-0184-4F4B-AD38-064C0711BC05}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0F5250A4-0184-4F4B-AD38-064C0711BC05}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{0F5250A4-0184-4F4B-AD38-064C0711BC05} = {C1B7DA66-4BDF-451A-8435-08E524D7B588}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {78C044F1-B4A3-4492-B688-0DE1D4C34D98}
+	EndGlobalSection
+EndGlobal
