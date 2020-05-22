@@ -12,6 +12,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using TicketScalper.Core.Seeding;
 using TicketScalper.ShowsAPI.Data;
 
 namespace TicketScalper.ShowsAPI
@@ -20,26 +21,28 @@ namespace TicketScalper.ShowsAPI
   {
     public Startup(IConfiguration configuration)
     {
-      Configuration = configuration;
+      _config = configuration;
     }
 
-    public IConfiguration Configuration { get; }
+    private IConfiguration _config;
 
     // This method gets called by the runtime. Use this method to add services to the container.
     public void ConfigureServices(IServiceCollection services)
     {
       services.AddDbContext<ShowContext>();
+      services.AddTransient<ISeeder, ShowSeeder>();
 
       services.AddControllers();
       services.AddAutoMapper(Assembly.GetEntryAssembly());
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-    public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+    public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ISeeder seeder)
     {
       if (env.IsDevelopment())
       {
         app.UseDeveloperExceptionPage();
+        seeder.Seed().Wait();
       }
       else 
       { 

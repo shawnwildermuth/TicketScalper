@@ -45,23 +45,27 @@ namespace TicketScalper.ShowsAPI.Data
 
     private void BindModel(EntityTypeBuilder<Ticket> bldr)
     {
+      bldr.ToTable("Tickets", "TicketScalper");
       bldr.Property(t => t.Seat).HasMaxLength(20);
     }
 
     private void BindModel(EntityTypeBuilder<Show> bldr)
     {
+      bldr.ToTable("Shows", "TicketScalper");
       bldr.Property(s => s.IsGeneralAdmission).HasDefaultValue(false);
       bldr.Property(s => s.Name).HasMaxLength(100);
     }
 
     private void BindModel(EntityTypeBuilder<Act> bldr)
     {
+      bldr.ToTable("Acts", "TicketScalper");
       bldr.Property(s => s.Description).HasMaxLength(4000);
       bldr.Property(s => s.Name).HasMaxLength(100);
     }
 
     private void BindModel(EntityTypeBuilder<ActShow> bldr)
     {
+      bldr.ToTable("ActShows", "TicketScalper");
       bldr.Property("ActId");
       bldr.Property("ShowId");
       bldr.HasKey("ActId", "ShowId");
@@ -76,6 +80,8 @@ namespace TicketScalper.ShowsAPI.Data
 
     private void BindModel(EntityTypeBuilder<Venue> bldr)
     {
+      bldr.ToTable("Venues", "TicketScalper");
+
       var addr = bldr.OwnsOne(v => v.Address);
       bldr.Property(v => v.Name).HasMaxLength(100);
       bldr.Property(v => v.Phone).HasMaxLength(20);

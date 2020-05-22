@@ -36,7 +36,7 @@ namespace TicketScalper.ShowsAPI.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Acts");
+                    b.ToTable("Acts","TicketScalper");
                 });
 
             modelBuilder.Entity("TicketScalper.ShowsAPI.Data.Entities.ActShow", b =>
@@ -51,7 +51,7 @@ namespace TicketScalper.ShowsAPI.Migrations
 
                     b.HasIndex("ShowId");
 
-                    b.ToTable("ActShow");
+                    b.ToTable("ActShows","TicketScalper");
                 });
 
             modelBuilder.Entity("TicketScalper.ShowsAPI.Data.Entities.Show", b =>
@@ -83,7 +83,7 @@ namespace TicketScalper.ShowsAPI.Migrations
 
                     b.HasIndex("VenueId");
 
-                    b.ToTable("Shows");
+                    b.ToTable("Shows","TicketScalper");
                 });
 
             modelBuilder.Entity("TicketScalper.ShowsAPI.Data.Entities.Ticket", b =>
@@ -110,7 +110,7 @@ namespace TicketScalper.ShowsAPI.Migrations
 
                     b.HasIndex("ShowId");
 
-                    b.ToTable("Tickets");
+                    b.ToTable("Tickets","TicketScalper");
                 });
 
             modelBuilder.Entity("TicketScalper.ShowsAPI.Data.Entities.Venue", b =>
@@ -130,7 +130,7 @@ namespace TicketScalper.ShowsAPI.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Venues");
+                    b.ToTable("Venues","TicketScalper");
                 });
 
             modelBuilder.Entity("TicketScalper.ShowsAPI.Data.Entities.ActShow", b =>
