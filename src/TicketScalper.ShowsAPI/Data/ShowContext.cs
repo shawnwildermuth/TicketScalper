@@ -47,6 +47,7 @@ namespace TicketScalper.ShowsAPI.Data
     {
       bldr.ToTable("Tickets", "TicketScalper");
       bldr.Property(t => t.Seat).HasMaxLength(20);
+      bldr.HasData(SeedDataProvider.GenerateTickets());
     }
 
     private void BindModel(EntityTypeBuilder<Show> bldr)
@@ -54,6 +55,7 @@ namespace TicketScalper.ShowsAPI.Data
       bldr.ToTable("Shows", "TicketScalper");
       bldr.Property(s => s.IsGeneralAdmission).HasDefaultValue(false);
       bldr.Property(s => s.Name).HasMaxLength(100);
+      bldr.HasData(SeedDataProvider.GenerateShows());
     }
 
     private void BindModel(EntityTypeBuilder<Act> bldr)
@@ -61,6 +63,7 @@ namespace TicketScalper.ShowsAPI.Data
       bldr.ToTable("Acts", "TicketScalper");
       bldr.Property(s => s.Description).HasMaxLength(4000);
       bldr.Property(s => s.Name).HasMaxLength(100);
+      bldr.HasData(SeedDataProvider.GenerateActs());
     }
 
     private void BindModel(EntityTypeBuilder<ActShow> bldr)
@@ -76,6 +79,9 @@ namespace TicketScalper.ShowsAPI.Data
       bldr.HasOne(a => a.Show)
        .WithMany(s => s.ActShows)
        .HasForeignKey("ShowId");
+
+      bldr.HasData(SeedDataProvider.GenerateActShows());
+
     }
 
     private void BindModel(EntityTypeBuilder<Venue> bldr)
@@ -93,8 +99,9 @@ namespace TicketScalper.ShowsAPI.Data
       addr.Property(a => a.StateProvince).HasMaxLength(50);
       addr.Property(a => a.PostalCode).HasMaxLength(50);
       addr.Property(a => a.Country).HasMaxLength(50);
+      addr.HasData(SeedDataProvider.GenerateAddresses());
 
-
+      bldr.HasData(SeedDataProvider.GenerateVenues());
     }
   }
 }

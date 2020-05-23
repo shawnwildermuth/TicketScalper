@@ -14,22 +14,22 @@ namespace TicketScalper.ShowsAPI.Data
       return new Ticket[]
       {
         new Ticket() { Id = 1, Seat = "General Admission", OriginalPrice = 49m, CurrentPrice = 99m, ShowId = 1  },
-      new Ticket() { Id =2, Seat = "General Admission", OriginalPrice = 49m, CurrentPrice = 99m, ShowId = 1 },
-      new Ticket() { Id =3, Seat = "General Admission", OriginalPrice = 49m, CurrentPrice = 99m, ShowId = 1 },
-      new Ticket() { Id =4, Seat = "General Admission", OriginalPrice = 49m, CurrentPrice = 99m, ShowId = 1 },
-      new Ticket() { Id =5, Seat = "General Admission", OriginalPrice = 49m, CurrentPrice = 99m, ShowId = 1 },
-      new Ticket() { Id =6, Seat = "General Admission", OriginalPrice = 49m, CurrentPrice = 99m, ShowId = 1 },
-      new Ticket() { Id =7, Seat = "General Admission", OriginalPrice = 49m, CurrentPrice = 99m, ShowId = 1 },
-      new Ticket() { Id =8, Seat = "General Admission", OriginalPrice = 49m, CurrentPrice = 99m, ShowId = 1 },
-      new Ticket() { Id =9, Seat = "F11", OriginalPrice = 129m, CurrentPrice = 299m, ShowId = 2 },
-      new Ticket() { Id =10, Seat = "F12", OriginalPrice = 129m, CurrentPrice = 299m, ShowId = 2 },
-      new Ticket() { Id =11, Seat = "F13", OriginalPrice = 129m, CurrentPrice = 299m, ShowId = 2 },
-      new Ticket() { Id =12, Seat = "F14", OriginalPrice = 129m, CurrentPrice = 299m, ShowId = 2 },
-      new Ticket() { Id =13, Seat = "G01", OriginalPrice = 129m, CurrentPrice = 299m, ShowId = 2 },
-      new Ticket() { Id =14, Seat = "G02", OriginalPrice = 129m, CurrentPrice = 299m, ShowId = 2 },
-      new Ticket() { Id =15, Seat = "G03", OriginalPrice = 129m, CurrentPrice = 299m, ShowId = 2 },
-      new Ticket() { Id =16, Seat = "G04", OriginalPrice = 129m, CurrentPrice = 299m, ShowId = 2 }
-    };
+        new Ticket() { Id = 2, Seat = "General Admission", OriginalPrice = 49m, CurrentPrice = 99m, ShowId = 1 },
+        new Ticket() { Id = 3, Seat = "General Admission", OriginalPrice = 49m, CurrentPrice = 99m, ShowId = 1 },
+        new Ticket() { Id = 4, Seat = "General Admission", OriginalPrice = 49m, CurrentPrice = 99m, ShowId = 1 },
+        new Ticket() { Id = 5, Seat = "General Admission", OriginalPrice = 49m, CurrentPrice = 99m, ShowId = 1 },
+        new Ticket() { Id = 6, Seat = "General Admission", OriginalPrice = 49m, CurrentPrice = 99m, ShowId = 1 },
+        new Ticket() { Id = 7, Seat = "General Admission", OriginalPrice = 49m, CurrentPrice = 99m, ShowId = 1 },
+        new Ticket() { Id = 8, Seat = "General Admission", OriginalPrice = 49m, CurrentPrice = 99m, ShowId = 1 },
+        new Ticket() { Id = 9, Seat = "F11", OriginalPrice = 129m, CurrentPrice = 299m, ShowId = 2 },
+        new Ticket() { Id = 10, Seat = "F12", OriginalPrice = 129m, CurrentPrice = 299m, ShowId = 2 },
+        new Ticket() { Id = 11, Seat = "F13", OriginalPrice = 129m, CurrentPrice = 299m, ShowId = 2 },
+        new Ticket() { Id = 12, Seat = "F14", OriginalPrice = 129m, CurrentPrice = 299m, ShowId = 2 },
+        new Ticket() { Id = 13, Seat = "G01", OriginalPrice = 129m, CurrentPrice = 299m, ShowId = 2 },
+        new Ticket() { Id = 14, Seat = "G02", OriginalPrice = 129m, CurrentPrice = 299m, ShowId = 2 },
+        new Ticket() { Id = 15, Seat = "G03", OriginalPrice = 129m, CurrentPrice = 299m, ShowId = 2 },
+        new Ticket() { Id = 16, Seat = "G04", OriginalPrice = 129m, CurrentPrice = 299m, ShowId = 2 }
+      };
     }
 
     public static ActShow[] GenerateActShows()
@@ -52,25 +52,25 @@ namespace TicketScalper.ShowsAPI.Data
           Id = 1,
           Name = "Jethro Tull and Styx",
           Length = 1 ,
-          StartDate  = new DateTime(2020, 11, 1),
+          StartDate  = new DateTime(2020, 11, 1).ToUniversalTime(),
           IsGeneralAdmission = true,
           VenueId = 2
-          },
+        },
         new Show()
         {
-          Id = 1,
+          Id = 2,
           Name = "Bruce!",
           Length = 1 ,
-          StartDate  = new DateTime(2020, 11, 4),
+          StartDate  = new DateTime(2020, 11, 4).ToUniversalTime(),
           IsGeneralAdmission = false,
           VenueId = 1
         },
         new Show()
         {
-          Id = 1,
+          Id = 3,
           Name = "Bruce!",
           Length = 1 ,
-          StartDate  = new DateTime(2020, 11, 3),
+          StartDate  = new DateTime(2020, 11, 3).ToUniversalTime(),
           IsGeneralAdmission = false,
           VenueId = 1
         },
@@ -87,29 +87,39 @@ namespace TicketScalper.ShowsAPI.Data
           Id = 1,
           Name = "The Omni",
           Phone = "(404) 555-1212",
-          Address = new Address()
-          {
-            Address1 = "123 Peachtree St",
-            CityTown = "Atlanta",
-            StateProvince = "GA",
-            PostalCode = "30303",
-            Country ="USA"
-          }
         },
         new Venue()
         {
           Id = 2,
           Name = "Variety Playhouse",
           Phone = "(404) 555-1213",
-          Address = new Address()
+        }
+      };
+    }
+
+    public static Address[] GenerateAddresses()
+    {
+      return new Address[]
+      {
+          new Address()
+          {
+            Address1 = "123 Peachtree St",
+            CityTown = "Atlanta",
+            StateProvince = "GA",
+            PostalCode = "30303",
+            Country ="USA",
+            VenueId = 1
+          },
+          new Address()
           {
             Address1 = "123 Euclid Avenue",
             CityTown = "Atlanta",
             StateProvince = "GA",
             PostalCode = "30307",
-            Country ="USA"
+            Country ="USA",
+            VenueId = 2
           }
-        }
+
       };
     }
 

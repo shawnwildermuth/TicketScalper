@@ -14,7 +14,7 @@ namespace TicketScalper.ShowsAPI.Data.Entities
     public int Length { get; set; }
     public bool IsGeneralAdmission { get; set; }
 
-    public int VenueId { get; internal set; }
+    public int VenueId { get; set; }
 
     public Venue Venue { get; set; }
     public ICollection<ActShow> ActShows { get; set; }
