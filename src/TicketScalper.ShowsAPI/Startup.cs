@@ -30,6 +30,7 @@ namespace TicketScalper.ShowsAPI
     public void ConfigureServices(IServiceCollection services)
     {
       services.AddDbContext<ShowContext>();
+      services.AddScoped<IShowRepository, ShowRepository>();
       services.AddTransient<ISeeder, ShowSeeder>();
 
       services.AddControllers();

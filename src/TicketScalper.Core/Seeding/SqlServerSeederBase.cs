@@ -1,15 +1,20 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace TicketScalper.Core.Seeding
 {
-  public abstract class SeederBase<T> : ISeeder where T : DbContext
+  public abstract class SqlServerSeederBase<T> : ISeeder where T : DbContext
   {
     protected readonly T Context;
 
-    public SeederBase(T context) 
+    public SqlServerSeederBase(T context) 
     {
+      if (!context.Database.IsSqlServer())
+      {
+        throw new InvalidOperationException("SqlServerSeederBase requires a DbContext for SQL Server.");
+      }
       Context = context;
     }
 

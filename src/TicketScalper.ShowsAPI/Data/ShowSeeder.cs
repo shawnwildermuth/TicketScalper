@@ -1,8 +1,13 @@
-﻿using Microsoft.Data.SqlClient;
+﻿using FastMember;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Internal;
+using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -12,8 +17,9 @@ using TicketScalper.Core.Seeding;
 
 namespace TicketScalper.ShowsAPI.Data
 {
-  public class ShowSeeder : SeederBase<ShowContext>
+  public class ShowSeeder : SqlServerSeederBase<ShowContext>
   {
+    private const string PROPERTYNAME = "PROPERTYNAME";
     private readonly IConfiguration _config;
     private readonly ILogger<ShowSeeder> _logger;
 
@@ -27,23 +33,33 @@ namespace TicketScalper.ShowsAPI.Data
     {
       _logger.LogInformation("Determining if Seeding is Necessary...");
 
+      if (_config.GetValue<bool>("Debug:IterateDatabase"))
+      {
+        await Context.Database.EnsureDeletedAsync();
+        await Context.Database.MigrateAsync();
+      }
+
       if (await CanSeed())
       {
         if (!await Context.Acts.AnyAsync())
         {
           _logger.LogInformation("Attempting to Seed the Database...");
-          using (var bulkCopy = new SqlBulkCopy(_config.GetConnectionString("ShowDb")))
+          var bulkOptions = SqlBulkCopyOptions.KeepIdentity | SqlBulkCopyOptions.UseInternalTransaction;
+
+          // Get Connection from Context passed in
+          using (var bulkCopy = new SqlBulkCopy(Context.Database.GetDbConnection().ConnectionString, bulkOptions))
           {
-            await BulkWrite(bulkCopy, "[TicketScalper].[Acts]", GenerateActs());
-            await BulkWrite(bulkCopy, "[TicketScalper].[Venues]", GenerateVenues());
-            await BulkWrite(bulkCopy, "[TicketScalper].[Shows]", GenerateShows());
-            await BulkWrite(bulkCopy, "[TicketScalper].[ActShows]", GenerateActShows());
-            await BulkWrite(bulkCopy, "[TicketScalper].[Tickets]", GenerateTickets());
+
+            await BulkWrite(bulkCopy, SeedDataProvider.GenerateActs());
+            await BulkWrite(bulkCopy, SeedDataProvider.GenerateVenues());
+            await BulkWrite(bulkCopy, SeedDataProvider.GenerateShows());
+            await BulkWrite(bulkCopy, SeedDataProvider.GenerateActShows());
+            await BulkWrite(bulkCopy, SeedDataProvider.GenerateTickets());
           }
         }
         else
         {
-          _logger.LogInformation("Seed not necessary...");
+          _logger.LogInformation("Seeding not necessary...");
         }
       }
       else
@@ -53,124 +69,85 @@ namespace TicketScalper.ShowsAPI.Data
       }
     }
 
-    private async Task BulkWrite(SqlBulkCopy bulkCopy, string tableName, DataTable dataTable)
+    private async Task BulkWrite<T>(SqlBulkCopy bulkCopy, IEnumerable<T> data)
     {
       try
       {
-        bulkCopy.DestinationTableName = tableName;
-        await bulkCopy.WriteToServerAsync(dataTable);
+        var mapping = GetMappingInfo<T>(data);
+
+        bulkCopy.DestinationTableName = mapping.TableName;
+        await bulkCopy.WriteToServerAsync(mapping.Table);
       }
       catch (Exception ex)
       {
         _logger.LogError($"Failed to seed: {ex}");
-        throw new InvalidOperationException("Seeding Failed");
+        throw new InvalidOperationException("Seeding Failed", ex);
       }
     }
 
-    private DataTable GenerateTickets()
+    private MappingResult GetMappingInfo<T>(IEnumerable<T> data)
     {
-      var dt = new DataTable();
-      dt.Columns.Add("Id", typeof(int));
-      dt.Columns.Add("Seat", typeof(string));
-      dt.Columns.Add("OriginalPrice", typeof(decimal));
-      dt.Columns.Add("CurrentPrice", typeof(decimal));
-      dt.Columns.Add("ShowId", typeof(int));
-      dt.Rows.Add(1, "General Admission", 49m, 99m, 1);
-      dt.Rows.Add(2, "General Admission", 49m, 99m, 1);
-      dt.Rows.Add(3, "General Admission", 49m, 99m, 1);
-      dt.Rows.Add(4, "General Admission", 49m, 99m, 1);
-      dt.Rows.Add(5, "General Admission", 49m, 99m, 1);
-      dt.Rows.Add(6, "General Admission", 49m, 99m, 1);
-      dt.Rows.Add(7, "General Admission", 49m, 99m, 1);
-      dt.Rows.Add(8, "General Admission", 49m, 99m, 1);
-      dt.Rows.Add(9, "F11", 129m, 399m, 2);
-      dt.Rows.Add(10, "F12", 129m, 399m, 2);
-      dt.Rows.Add(11, "F13", 129m, 399m, 2);
-      dt.Rows.Add(12, "F14", 129m, 399m, 2);
-      dt.Rows.Add(13, "G01", 129m, 399m, 2);
-      dt.Rows.Add(14, "G02", 129m, 399m, 2);
-      dt.Rows.Add(15, "G03", 129m, 399m, 2);
-      dt.Rows.Add(16, "G04", 129m, 399m, 2);
+      var table = new DataTable();
 
-      return dt;
+      var entityInfo = Context.Model.GetEntityTypes(typeof(T)).FirstOrDefault();
+      if (entityInfo == null) throw new InvalidOperationException("Failed to determine table type.");
+
+      var tblName = $"[{entityInfo.GetSchema()}].[{entityInfo.GetTableName()}]";
+
+      table.Columns.AddRange(GenerateColumns(entityInfo));
+
+      // Store Data
+      foreach (var item in data)
+      {
+        table.Rows.Add(GenerateRow(item, table));
+      }
+
+      return new MappingResult(tblName, table);
     }
 
-    private DataTable GenerateActShows()
+    private object[] GenerateRow<T>(T item, DataTable table)
     {
-      var dt = new DataTable();
-      dt.Columns.Add("ActId", typeof(int));
-      dt.Columns.Add("ShowId", typeof(int));
-      dt.Rows.Add(1, 1);
-      dt.Rows.Add(3, 1);
-      dt.Rows.Add(2, 2);
+      var values = new List<object>();
 
-      return dt;
+      foreach (DataColumn col in table.Columns)
+      {
+        var getter = (IClrPropertyGetter)col.ExtendedProperties[PROPERTYNAME];
+        values.Add(getter.GetClrValue(item));
+      }
+
+      return values.ToArray();
     }
 
-    private DataTable GenerateShows()
+    private DataColumn[] GenerateColumns(IEntityType entityInfo)
     {
-      var dt = new DataTable();
-      dt.Columns.Add("Id", typeof(int));
-      dt.Columns.Add("Name", typeof(string));
-      dt.Columns.Add("StartDate", typeof(DateTime));
-      dt.Columns.Add("Length", typeof(int));
-      dt.Columns.Add("IsGeneralAdmission", typeof(bool));
-      dt.Columns.Add("VenueId", typeof(int));
-      dt.Rows.Add(1, "Jethro Tull and Styx", DateTime.Today, 1, true, 2);
-      dt.Rows.Add(2, "Bruce!", DateTime.Today, 1, false, 1);
+      var columns = new List<DataColumn>();
 
-      return dt;
+      var props = entityInfo.GetDeclaredProperties();
+
+      foreach (var field in props) columns.Add(GenerateColumn(field));
+
+      // Owned Properties
+      foreach (var ownedEntity in entityInfo.GetNavigations().Where(n => n.GetTargetType().IsOwned()))
+      {
+        var targetEntityInfo = ownedEntity.GetTargetType();
+
+        foreach (var field in targetEntityInfo.GetDeclaredProperties()
+          .Where(p => !p.IsShadowProperty()))
+        {
+          columns.Add(GenerateColumn(field));
+        }
+      }
+
+      return columns.ToArray();
     }
 
-    private DataTable GenerateVenues()
+    private DataColumn GenerateColumn(IProperty field)
     {
-      var dt = new DataTable();
-      dt.Columns.Add("Id", typeof(int));
-      dt.Columns.Add("Name", typeof(string));
-      dt.Columns.Add("Phone", typeof(string));
-      dt.Columns.Add("Address_Address1", typeof(string));
-      dt.Columns.Add("Address_Address2", typeof(string));
-      dt.Columns.Add("Address_Address3", typeof(string));
-      dt.Columns.Add("Address_CityTown", typeof(string));
-      dt.Columns.Add("Address_StateProvince", typeof(string));
-      dt.Columns.Add("Address_PostalCode", typeof(string));
-      dt.Columns.Add("Address_Country", typeof(string));
-      dt.Rows.Add(1, 
-        "The Omni", 
-        "(404) 555-1212",
-        "123 Peachtree St",
-        "",
-        "",
-        "Atlanta",
-        "GA",
-        "30303",
-        "USA");
-
-      dt.Rows.Add(2,
-        "Variety Playhouse",
-        "(404) 555-1213",
-        "123 Euclid Avenue",
-        "",
-        "",
-        "Atlanta",
-        "GA",
-        "30303",
-        "USA");
-
-      return dt;
-    }
-
-    private DataTable GenerateActs()
-    {
-      var dt = new DataTable();
-      dt.Columns.Add("Id", typeof(int));
-      dt.Columns.Add("Name", typeof(string));
-      dt.Columns.Add("Description", typeof(string));
-      dt.Rows.Add(1, "Jethro Tull", "Flute Tour");
-      dt.Rows.Add(2, "Bruce Springsteen", "The Boss Across the World");
-      dt.Rows.Add(3, "Styx", "We're Still Alive Tour");
-
-      return dt;
+      var column = new DataColumn();
+      column.ColumnName = field.GetColumnName();
+      column.DataType = field.ClrType;
+      column.ExtendedProperties[PROPERTYNAME] = field.GetGetter();
+      return column;
     }
   }
 }

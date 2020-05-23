@@ -4,20 +4,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TicketScalper.ShowsAPI.Data.Entities
+namespace TicketScalper.ShowsAPI.Models
 {
-    public class Show
+    public class ShowModel
     {
     public int Id { get; set; }
     public string Name { get; set; }
     public DateTime StartDate { get; set; }
     public int Length { get; set; }
     public bool IsGeneralAdmission { get; set; }
+    public bool SoldOut { get; set; }
 
-    public int VenueId { get; internal set; }
-
-    public Venue Venue { get; set; }
-    public ICollection<ActShow> ActShows { get; set; }
-    public ICollection<Ticket> Tickets { get; set; }
+    public VenueModel Venue { get; set; }
+    public ActModel[] Acts { get; set; }
   }
 }
