@@ -13,24 +13,14 @@ namespace TicketScalper.ShowsAPI.Data
 {
   public class ShowContext : DbContext
   {
-    private readonly IConfiguration _config;
-
-    public ShowContext(IConfiguration config)
+    public ShowContext(DbContextOptions options) : base(options)
     {
-      _config = config;
     }
 
     public DbSet<Show> Shows { get; set; }
     public DbSet<Act> Acts { get; set; }
     public DbSet<Ticket> Tickets { get; set; }
     public DbSet<Venue> Venues { get; set; }
-
-    protected override void OnConfiguring(DbContextOptionsBuilder bldr)
-    {
-      base.OnConfiguring(bldr);
-
-      bldr.UseSqlServer(_config.GetConnectionString("ShowDb"));
-    }
 
     protected override void OnModelCreating(ModelBuilder bldr)
     {
