@@ -15,6 +15,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TicketScalper.Core", "Ticke
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TicketScalper.ShowsAPI.Tests", "Tests\TicketScalper.ShowsAPI.Tests\TicketScalper.ShowsAPI.Tests.csproj", "{68A26C06-6E57-4617-A4B5-AB268F1DF749}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TicketScalper.SalesAPI", "TicketScalper.SalesAPI\TicketScalper.SalesAPI.csproj", "{3FD77837-375D-4B00-ACB3-C5253BA87BE7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{68A26C06-6E57-4617-A4B5-AB268F1DF749}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{68A26C06-6E57-4617-A4B5-AB268F1DF749}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{68A26C06-6E57-4617-A4B5-AB268F1DF749}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3FD77837-375D-4B00-ACB3-C5253BA87BE7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3FD77837-375D-4B00-ACB3-C5253BA87BE7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3FD77837-375D-4B00-ACB3-C5253BA87BE7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3FD77837-375D-4B00-ACB3-C5253BA87BE7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -40,6 +46,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{0F5250A4-0184-4F4B-AD38-064C0711BC05} = {C1B7DA66-4BDF-451A-8435-08E524D7B588}
 		{68A26C06-6E57-4617-A4B5-AB268F1DF749} = {B6D74D78-740C-40B9-AFDB-2B13295F74F4}
+		{3FD77837-375D-4B00-ACB3-C5253BA87BE7} = {C1B7DA66-4BDF-451A-8435-08E524D7B588}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {78C044F1-B4A3-4492-B688-0DE1D4C34D98}

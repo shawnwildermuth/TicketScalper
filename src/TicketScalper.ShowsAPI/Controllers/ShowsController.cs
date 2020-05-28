@@ -12,6 +12,7 @@ using TicketScalper.ShowsAPI.Models;
 namespace TicketScalper.ShowsAPI.Controllers
 {
   [Route("[controller]")]
+  [ApiController]
   public class ShowsController : ControllerBase
   {
     private readonly IShowRepository _repository;
