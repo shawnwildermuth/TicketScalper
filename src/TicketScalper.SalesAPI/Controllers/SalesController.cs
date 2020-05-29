@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -7,10 +8,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TicketScalper.SalesAPI.Data;
+using TicketScalper.SalesAPI.Models;
 
 namespace TicketScalper.SalesAPI.Controllers
 {
-  [Route("[controller]")]
+  [Route("customers/{customerId:int}/[controller]")]
   [ApiVersion("1.0")]
   [ApiController]
   public class SalesController : ControllerBase
@@ -25,5 +27,14 @@ namespace TicketScalper.SalesAPI.Controllers
       _mapper = mapper;
       _repository = repository;
     }
+
+    [HttpGet]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    public async Task<ActionResult<TicketSaleModel[]>> Get(int customerId)
+    {
+      var result = await _repository.GetSalesAsync(customerId);
+      return _mapper.Map<TicketSaleModel[]>(result);
+    }
+
   }
 }

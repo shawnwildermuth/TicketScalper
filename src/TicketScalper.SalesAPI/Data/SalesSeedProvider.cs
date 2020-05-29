@@ -38,7 +38,8 @@ namespace TicketScalper.SalesAPI.Data
           Completed = true,
           CustomerId = 1,
           PaymentType = "Credit Card",
-          TransactionNumber = "7287391829"
+          TransactionNumber = "7287391829",
+          TransactionTotal = 399.54m
         }
       };
     }

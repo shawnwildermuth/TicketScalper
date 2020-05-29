@@ -26,6 +26,7 @@ namespace TicketScalper.ShowsAPI.Controllers
     }
 
     [HttpGet("latest")]
+    [ProducesResponseType(200)]
     public async Task<ActionResult<ShowModel[]>> GetLatest()
     {
       var result = await _repository.GetLatestShowsAsync();
@@ -33,6 +34,7 @@ namespace TicketScalper.ShowsAPI.Controllers
     }
 
     [HttpGet("{id:int}")]
+    [ProducesResponseType(200)]
     public async Task<ActionResult<ShowModel>> Get(int id)
     {
       var result = await _repository.GetShowAsync(id);
@@ -40,6 +42,8 @@ namespace TicketScalper.ShowsAPI.Controllers
     }
 
     [HttpGet("{id:int}/tickets")]
+    [ProducesResponseType(200)]
+    [ProducesResponseType(404)]
     public async Task<ActionResult<TicketModel[]>> GetTickets(int id)
     {
       var result = await _repository.GetTicketsAsync(id);

@@ -28,6 +28,14 @@ namespace TicketScalper.SalesAPI.Data
       return Context.Customers.ToArrayAsync();
     }
 
+    public Task<TicketSale[]> GetSalesAsync(int customerId)
+    {
+      return Context.TicketSales
+        .Include(s => s.Tickets)
+        .Where(s => s.CustomerId == customerId)
+        .ToArrayAsync();
+    }
+
     public Task<bool> HasCustomerAsync(string firstName, string lastName)
     {
       return Context.Customers.AnyAsync(w => w.FirstName.ToUpper() == firstName.ToUpper() && w.LastName.ToUpper() == lastName.ToUpper());

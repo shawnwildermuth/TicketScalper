@@ -16,6 +16,12 @@ namespace TicketScalper.SalesAPI.Data
       CreateMap<Customer, CustomerModel>()
         .ForMember(c => c.FullName, opt => opt.MapFrom(c => $"{c.FirstName} {c.LastName}"))
         .ReverseMap();
+
+      CreateMap<TicketSale, TicketSaleModel>()
+        .ReverseMap();
+
+      CreateMap<TicketInfo, TicketModel>()
+      .ReverseMap();
     }
   }
 }

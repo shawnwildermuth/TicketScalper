@@ -17,7 +17,7 @@ namespace TicketScalper.SalesAPI.Data
     }
 
     public DbSet<Customer>  Customers { get; set; }
-    public DbSet<TicketInfo> TicketSales { get; set; }
+    public DbSet<TicketSale> TicketSales { get; set; }
 
     protected override void OnModelCreating(ModelBuilder bldr)
     {

@@ -29,12 +29,15 @@ namespace TicketScalper.SalesAPI.Controllers
     }
 
     [HttpGet]
+    [ProducesResponseType(200)]
     public async Task<ActionResult<CustomerModel[]>> GetCustomersAsync()
     {
       return _mapper.Map<CustomerModel[]>(await _repository.GetCustomersAsync());
     }
 
     [HttpGet("{id:int}")]
+    [ProducesResponseType(200)]
+    [ProducesResponseType(404)]
     public async Task<ActionResult<CustomerModel>> GetCustomerAsync(int id)
     {
       var result = await _repository.GetCustomerAsync(id);
@@ -44,6 +47,8 @@ namespace TicketScalper.SalesAPI.Controllers
     }
 
     [HttpPost]
+    [ProducesResponseType(201)]
+    [ProducesResponseType(400)]
     public async Task<ActionResult<CustomerModel>> Post([FromBody] CustomerModel model)
     {
       try
@@ -71,6 +76,9 @@ namespace TicketScalper.SalesAPI.Controllers
     }
 
     [HttpPut("{id:int}")]
+    [ProducesResponseType(200)]
+    [ProducesResponseType(404)]
+    [ProducesResponseType(400)]
     public async Task<ActionResult<CustomerModel>> Put(int id, [FromBody] CustomerModel model)
     {
       try
@@ -95,6 +103,9 @@ namespace TicketScalper.SalesAPI.Controllers
     }
 
     [HttpDelete("{id:int}")]
+    [ProducesResponseType(200)]
+    [ProducesResponseType(404)]
+    [ProducesResponseType(400)]
     public async Task<IActionResult> Delete(int id)
     {
       try
