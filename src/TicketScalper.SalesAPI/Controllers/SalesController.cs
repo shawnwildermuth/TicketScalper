@@ -11,6 +11,7 @@ using TicketScalper.SalesAPI.Data;
 namespace TicketScalper.SalesAPI.Controllers
 {
   [Route("[controller]")]
+  [ApiVersion("1.0")]
   [ApiController]
   public class SalesController : ControllerBase
   {
