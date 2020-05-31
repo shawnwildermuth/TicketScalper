@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
-using TicketScalper.core.Data;
+using TicketScalper.Core.Data;
 using TicketScalper.SalesAPI.Data.Entities;
 
 namespace TicketScalper.SalesAPI.Data
@@ -12,5 +12,6 @@ namespace TicketScalper.SalesAPI.Data
     Task<bool> HasCustomerAsync(string firstName, string lastName);
     Task<bool> HasSalesAsync(int id);
     Task<TicketSale[]> GetSalesAsync(int customerId);
+    Task<TicketSale> GetSaleAsync(int customerId, int id);
   }
 }

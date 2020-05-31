@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace TicketScalper.core.Data
+namespace TicketScalper.Core.Data
 {
   public interface IRepository
   {

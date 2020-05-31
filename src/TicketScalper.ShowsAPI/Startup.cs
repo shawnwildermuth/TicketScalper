@@ -18,6 +18,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using TicketScalper.ShowsAPI.Data;
+using TicketScalper.ShowsAPI.Services;
 
 namespace TicketScalper.ShowsAPI
 {
@@ -52,6 +53,8 @@ namespace TicketScalper.ShowsAPI
         }
       });
 
+      services.AddGrpc(cfg => cfg.EnableDetailedErrors = true);
+
       services.AddApiVersioning(cfg =>
       {
         cfg.ReportApiVersions = true;
@@ -68,10 +71,8 @@ namespace TicketScalper.ShowsAPI
       {
         app.UseDeveloperExceptionPage();
       }
-      else 
-      { 
-        app.UseHttpsRedirection();
-      }
+
+      app.UseHttpsRedirection();
 
       app.UseSwagger();
       app.UseSwaggerUI(cfg =>
@@ -87,6 +88,7 @@ namespace TicketScalper.ShowsAPI
       app.UseEndpoints(endpoints =>
       {
         endpoints.MapControllers();
+        endpoints.MapGrpcService<TicketService>();
       });
     }
   }

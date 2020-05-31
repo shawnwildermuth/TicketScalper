@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TicketScalper.core.Data;
+using TicketScalper.Core.Data;
 using TicketScalper.ShowsAPI.Data.Entities;
 
 namespace TicketScalper.ShowsAPI.Data
@@ -31,8 +31,18 @@ namespace TicketScalper.ShowsAPI.Data
         .Where(s => s.Id == id)
         .FirstOrDefaultAsync();
 
-    public async Task<IEnumerable<Ticket>> GetTicketsAsync(int showId) => await Context.Tickets
+    public async Task<IEnumerable<Ticket>> GetTicketsForShowAsync(int showId) => await Context.Tickets
       .Where(t => t.Show.Id == showId)
+      .ToArrayAsync();
+
+    public async Task<IEnumerable<Ticket>> GetTicketsAsync(int[] ticketIds) => await Context.Tickets
+      .Include(t => t.Show)
+      .ThenInclude(t => t.ActShows)
+      .ThenInclude(t => t.Act)
+      .Include(t => t.Show)
+      .ThenInclude(t => t.Venue)
+      .ThenInclude(t => t.Address)
+      .Where(t => ticketIds.Contains(t.Id))
       .ToArrayAsync();
 
   }

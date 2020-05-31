@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TicketScalper.ShowsAPI.Data;
 
 namespace TicketScalper.ShowsAPI.Migrations
 {
     [DbContext(typeof(ShowContext))]
-    partial class ShowContextModelSnapshot : ModelSnapshot
+    [Migration("20200531013323_TicketDates")]
+    partial class TicketDates
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -165,13 +167,13 @@ namespace TicketScalper.ShowsAPI.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<decimal>("CurrentPrice")
-                        .HasColumnType("decimal(9,2)");
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
 
                     b.Property<decimal>("OriginalPrice")
-                        .HasColumnType("decimal(9,2)");
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("Seat")
                         .HasColumnType("nvarchar(20)")
@@ -190,79 +192,79 @@ namespace TicketScalper.ShowsAPI.Migrations
                         new
                         {
                             Id = 1,
-                            CurrentPrice = 99.99m,
+                            CurrentPrice = 99m,
                             Date = new DateTime(2020, 11, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            OriginalPrice = 49.99m,
+                            OriginalPrice = 49m,
                             Seat = "General Admission",
                             ShowId = 1
                         },
                         new
                         {
                             Id = 2,
-                            CurrentPrice = 99.99m,
+                            CurrentPrice = 99m,
                             Date = new DateTime(2020, 11, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            OriginalPrice = 49.99m,
+                            OriginalPrice = 49m,
                             Seat = "General Admission",
                             ShowId = 1
                         },
                         new
                         {
                             Id = 3,
-                            CurrentPrice = 99.99m,
+                            CurrentPrice = 99m,
                             Date = new DateTime(2020, 11, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            OriginalPrice = 49.99m,
+                            OriginalPrice = 49m,
                             Seat = "General Admission",
                             ShowId = 1
                         },
                         new
                         {
                             Id = 4,
-                            CurrentPrice = 99.99m,
+                            CurrentPrice = 99m,
                             Date = new DateTime(2020, 11, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            OriginalPrice = 49.99m,
+                            OriginalPrice = 49m,
                             Seat = "General Admission",
                             ShowId = 1
                         },
                         new
                         {
                             Id = 5,
-                            CurrentPrice = 99.99m,
+                            CurrentPrice = 99m,
                             Date = new DateTime(2020, 11, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            OriginalPrice = 49.99m,
+                            OriginalPrice = 49m,
                             Seat = "General Admission",
                             ShowId = 1
                         },
                         new
                         {
                             Id = 6,
-                            CurrentPrice = 99.99m,
+                            CurrentPrice = 99m,
                             Date = new DateTime(2020, 11, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            OriginalPrice = 49.99m,
+                            OriginalPrice = 49m,
                             Seat = "General Admission",
                             ShowId = 1
                         },
                         new
                         {
                             Id = 7,
-                            CurrentPrice = 99.99m,
+                            CurrentPrice = 99m,
                             Date = new DateTime(2020, 11, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            OriginalPrice = 49.99m,
+                            OriginalPrice = 49m,
                             Seat = "General Admission",
                             ShowId = 1
                         },
                         new
                         {
                             Id = 8,
-                            CurrentPrice = 99.99m,
+                            CurrentPrice = 99m,
                             Date = new DateTime(2020, 11, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            OriginalPrice = 49.99m,
+                            OriginalPrice = 49m,
                             Seat = "General Admission",
                             ShowId = 1
                         },
                         new
                         {
                             Id = 9,
-                            CurrentPrice = 299.99m,
+                            CurrentPrice = 299m,
                             Date = new DateTime(2020, 11, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             OriginalPrice = 129m,
                             Seat = "F11",
@@ -271,7 +273,7 @@ namespace TicketScalper.ShowsAPI.Migrations
                         new
                         {
                             Id = 10,
-                            CurrentPrice = 299.99m,
+                            CurrentPrice = 299m,
                             Date = new DateTime(2020, 11, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             OriginalPrice = 129m,
                             Seat = "F12",
@@ -280,7 +282,7 @@ namespace TicketScalper.ShowsAPI.Migrations
                         new
                         {
                             Id = 11,
-                            CurrentPrice = 299.99m,
+                            CurrentPrice = 299m,
                             Date = new DateTime(2020, 11, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             OriginalPrice = 129m,
                             Seat = "F13",
@@ -289,7 +291,7 @@ namespace TicketScalper.ShowsAPI.Migrations
                         new
                         {
                             Id = 12,
-                            CurrentPrice = 299.99m,
+                            CurrentPrice = 299m,
                             Date = new DateTime(2020, 11, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             OriginalPrice = 129m,
                             Seat = "F14",
@@ -298,7 +300,7 @@ namespace TicketScalper.ShowsAPI.Migrations
                         new
                         {
                             Id = 13,
-                            CurrentPrice = 299.99m,
+                            CurrentPrice = 299m,
                             Date = new DateTime(2020, 11, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             OriginalPrice = 129m,
                             Seat = "G01",
@@ -307,7 +309,7 @@ namespace TicketScalper.ShowsAPI.Migrations
                         new
                         {
                             Id = 14,
-                            CurrentPrice = 299.99m,
+                            CurrentPrice = 299m,
                             Date = new DateTime(2020, 11, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             OriginalPrice = 129m,
                             Seat = "G02",
@@ -316,7 +318,7 @@ namespace TicketScalper.ShowsAPI.Migrations
                         new
                         {
                             Id = 15,
-                            CurrentPrice = 299.99m,
+                            CurrentPrice = 299m,
                             Date = new DateTime(2020, 11, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             OriginalPrice = 129m,
                             Seat = "G03",
@@ -325,7 +327,7 @@ namespace TicketScalper.ShowsAPI.Migrations
                         new
                         {
                             Id = 16,
-                            CurrentPrice = 299.99m,
+                            CurrentPrice = 299m,
                             Date = new DateTime(2020, 11, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             OriginalPrice = 129m,
                             Seat = "G04",
@@ -410,46 +412,32 @@ namespace TicketScalper.ShowsAPI.Migrations
                                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                             b1.Property<string>("Address1")
-                                .ValueGeneratedOnAdd()
                                 .HasColumnType("nvarchar(100)")
-                                .HasMaxLength(100)
-                                .HasDefaultValue("");
+                                .HasMaxLength(100);
 
                             b1.Property<string>("Address2")
-                                .ValueGeneratedOnAdd()
                                 .HasColumnType("nvarchar(100)")
-                                .HasMaxLength(100)
-                                .HasDefaultValue("");
+                                .HasMaxLength(100);
 
                             b1.Property<string>("Address3")
-                                .ValueGeneratedOnAdd()
                                 .HasColumnType("nvarchar(100)")
-                                .HasMaxLength(100)
-                                .HasDefaultValue("");
+                                .HasMaxLength(100);
 
                             b1.Property<string>("CityTown")
-                                .ValueGeneratedOnAdd()
                                 .HasColumnType("nvarchar(50)")
-                                .HasMaxLength(50)
-                                .HasDefaultValue("");
+                                .HasMaxLength(50);
 
                             b1.Property<string>("Country")
-                                .ValueGeneratedOnAdd()
                                 .HasColumnType("nvarchar(50)")
-                                .HasMaxLength(50)
-                                .HasDefaultValue("");
+                                .HasMaxLength(50);
 
                             b1.Property<string>("PostalCode")
-                                .ValueGeneratedOnAdd()
                                 .HasColumnType("nvarchar(50)")
-                                .HasMaxLength(50)
-                                .HasDefaultValue("");
+                                .HasMaxLength(50);
 
                             b1.Property<string>("StateProvince")
-                                .ValueGeneratedOnAdd()
                                 .HasColumnType("nvarchar(50)")
-                                .HasMaxLength(50)
-                                .HasDefaultValue("");
+                                .HasMaxLength(50);
 
                             b1.HasKey("VenueId");
 

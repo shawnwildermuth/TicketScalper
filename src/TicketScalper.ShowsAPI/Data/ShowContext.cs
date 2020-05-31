@@ -37,6 +37,8 @@ namespace TicketScalper.ShowsAPI.Data
     {
       bldr.ToTable("Tickets", "TicketScalper");
       bldr.Property(t => t.Seat).HasMaxLength(20);
+      bldr.Property(t => t.OriginalPrice).HasColumnType("decimal(9,2)");
+      bldr.Property(t => t.CurrentPrice).HasColumnType("decimal(9,2)");
       bldr.HasData(SeedDataProvider.GenerateTickets());
     }
 
@@ -82,13 +84,13 @@ namespace TicketScalper.ShowsAPI.Data
       bldr.Property(v => v.Name).HasMaxLength(100);
       bldr.Property(v => v.Phone).HasMaxLength(20);
 
-      addr.Property(a => a.Address1).HasMaxLength(100);
-      addr.Property(a => a.Address2).HasMaxLength(100);
-      addr.Property(a => a.Address3).HasMaxLength(100);
-      addr.Property(a => a.CityTown).HasMaxLength(50);
-      addr.Property(a => a.StateProvince).HasMaxLength(50);
-      addr.Property(a => a.PostalCode).HasMaxLength(50);
-      addr.Property(a => a.Country).HasMaxLength(50);
+      addr.Property(a => a.Address1).HasMaxLength(100).HasDefaultValue("");
+      addr.Property(a => a.Address2).HasMaxLength(100).HasDefaultValue("");
+      addr.Property(a => a.Address3).HasMaxLength(100).HasDefaultValue("");
+      addr.Property(a => a.CityTown).HasMaxLength(50).HasDefaultValue("");
+      addr.Property(a => a.StateProvince).HasMaxLength(50).HasDefaultValue("");
+      addr.Property(a => a.PostalCode).HasMaxLength(50).HasDefaultValue("");
+      addr.Property(a => a.Country).HasMaxLength(50).HasDefaultValue("");
       addr.HasData(SeedDataProvider.GenerateAddresses());
 
       bldr.HasData(SeedDataProvider.GenerateVenues());

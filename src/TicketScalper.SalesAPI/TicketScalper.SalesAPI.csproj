@@ -11,6 +11,7 @@
   <ItemGroup>
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="7.0.0" />
     <PackageReference Include="FastMember" Version="1.5.0" />
+    <PackageReference Include="Grpc.AspNetCore" Version="2.29.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.4" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.4">
       <PrivateAssets>all</PrivateAssets>
@@ -24,6 +25,12 @@
 
   <ItemGroup>
     <ProjectReference Include="..\TicketScalper.Core\TicketScalper.Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Protobuf Include="..\TicketScalper.ShowsAPI\Protos\TicketMessageService.proto" GrpcServices="Client">
+      <Link>Protos\TicketMessageService.proto</Link>
+    </Protobuf>
   </ItemGroup>
 
 </Project>

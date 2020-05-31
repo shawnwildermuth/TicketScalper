@@ -13,22 +13,22 @@ namespace TicketScalper.ShowsAPI.Data
     {
       return new Ticket[]
       {
-        new Ticket() { Id = 1, Seat = "General Admission", OriginalPrice = 49m, CurrentPrice = 99m, ShowId = 1  },
-        new Ticket() { Id = 2, Seat = "General Admission", OriginalPrice = 49m, CurrentPrice = 99m, ShowId = 1 },
-        new Ticket() { Id = 3, Seat = "General Admission", OriginalPrice = 49m, CurrentPrice = 99m, ShowId = 1 },
-        new Ticket() { Id = 4, Seat = "General Admission", OriginalPrice = 49m, CurrentPrice = 99m, ShowId = 1 },
-        new Ticket() { Id = 5, Seat = "General Admission", OriginalPrice = 49m, CurrentPrice = 99m, ShowId = 1 },
-        new Ticket() { Id = 6, Seat = "General Admission", OriginalPrice = 49m, CurrentPrice = 99m, ShowId = 1 },
-        new Ticket() { Id = 7, Seat = "General Admission", OriginalPrice = 49m, CurrentPrice = 99m, ShowId = 1 },
-        new Ticket() { Id = 8, Seat = "General Admission", OriginalPrice = 49m, CurrentPrice = 99m, ShowId = 1 },
-        new Ticket() { Id = 9, Seat = "F11", OriginalPrice = 129m, CurrentPrice = 299m, ShowId = 2 },
-        new Ticket() { Id = 10, Seat = "F12", OriginalPrice = 129m, CurrentPrice = 299m, ShowId = 2 },
-        new Ticket() { Id = 11, Seat = "F13", OriginalPrice = 129m, CurrentPrice = 299m, ShowId = 2 },
-        new Ticket() { Id = 12, Seat = "F14", OriginalPrice = 129m, CurrentPrice = 299m, ShowId = 2 },
-        new Ticket() { Id = 13, Seat = "G01", OriginalPrice = 129m, CurrentPrice = 299m, ShowId = 2 },
-        new Ticket() { Id = 14, Seat = "G02", OriginalPrice = 129m, CurrentPrice = 299m, ShowId = 2 },
-        new Ticket() { Id = 15, Seat = "G03", OriginalPrice = 129m, CurrentPrice = 299m, ShowId = 2 },
-        new Ticket() { Id = 16, Seat = "G04", OriginalPrice = 129m, CurrentPrice = 299m, ShowId = 2 }
+        new Ticket() { Id = 1, Date = new DateTime(2020,11,2), Seat = "General Admission", OriginalPrice = 49.99m, CurrentPrice = 99.99m, ShowId = 1  },
+        new Ticket() { Id = 2, Date = new DateTime(2020,11,2), Seat = "General Admission", OriginalPrice = 49.99m, CurrentPrice = 99.99m, ShowId = 1 },
+        new Ticket() { Id = 3, Date = new DateTime(2020,11,2), Seat = "General Admission", OriginalPrice = 49.99m, CurrentPrice = 99.99m, ShowId = 1 },
+        new Ticket() { Id = 4, Date = new DateTime(2020,11,2), Seat = "General Admission", OriginalPrice = 49.99m, CurrentPrice = 99.99m, ShowId = 1 },
+        new Ticket() { Id = 5, Date = new DateTime(2020,11,2), Seat = "General Admission", OriginalPrice = 49.99m, CurrentPrice = 99.99m, ShowId = 1 },
+        new Ticket() { Id = 6, Date = new DateTime(2020,11,2), Seat = "General Admission", OriginalPrice = 49.99m, CurrentPrice = 99.99m, ShowId = 1 },
+        new Ticket() { Id = 7, Date = new DateTime(2020,11,2), Seat = "General Admission", OriginalPrice = 49.99m, CurrentPrice = 99.99m, ShowId = 1 },
+        new Ticket() { Id = 8, Date = new DateTime(2020,11,2), Seat = "General Admission", OriginalPrice = 49.99m, CurrentPrice = 99.99m, ShowId = 1 },
+        new Ticket() { Id = 9, Date = new DateTime(2020,11,4), Seat = "F11", OriginalPrice = 129m, CurrentPrice = 299.99m, ShowId = 2 },
+        new Ticket() { Id = 10, Date = new DateTime(2020,11,4), Seat = "F12", OriginalPrice = 129m, CurrentPrice = 299.99m, ShowId = 2 },
+        new Ticket() { Id = 11, Date = new DateTime(2020,11,4), Seat = "F13", OriginalPrice = 129m, CurrentPrice = 299.99m, ShowId = 2 },
+        new Ticket() { Id = 12, Date = new DateTime(2020,11,4), Seat = "F14", OriginalPrice = 129m, CurrentPrice = 299.99m, ShowId = 2 },
+        new Ticket() { Id = 13, Date = new DateTime(2020,11,4), Seat = "G01", OriginalPrice = 129m, CurrentPrice = 299.99m, ShowId = 2 },
+        new Ticket() { Id = 14, Date = new DateTime(2020,11,4), Seat = "G02", OriginalPrice = 129m, CurrentPrice = 299.99m, ShowId = 2 },
+        new Ticket() { Id = 15, Date = new DateTime(2020,11,4), Seat = "G03", OriginalPrice = 129m, CurrentPrice = 299.99m, ShowId = 2 },
+        new Ticket() { Id = 16, Date = new DateTime(2020,11,4), Seat = "G04", OriginalPrice = 129m, CurrentPrice = 299.99m, ShowId = 2 }
       };
     }
 

@@ -46,7 +46,7 @@ namespace TicketScalper.ShowsAPI.Controllers
     [ProducesResponseType(404)]
     public async Task<ActionResult<TicketModel[]>> GetTickets(int id)
     {
-      var result = await _repository.GetTicketsAsync(id);
+      var result = await _repository.GetTicketsForShowAsync(id);
       if (result == null || !result.Any())
       {
         return NotFound();

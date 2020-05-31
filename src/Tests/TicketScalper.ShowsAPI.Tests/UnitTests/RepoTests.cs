@@ -42,7 +42,7 @@ namespace TicketScalper.ShowsAPI.UnitTests
     [Fact]
     public async Task RepositoryShouldReturnTickets()
     {
-      var tickets = await _repo.GetTicketsAsync(1); 
+      var tickets = await _repo.GetTicketsForShowAsync(1); 
 
       Assert.NotNull(tickets);
       Assert.NotEmpty(tickets);
@@ -54,7 +54,7 @@ namespace TicketScalper.ShowsAPI.UnitTests
     [Fact]
     public async Task RepositoryNotShouldReturnTickets()
     {
-      var tickets = await _repo.GetTicketsAsync(3);
+      var tickets = await _repo.GetTicketsForShowAsync(3);
 
       Assert.NotNull(tickets);
       Assert.Empty(tickets);

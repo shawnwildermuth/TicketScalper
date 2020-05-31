@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
 
-namespace TicketScalper.core.Data
+namespace TicketScalper.Core.Data
 {
   public class BaseRepository<TContext> : IRepository where TContext : DbContext
   {

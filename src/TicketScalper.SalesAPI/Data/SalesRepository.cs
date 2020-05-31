@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TicketScalper.core.Data;
+using TicketScalper.Core.Data;
 using TicketScalper.SalesAPI.Data.Entities;
 
 namespace TicketScalper.SalesAPI.Data
@@ -26,6 +26,14 @@ namespace TicketScalper.SalesAPI.Data
     public Task<Customer[]> GetCustomersAsync()
     {
       return Context.Customers.ToArrayAsync();
+    }
+
+    public Task<TicketSale> GetSaleAsync(int customerId, int id)
+    {
+      return Context.TicketSales
+        .Include(s => s.Tickets)
+        .Where(s => s.CustomerId == customerId && s.Id == id)
+        .FirstOrDefaultAsync();
     }
 
     public Task<TicketSale[]> GetSalesAsync(int customerId)

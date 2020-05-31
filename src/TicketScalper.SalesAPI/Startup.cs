@@ -67,10 +67,8 @@ namespace TicketScalper.SalesAPI
       {
         app.UseDeveloperExceptionPage();
       }
-      else
-      {
-        app.UseHttpsRedirection();
-      }
+
+      app.UseHttpsRedirection();
 
       app.UseSwagger();
       app.UseSwaggerUI(cfg =>

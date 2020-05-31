@@ -1,0 +1,47 @@
+syntax = "proto3";
+
+option csharp_namespace = "TicketScalper.ShowsAPI.Services";
+import "google/protobuf/timestamp.proto";
+
+package Tickets;
+
+service TicketMessageService {
+  rpc ReserveTickets(TicketRequest) returns (TicketResponse);
+  rpc FinalizeTickets(TicketRequest) returns (ConfirmedTicketResponse);
+}
+
+message TicketRequest {
+  repeated int32 TicketIds = 1;
+}
+
+message TicketResponse {
+  bool Success = 1;
+  string UserMessage = 2;
+}
+
+message TicketMessage {
+  int32 Id = 1;
+  string Seat = 2;
+  string ShowName = 3;
+  google.protobuf.Timestamp ShowDate = 4;
+  repeated string Acts = 5;
+  double Price = 6;
+  string VenueName = 7;
+  string Phone = 8;
+  string Address1 = 9; 
+  string Address2 = 10; 
+  string Address3 = 11; 
+  string CityTown = 12; 
+  string StateProvince = 13; 
+  string PostalCode  = 14;
+  string Country  = 15;
+}
+
+message ConfirmedTicketResponse {
+  bool Success = 1;
+  string UserMessage = 2;
+  repeated TicketMessage Tickets = 3;
+}
+
+
+    
