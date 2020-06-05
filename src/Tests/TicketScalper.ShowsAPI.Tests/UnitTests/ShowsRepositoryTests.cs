@@ -8,11 +8,11 @@ using Xunit;
 
 namespace TicketScalper.ShowsAPI.UnitTests
 {
-  public class RepoTests
+  public class ShowsRepositoryTests
   {
     private ShowRepository _repo;
 
-    public RepoTests()
+    public ShowsRepositoryTests()
     {
       _repo = new ShowRepository(DbUtilities.BuildInMemoryContext());
     }
