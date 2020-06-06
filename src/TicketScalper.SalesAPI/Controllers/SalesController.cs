@@ -16,6 +16,7 @@ using System.Threading.Tasks;
 using TicketScalper.SalesAPI.Data;
 using TicketScalper.SalesAPI.Data.Entities;
 using TicketScalper.SalesAPI.Models;
+using TicketScalper.SalesAPI.Services;
 using TicketScalper.ShowsAPI.Services;
 
 namespace TicketScalper.SalesAPI.Controllers
@@ -28,17 +29,17 @@ namespace TicketScalper.SalesAPI.Controllers
     private readonly ILogger<SalesController> _logger;
     private readonly IMapper _mapper;
     private readonly ISalesRepository _repository;
-    private readonly IWebHostEnvironment _environment;
+    private readonly ITicketService _ticketService;
 
     public SalesController(ILogger<SalesController> logger, 
       IMapper mapper, 
       ISalesRepository repository,
-      IWebHostEnvironment environment)
+      ITicketService ticketService)
     {
       _logger = logger;
       _mapper = mapper;
       _repository = repository;
-      _environment = environment;
+      _ticketService = ticketService;
     }
 
     [HttpGet]
@@ -69,33 +70,13 @@ namespace TicketScalper.SalesAPI.Controllers
         if (customer == null) return NotFound();
 
         // Check Ticket Availability
-        GrpcChannel channel;
-        if (_environment.IsDevelopment())
-        {
-          var httpHandler = new HttpClientHandler();
-          httpHandler.ServerCertificateCustomValidationCallback =
-              HttpClientHandler.DangerousAcceptAnyServerCertificateValidator;
-          channel = GrpcChannel.ForAddress("https://localhost:5001", new GrpcChannelOptions
-          {
-            HttpHandler = httpHandler
-          }); // TODO Move to configuration/Kube
-        }
-        else
-        {
-          channel = GrpcChannel.ForAddress("https://localhost:5001"); // TODO Move to configuration/Kube
-        }
-        var client = new TicketMessageService.TicketMessageServiceClient(channel);
-        var request = new TicketRequest();
-        request.TicketIds.Add(model.TicketIds);
-        var response = await client.ReserveTicketsAsync(request);
-        if (response.Success)
+        if (await _ticketService.ReserveTickets(model.TicketIds))
         {
           // Process Creditcard (no/op in example)
 
           // Finalize Tickets
-          var confirmedResponse = await client.FinalizeTicketsAsync(request);
-
-          if (confirmedResponse.Success)
+          var finalizedTickets = await _ticketService.FinalizeTickets(model.TicketIds);
+          if (finalizedTickets.Success)
           {
             // Create the Sales Record
 
@@ -106,8 +87,8 @@ namespace TicketScalper.SalesAPI.Controllers
               ApprovalCode = "FOOBAR",
               TransactionNumber = "123456",
               PaymentType = "Credit Card",
-              TransactionTotal = confirmedResponse.Tickets.Sum(t => (decimal)t.Price),
-              Tickets = _mapper.Map<TicketInfo[]>(confirmedResponse.Tickets.ToArray())       
+              TransactionTotal = finalizedTickets.Tickets.Sum(t => (decimal)t.Price),
+              Tickets = finalizedTickets.Tickets.ToArray()       
             };
 
             _repository.Add(ticketSale);

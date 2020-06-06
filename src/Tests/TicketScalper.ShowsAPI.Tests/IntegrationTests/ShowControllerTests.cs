@@ -20,7 +20,7 @@ namespace TicketScalper.ShowsAPI.Tests.IntegrationTests
 
     public ShowControllerTests()
     {
-      var ctx = DbUtilities.BuildInMemoryContext();
+      var ctx = TestDbUtilities<ShowContext>.BuildInMemoryContext();
       var repo = new ShowRepository(ctx);
 
       var configuration = new MapperConfiguration(cfg => cfg.AddProfile<ShowMaps>());

@@ -15,7 +15,7 @@ namespace TicketScaler.SalesAPI.Tests.UnitTests
 
     public SalesRepositoryTests()
     {
-      _repository = new SalesRepository(DbUtilities.BuildInMemoryContext());
+      _repository = new SalesRepository(TestDbUtilities<SalesContext>.BuildInMemoryContext());
     }
 
     [Fact]

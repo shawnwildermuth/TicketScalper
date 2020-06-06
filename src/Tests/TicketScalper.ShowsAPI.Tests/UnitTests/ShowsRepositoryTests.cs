@@ -14,7 +14,7 @@ namespace TicketScalper.ShowsAPI.UnitTests
 
     public ShowsRepositoryTests()
     {
-      _repo = new ShowRepository(DbUtilities.BuildInMemoryContext());
+      _repo = new ShowRepository(TestDbUtilities<ShowContext>.BuildInMemoryContext());
     }
 
     [Fact]

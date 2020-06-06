@@ -49,7 +49,7 @@ namespace TicketScalper.SalesAPI.Controllers
     [HttpPost]
     [ProducesResponseType(201)]
     [ProducesResponseType(400)]
-    public async Task<ActionResult<CustomerModel>> Post([FromBody] CustomerModel model)
+    public async Task<ActionResult<CustomerModel>> PostAsync([FromBody] CustomerModel model)
     {
       try
       {
