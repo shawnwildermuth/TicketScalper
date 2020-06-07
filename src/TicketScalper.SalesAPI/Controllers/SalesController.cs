@@ -70,10 +70,11 @@ namespace TicketScalper.SalesAPI.Controllers
         if (customer == null) return NotFound();
 
         // Check Ticket Availability
-        if (await _ticketService.ReserveTickets(model.TicketIds))
+        var result = await _ticketService.ReserveTickets(model.TicketIds);
+        if (result)
         {
           // Process Creditcard (no/op in example)
-
+          
           // Finalize Tickets
           var finalizedTickets = await _ticketService.FinalizeTickets(model.TicketIds);
           if (finalizedTickets.Success)
@@ -82,7 +83,7 @@ namespace TicketScalper.SalesAPI.Controllers
 
             var ticketSale = new TicketSale()
             {
-              CustomerId = customerId,
+              Customer = customer,
               Completed = true,
               ApprovalCode = "FOOBAR",
               TransactionNumber = "123456",

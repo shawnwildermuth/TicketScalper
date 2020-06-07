@@ -82,5 +82,6 @@ namespace TicketScalper.ShowsAPI.Tests.IntegrationTests
       Assert.Null(tickets);
       Assert.IsAssignableFrom<NotFoundResult>(result.Result);
     }
+
   }
 }

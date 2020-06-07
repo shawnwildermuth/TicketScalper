@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Moq;
@@ -12,6 +13,7 @@ using TicketScalper.SalesAPI.Data;
 using TicketScalper.SalesAPI.Data.Entities;
 using TicketScalper.SalesAPI.Models;
 using TicketScalper.SalesAPI.Services;
+using TicketScalper.ShowsAPI.Services;
 using TicketScalper.ShowsAPI.Tests;
 using Xunit;
 
@@ -38,8 +40,11 @@ namespace TicketScaler.SalesAPI.Tests.IntegrationTests
       var logger = factory.CreateLogger<SalesController>();
 
       var ticketServiceMock = new Mock<ITicketService>();
-      ticketServiceMock.Setup(s => s.ReserveTickets(new int[0])).Returns(() => Task.FromResult(true));
-      ticketServiceMock.Setup(s => s.FinalizeTickets(new int[0])).Returns(() =>
+      ticketServiceMock.Setup(s => s.ReserveTickets(It.IsAny<int[]>())).ReturnsAsync(() =>
+      {
+        return true;
+      });
+      ticketServiceMock.Setup(s => s.FinalizeTickets(It.IsAny<int[]>())).ReturnsAsync(() =>
       {
         var result = new FinalizedTicketResponse()
         {
@@ -48,11 +53,23 @@ namespace TicketScaler.SalesAPI.Tests.IntegrationTests
           {
             new TicketInfo()
             {
-              Id = 1
-            }
+              Price = 49.99m
+            },
+            new TicketInfo()
+            {
+              Price = 49.99m
+            },
+            new TicketInfo()
+            {
+              Price = 49.99m
+            },
+            new TicketInfo()
+            {
+              Price = 49.99m
+            },
           }
         };
-        return Task.FromResult(result);
+        return result;
       });
 
 
@@ -68,6 +85,41 @@ namespace TicketScaler.SalesAPI.Tests.IntegrationTests
 
       Assert.NotNull(sales);
       Assert.NotEmpty(sales);
+    }
+
+    [Fact]
+    public async Task ShouldReturnSale()
+    {
+      var result = await _controller.Get(1,1);
+      var sale = result.Value;
+
+      Assert.NotNull(sale);
+    }
+
+    [Fact]
+    public async Task CreatesSales()
+    {
+      var model = new TicketRequestModel()
+      {
+        CreditCard = "12345",
+        ValidationCode = "1234",
+        ExpirationMonth = 4,
+        ExpirationYear = 2024,
+        TicketIds = new int[] { 1, 2, 3, 4 }
+      };
+
+      var result = await _controller.Post(1, model);
+
+      Assert.IsType<CreatedAtRouteResult>(result.Result);
+      var objectResult = (ObjectResult)result.Result;
+
+      var sale = (TicketSaleModel)objectResult.Value;
+
+      Assert.NotNull(sale);
+      Assert.NotEmpty(sale.Tickets);
+      Assert.True(sale.Tickets.Count() == 4);
+      Assert.True(sale.Tickets.Sum(t => t.Price) == sale.TransactionTotal);
+
     }
   }
 }
