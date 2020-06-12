@@ -23,7 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\TicketScalper.SalesAPI\TicketScalper.SalesAPI.csproj" />
+    <ProjectReference Include="..\..\TicketScalper.SalesAPI\TicketScalper.SalesAPI.csproj" />
   </ItemGroup>
 
 </Project>

@@ -17,6 +17,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
+using TicketScalper.Core.Extensions;
 using TicketScalper.ShowsAPI.Data;
 using TicketScalper.ShowsAPI.Services;
 
@@ -62,6 +63,8 @@ namespace TicketScalper.ShowsAPI
         cfg.AssumeDefaultVersionWhenUnspecified = true;
         cfg.ApiVersionReader = new HeaderApiVersionReader("X-Version");
       });
+
+      services.AddTicketScalperCorsPolicy();
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -82,6 +85,8 @@ namespace TicketScalper.ShowsAPI
       });
 
       app.UseRouting();
+
+      app.UseCors();
 
       app.UseAuthorization();
 

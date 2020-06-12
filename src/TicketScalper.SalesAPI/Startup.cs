@@ -16,6 +16,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using TicketScalper.Core.Extensions;
 using TicketScalper.SalesAPI.Data;
 
 namespace TicketScalper.SalesAPI
@@ -58,6 +59,9 @@ namespace TicketScalper.SalesAPI
         cfg.AssumeDefaultVersionWhenUnspecified = true;
         cfg.ApiVersionReader = new HeaderApiVersionReader("X-Version");
       });
+
+      services.AddTicketScalperCorsPolicy();
+
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -67,6 +71,7 @@ namespace TicketScalper.SalesAPI
       {
         app.UseDeveloperExceptionPage();
       }
+
 
       app.UseHttpsRedirection();
 
@@ -78,6 +83,8 @@ namespace TicketScalper.SalesAPI
       });
 
       app.UseRouting();
+
+      app.UseCors();
 
       app.UseAuthorization();
 

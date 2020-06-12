@@ -19,6 +19,14 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TicketScalper.SalesAPI", "T
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TicketScaler.SalesAPI.Tests", "Tests\TicketScaler.SalesAPI.Tests\TicketScaler.SalesAPI.Tests.csproj", "{3AD34C15-FAFB-4757-9AD8-C966C314B185}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TicketScalper.Web", "TicketScalper.Web\TicketScalper.Web.csproj", "{A79C0F40-B378-430F-9512-5010C193AA3A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{EA58305E-004F-48EA-834E-7D535CA2D18C}"
+	ProjectSection(SolutionItems) = preProject
+		..\.gitignore = ..\.gitignore
+		..\README.md = ..\README.md
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +53,10 @@ Global
 		{3AD34C15-FAFB-4757-9AD8-C966C314B185}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3AD34C15-FAFB-4757-9AD8-C966C314B185}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3AD34C15-FAFB-4757-9AD8-C966C314B185}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A79C0F40-B378-430F-9512-5010C193AA3A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A79C0F40-B378-430F-9512-5010C193AA3A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A79C0F40-B378-430F-9512-5010C193AA3A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A79C0F40-B378-430F-9512-5010C193AA3A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -54,6 +66,7 @@ Global
 		{68A26C06-6E57-4617-A4B5-AB268F1DF749} = {B6D74D78-740C-40B9-AFDB-2B13295F74F4}
 		{3FD77837-375D-4B00-ACB3-C5253BA87BE7} = {C1B7DA66-4BDF-451A-8435-08E524D7B588}
 		{3AD34C15-FAFB-4757-9AD8-C966C314B185} = {B6D74D78-740C-40B9-AFDB-2B13295F74F4}
+		{A79C0F40-B378-430F-9512-5010C193AA3A} = {D02F806B-147B-4023-A94E-A37E67D68C6D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {78C044F1-B4A3-4492-B688-0DE1D4C34D98}
