@@ -1,4 +1,5 @@
 ﻿export default {
   shows: [],
-  busy: false
+  busy: false,
+  basket: []
 };

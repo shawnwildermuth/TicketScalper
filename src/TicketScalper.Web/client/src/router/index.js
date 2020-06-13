@@ -1,21 +1,29 @@
 import { createRouter, createWebHashHistory } from 'vue-router';
-import Home from '../views/Home';
-import Tickets from "../views/Tickets";
+import Views from '../views';
 import store from "../store";
 
 const routes = [
   {
     path: '/',
     name: 'Home',
-    component: Home
+    component: Views.Home
   },
   {
     path: "/tickets/:id",
     name: "Tickets",
-    component: Tickets,
+    component: Views.Tickets,
     props: true,
     beforeEnter(to, from, next) {
       if (store.getters.isLoaded) next();
+      else next('/');
+    }
+  },
+  {
+    path: "/checkout",
+    name: "Checkout",
+    component: Views.Checkout,
+    beforeEnter(to, from, next) {
+      if (store.state.basket.length > 0) next();
       else next('/');
     }
   }

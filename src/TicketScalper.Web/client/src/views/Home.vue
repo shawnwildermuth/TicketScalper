@@ -22,7 +22,9 @@
             <td>{{ dateFormat(s.startDate) }}</td>
             <td>{{ s.venue.name }}</td>
             <td>{{ s.soldOut ? "Sold Out" : "Tickets Available" }}</td>
-            <td><router-link class="btn btn-sm btn-primary" :disabled="s.soldOut" :to="`/tickets/${s.id}`">Buy</router-link></td>
+            <td>
+              <route-button className="btn btn-sm btn-primary" :disabled="s.soldOut" :to="`/tickets/${s.id}`">Buy</route-button>
+            </td>
           </tr>
         </tbody>
         
