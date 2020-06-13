@@ -3,6 +3,16 @@
   return date.toLocaleDateString();
 }
 
+
+export function moneyFormat(val) {
+  if (typeof(val) === "number") {
+    return `$${val.toFixed(2)}`;
+  }
+
+  return val;
+}
+
 export default {
-  dateFormat
+  dateFormat,
+  moneyFormat
 };

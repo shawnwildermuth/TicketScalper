@@ -1,6 +1,5 @@
 <template>
   <div class="row">
-    <div v-if="busy" class="alert alert-success">Loading...</div>
     <h3>Available Shows</h3>
     <div class="col-12">
       <table class="table table-condensed table-striped table-bordered">
@@ -23,7 +22,7 @@
             <td>{{ dateFormat(s.startDate) }}</td>
             <td>{{ s.venue.name }}</td>
             <td>{{ s.soldOut ? "Sold Out" : "Tickets Available" }}</td>
-            <td><button class="btn btn-sm btn-primary" :disabled="s.soldOut">Buy</button></td>
+            <td><router-link class="btn btn-sm btn-primary" :disabled="s.soldOut" :to="`/tickets/${s.id}`">Buy</router-link></td>
           </tr>
         </tbody>
         
@@ -42,16 +41,12 @@
     setup() {
 
       let shows = computed(() => store.state.shows);
-      let busy = computed(() => store.state.busy);
       onMounted(() => store.dispatch("loadShows"));
 
       return {
         shows,
-        busy,
-        ...filters
+        ...filters,
       };
-    },
-    components: {
     }
   }
 </script>
