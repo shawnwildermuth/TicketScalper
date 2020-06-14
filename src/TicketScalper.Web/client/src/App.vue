@@ -1,6 +1,7 @@
 <template>
   <div id="app">
-    <wait-cursor :busy="busy"><i class="fas fa-gear fa-spin"></i> Please wait...</wait-cursor>
+    <wait-cursor :busy="busy"><i class="fas fa-cog fa-spin"></i> Please wait...</wait-cursor>
+    <div class="alert alert-danger" v-if="error"> <i class="fas fa-exclamation-triangle"></i> {{ error }}</div>
     <Teleport to="#main-menu">
       <ul class="navbar-nav flex-grow-1">
         <li class="nav-item">
@@ -15,17 +16,17 @@
 <script>
   import store from "./store";
   import { computed } from "vue";
-  import WaitCursor from "./components/WaitCursor";
 
   export default {
     setup() {
       const busy = computed(() => store.state.busy);
+      const error = computed(() => store.state.error);
 
       return {
-        busy
+        busy, 
+        error
       };
-    },
-    components: { WaitCursor }
+    }
   }
 </script>
 

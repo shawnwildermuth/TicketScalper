@@ -4,7 +4,7 @@
   },
   isLoaded: (state) => state.shows.length > 0,
   basketTotal: (state) => {
-    return state.basket.length === 0 ? 0 : state.basket.reduce((a, v) => a + Number(v.currentPrice), 0);
+    return state.basket.length === 0 ? 0 : state.basket.reduce((a, v) => a + Number(v.price), 0);
   },
-  hasTicket: (state) => (ticket) => state.basket.indexOf(ticket) > -1
+  hasTicket: (state) => (ticket) => state.basket.findIndex(t => t.id === ticket.id) > -1
 };

@@ -70,7 +70,7 @@
       onMounted(() => store.dispatch("loadTickets", props.id));
 
       function addTicket(ticket) {
-        store.commit("addToBasket", ticket);
+        store.commit("addToBasket", { ticket, show: show.value });
       };
 
       function removeTicket(ticket) {

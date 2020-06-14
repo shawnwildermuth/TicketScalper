@@ -19,6 +19,8 @@ namespace TicketScalper.SalesAPI.Models
     public int ExpirationYear { get; set; }
     [Required]
     public string ValidationCode { get; set; }
+    [Required]
+    public string PostalCode { get; set; }
 
   }
 }
