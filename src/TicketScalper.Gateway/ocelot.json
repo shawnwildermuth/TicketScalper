@@ -1,0 +1,56 @@
+{
+	"Routes": [
+		{
+			"DownstreamPathTemplate": "/shows/{everything}",
+			"DownstreamScheme": "https",
+			"DownstreamHostAndPorts": [
+				{
+					"Host": "localhost",
+					"Port": 5001
+				}
+			],
+			"UpstreamPathTemplate": "/shows/{everything}",
+			"UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ]
+		},
+		{
+			"DownstreamPathTemplate": "/customers/{everything}",
+			"DownstreamScheme": "https",
+			"DownstreamHostAndPorts": [
+				{
+					"Host": "localhost",
+					"Port": 5002
+				}
+			],
+			"UpstreamPathTemplate": "/customers/{everything}",
+			"UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ]
+		},
+		{
+			"DownstreamPathTemplate": "/sales/{everything}",
+			"DownstreamScheme": "https",
+			"DownstreamHostAndPorts": [
+				{
+					"Host": "localhost",
+					"Port": 5002
+				}
+			],
+			"UpstreamPathTemplate": "/sales/{everything}",
+			"UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ]
+		},
+		{
+			"DownstreamPathTemplate": "/auth/{everything}",
+			"DownstreamScheme": "https",
+			"DownstreamHostAndPorts": [
+				{
+					"Host": "localhost",
+					"Port": 5003
+				}
+			],
+			"UpstreamPathTemplate": "/auth/{everything}",
+			"UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ]
+		}
+
+	],
+	"GlobalConfiguration": {
+		"BaseUrl": "https://localhost:5999/"
+	}
+}

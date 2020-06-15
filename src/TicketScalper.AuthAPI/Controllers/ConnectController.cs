@@ -13,7 +13,7 @@ using TicketScalper.Core.Tokens;
 namespace TicketScalper.AuthAPI.Controllers
 {
   [ApiController]
-  [Route("[controller]")]
+  [Route("auth/[controller]")]
   public class ConnectController : ControllerBase
   {
     private readonly ILogger<ConnectController> _logger;

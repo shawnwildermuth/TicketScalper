@@ -1,0 +1,38 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.InteropServices.ComTypes;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
+using Ocelot.DependencyInjection;
+using Ocelot.Middleware;
+
+namespace TicketScalper.Gateway
+{
+  public class Program
+  {
+    public static void Main(string[] args)
+    {
+      CreateHostBuilder(args).Build().Run();
+    }
+
+    public static IHostBuilder CreateHostBuilder(string[] args) =>
+      Host.CreateDefaultBuilder(args)
+        .ConfigureAppConfiguration((ctx, cfg) =>
+        {
+          cfg.SetBasePath(ctx.HostingEnvironment.ContentRootPath)
+              .AddJsonFile("appsettings.json")
+              .AddJsonFile("appsettings.Development.json", true)
+              .AddJsonFile("ocelot.json", false, true)
+              .AddEnvironmentVariables();
+        })
+        .ConfigureWebHostDefaults(webBuilder =>
+        {
+          webBuilder.ConfigureServices(cfg => cfg.AddOcelot());
+          webBuilder.Configure(async cfg => await cfg.UseOcelot());
+        });
+  }
+}
