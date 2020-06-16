@@ -8,4 +8,8 @@
     <PackageReference Include="Ocelot" Version="16.0.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\TicketScalper.Core\TicketScalper.Core.csproj" />
+  </ItemGroup>
+
 </Project>

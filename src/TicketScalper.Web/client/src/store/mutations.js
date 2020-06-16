@@ -26,5 +26,9 @@ export default {
   },
   clearError(state) {
     state.error = ""
+  },
+  setToken(state, { token, expiration }) { 
+    state.token = token; 
+    state.tokenExpiration = Date.parse(expiration); 
   }
 };

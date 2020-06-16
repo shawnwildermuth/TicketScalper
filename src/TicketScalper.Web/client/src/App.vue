@@ -7,6 +7,13 @@
         <li class="nav-item">
           <router-link class="nav-link" to="/">Home</router-link>
         </li>
+        <li class="nav-item" v-if="!isAuthenticated">
+          <router-link class="nav-link" to="/Login">Login</router-link>
+        </li>
+        <li class="nav-item" v-if="isAuthenticated">
+          <a class="nav-link" href="#" @click="logout()">Logout</a>
+        </li>
+        <li class="nav-item" >{{ isAuthenticated }}</li>
       </ul>
     </Teleport>
     <router-view />
@@ -21,10 +28,15 @@
     setup() {
       const busy = computed(() => store.state.busy);
       const error = computed(() => store.state.error);
+      const isAuthenticated = computed(() => store.getters.isAuthenticated);
+
+      function logout() { store.dispatch("logout"); }
 
       return {
         busy, 
-        error
+        error,
+        isAuthenticated,
+        logout
       };
     }
   }

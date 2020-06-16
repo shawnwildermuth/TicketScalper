@@ -11,17 +11,17 @@
   "dependencies": {
     "axios": "0.19.2",
     "core-js": "^3.6.5",
-    "vue": ">3.0.0-beta",
-    "vuex": ">4.0.0-beta",
-    "vue-router": ">4.0.0-alpha"
+    "vue": "^3.0.0-beta.15",
+    "vue-router": ">4.0.0-alpha",
+    "vuex": ">4.0.0-beta"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "~4.4.0",
-    "@vue/cli-plugin-router": "~4.4.0",
-    "@vue/cli-plugin-unit-mocha": "~4.4.0",
-    "@vue/cli-plugin-vuex": "~4.4.0",
-    "@vue/cli-service": "~4.4.0",
-    "@vue/compiler-sfc": "^3.0.0-beta.1",
+    "@vue/cli-plugin-babel": "^4.4.4",
+    "@vue/cli-plugin-router": "^4.4.4",
+    "@vue/cli-plugin-unit-mocha": "^4.4.4",
+    "@vue/cli-plugin-vuex": "^4.4.4",
+    "@vue/cli-service": "^4.4.4",
+    "@vue/compiler-sfc": "^3.0.0-beta.15",
     "@vue/test-utils": "^2.0.0-alpha.1",
     "chai": "^4.1.2",
     "vue-cli-plugin-vue-next": "~0.1.3"

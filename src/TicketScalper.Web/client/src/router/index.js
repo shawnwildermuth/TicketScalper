@@ -26,6 +26,24 @@ const routes = [
       if (store.state.basket.length > 0) next();
       else next('/');
     }
+  },
+  {
+    path: "/login",
+    name: "Login",
+    component: Views.Login,
+    beforeEnter(to, from, next) {
+      if (store.getters.isAuthenticated) next("/");
+      next();
+    }
+  },
+  {
+    path: "/customer",
+    name: "Customer",
+    component: Views.Customer,
+    beforeEnter(to, from, next) {
+      if (store.state.basket.length > 0) next();
+      else next('/');
+    }
   }
 ]
 

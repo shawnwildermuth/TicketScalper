@@ -6,5 +6,8 @@
   basketTotal: (state) => {
     return state.basket.length === 0 ? 0 : state.basket.reduce((a, v) => a + Number(v.price), 0);
   },
-  hasTicket: (state) => (ticket) => state.basket.findIndex(t => t.id === ticket.id) > -1
+  hasTicket: (state) => (ticket) => state.basket.findIndex(t => t.id === ticket.id) > -1,
+  isAuthenticated: ({ token, tokenExpiration }) => {
+    return token && tokenExpiration >= Date.now();
+  }
 };

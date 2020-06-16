@@ -13,5 +13,7 @@ export default createStore({
   },
   mutations,
   actions,
-  getters
+  getters,
+  token: "",
+  tokenExpiration: Date()
 });

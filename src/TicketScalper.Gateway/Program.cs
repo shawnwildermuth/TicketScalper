@@ -3,12 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices.ComTypes;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Ocelot.DependencyInjection;
 using Ocelot.Middleware;
+using TicketScalper.Core.Extensions;
 
 namespace TicketScalper.Gateway
 {
@@ -28,11 +31,20 @@ namespace TicketScalper.Gateway
               .AddJsonFile("appsettings.Development.json", true)
               .AddJsonFile("ocelot.json", false, true)
               .AddEnvironmentVariables();
+
         })
         .ConfigureWebHostDefaults(webBuilder =>
         {
-          webBuilder.ConfigureServices(cfg => cfg.AddOcelot());
-          webBuilder.Configure(async cfg => await cfg.UseOcelot());
+          webBuilder.ConfigureServices(cfg =>
+          {
+            cfg.AddTicketScalperCorsPolicy();
+            cfg.AddOcelot();
+          });
+          webBuilder.Configure(async cfg =>
+          {
+            cfg.UseCors();
+            await cfg.UseOcelot();
+          });
         });
   }
 }
