@@ -8,6 +8,11 @@ let app = createApp(App);
 
 registerComponents(app);
 
+app.config.errorHandler = (error) => {
+  store.commit("setError", error);
+  throw error;
+}
+
 app.use(router)
   .use(store)
   .mount('#app')

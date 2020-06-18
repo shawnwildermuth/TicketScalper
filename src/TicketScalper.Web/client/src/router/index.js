@@ -23,7 +23,14 @@ const routes = [
     name: "Checkout",
     component: Views.Checkout,
     beforeEnter(to, from, next) {
-      if (store.state.basket.length > 0) next();
+      if (store.state.basket.length > 0)
+      {
+        if (store.getters.isAuthenticated) {
+          next();
+        } else {
+          next("/customer")
+        }
+      } 
       else next('/');
     }
   },
@@ -41,8 +48,9 @@ const routes = [
     name: "Customer",
     component: Views.Customer,
     beforeEnter(to, from, next) {
-      if (store.state.basket.length > 0) next();
-      else next('/');
+      next();
+      // if (store.state.basket.length > 0) next();
+      // else next('/');
     }
   }
 ]

@@ -73,9 +73,9 @@ export default {
     const payment = reactive(
       new Payment("4444444444444444", "10", "2025", "30303", "123")
     );
-    const paymentValid = computed(() => payment.isValid(errors));
+    const paymentValid = computed(() => payment.isValid);
+    const errors = computed(() => payment.errors);
     const basketTotal = computed(() => store.getters.basketTotal);
-    const errors = reactive({});
 
     async function processPayment() {
       const result = await store.dispatch("processPayment", payment);

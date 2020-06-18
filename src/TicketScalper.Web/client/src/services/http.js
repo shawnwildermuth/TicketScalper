@@ -1,5 +1,5 @@
 import axios from "axios";
-import { state } from "@/store";
+import store from "@/store";
 
 export default function createHttp(secured) {
   // Default
@@ -10,7 +10,7 @@ export default function createHttp(secured) {
   if (secured) {
     return axios.create({
       baseURL: base,
-      //headers: { "Authorization": `bearer ${state.token}`}
+      headers: { "Authorization": `bearer ${store.state.token}`}
     });
   } else {
     return axios.create({

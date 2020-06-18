@@ -23,14 +23,18 @@
 <script>
   import store from "./store";
   import { computed } from "vue";
-
+  import router from "@/router";
+  
   export default {
     setup() {
       const busy = computed(() => store.state.busy);
       const error = computed(() => store.state.error);
       const isAuthenticated = computed(() => store.getters.isAuthenticated);
 
-      function logout() { store.dispatch("logout"); }
+      function logout() { 
+        store.dispatch("logout");
+        router.replace("/");
+      }
 
       return {
         busy, 

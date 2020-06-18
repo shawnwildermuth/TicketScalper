@@ -10,7 +10,7 @@
           v-model="credentials.username"
           placeholder="(e.g. bob@aol.com)"
         />
-        <error-span :error="errors['username']"></error-span>
+        <error-span :error="credentials.errors['username']"></error-span>
       </div>
       <div class="form-group">
         <label for="password">Password</label>
@@ -21,11 +21,12 @@
           v-model="credentials.password"
           placeholder="***********"
         />
-        <error-span :error="errors['password']"></error-span>
+        <error-span :error="credentials.errors['password']"></error-span>
       </div>
       <div class="form-group">
-        <button class="btn btn-success" :disabled="!isValid" @click="login()">Login</button>
+        <button class="btn btn-success" :disabled="!credentials.isValid" @click="login()">Login</button>
       </div>
+      <div>{{ credentials }}</div>
     </div>
   </div>
 </template>
@@ -39,8 +40,6 @@ import store from "@/store";
 export default {
   setup() {
     const credentials = reactive(new Credentials());
-    const isValid = computed(() => credentials.isValid(errors));
-    const errors = ref({});
 
     async function login() {
       store.commit("clearError");
@@ -52,8 +51,6 @@ export default {
 
     return {
       credentials,
-      isValid,
-      errors,
       login
     };
   }

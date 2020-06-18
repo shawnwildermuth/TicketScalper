@@ -4,7 +4,7 @@ export default {
   async loadShows({ commit }) {
     try {
       commit("setBusy");
-      const http = createHttp();
+      const http = createHttp(false);
       const result = await http.get("shows/latest");
       if (result.status === 200) {
         commit("setShows", result.data);
@@ -19,7 +19,7 @@ export default {
   async loadTickets({ commit, getters }, id) {
     try {
       commit("setBusy");
-      const http = createHttp();
+      const http = createHttp(false);
       const result = await http.get(`shows/${id}/tickets`);
       if (result.status === 200) {
         const show = getters.getShow(id);

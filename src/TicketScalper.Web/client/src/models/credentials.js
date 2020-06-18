@@ -1,29 +1,30 @@
-export default class Credentials {
+import ValidatableModel from "./validatableModel";
+
+export default class Credentials extends ValidatableModel {
   
   constructor() {
+    super();
     this.username = "";
     this.password = "";
   }
 
-  isValid(errors) {
+  get isValid() {
   
-    Object.keys(errors).forEach(function (key) { delete errors[key]; });
-  
-    let success = true;
+    let success = super.isValid;
 
     if (!this.username) {
-      errors["username"] = "Username is required";
+      this.errors["username"] = "Username is required";
       success = false;
     } else if (this.username.length < 5) {
-      errors["username"] = "Username should be > 5 characters";
+      this.errors["username"] = "Username should be > 5 characters";
       success = false;
     }
 
     if (!this.password) {
-      errors["password"] = "Password is required";
+      this.errors["password"] = "Password is required";
       success = false;
     } else if (!this.password.match(/^(?=.*\d).{4,24}$/)){
-      errors["password"] = "Password must be more complex";
+      this.errors["password"] = "Password must be more complex";
       success = false;
     }
 
