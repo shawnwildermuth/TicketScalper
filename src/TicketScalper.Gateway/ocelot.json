@@ -13,6 +13,30 @@
 			"UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ]
 		},
 		{
+			"DownstreamPathTemplate": "/shows",
+			"DownstreamScheme": "https",
+			"DownstreamHostAndPorts": [
+				{
+					"Host": "localhost",
+					"Port": 5001
+				}
+			],
+			"UpstreamPathTemplate": "/shows",
+			"UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ]
+		},
+		{
+			"DownstreamPathTemplate": "/customers",
+			"DownstreamScheme": "https",
+			"DownstreamHostAndPorts": [
+				{
+					"Host": "localhost",
+					"Port": 5002
+				}
+			],
+			"UpstreamPathTemplate": "/customers",
+			"UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ]
+		},
+		{
 			"DownstreamPathTemplate": "/customers/{everything}",
 			"DownstreamScheme": "https",
 			"DownstreamHostAndPorts": [

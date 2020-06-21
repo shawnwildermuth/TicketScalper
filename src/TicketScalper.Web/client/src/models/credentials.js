@@ -8,10 +8,11 @@ export default class Credentials extends ValidatableModel {
     this.password = "";
   }
 
-  get isValid() {
-  
-    let success = super.isValid;
+  validate() {
 
+    super.validate();
+
+    let success = true;
     if (!this.username) {
       this.errors["username"] = "Username is required";
       success = false;
@@ -28,7 +29,7 @@ export default class Credentials extends ValidatableModel {
       success = false;
     }
 
-    return success;
+    this.isValid = success;
   
   }
 }

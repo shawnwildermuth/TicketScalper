@@ -29,6 +29,29 @@ namespace TicketScalper.AuthAPI.Controllers
       _mapper = mapper;
     }
 
+    [HttpGet("{username}")]
+    public async Task<ActionResult<TicketScalperIdentityModel>> Get(string username)
+    {
+      try
+      {
+        var user = await _userManager.FindByNameAsync(username);
+
+        if (user != null)
+        {
+          return _mapper.Map<TicketScalperIdentityModel>(user);
+        }
+        else
+        {
+          return NotFound();
+        }
+      }
+      catch (Exception ex)
+      {
+        _logger.LogError("Error during GET for user: ", ex);
+        return BadRequest($"Error during GET for user: {ex.Message}");
+      }
+    }
+
     [HttpPost]
     public async Task<ActionResult<TicketScalperIdentityModel>> Post([FromBody] TicketScalperIdentityRequestModel model)
     {
@@ -45,7 +68,7 @@ namespace TicketScalper.AuthAPI.Controllers
 
         if (result.Succeeded)
         {
-          return _mapper.Map<TicketScalperIdentityModel>(user);
+          return CreatedAtRoute(new { username = user.UserName }, _mapper.Map<TicketScalperIdentityModel>(user));
         }
         else {
           return BadRequest(result.Errors.FirstOrDefault()?.Description);

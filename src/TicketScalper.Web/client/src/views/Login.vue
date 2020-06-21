@@ -24,15 +24,15 @@
         <error-span :error="credentials.errors['password']"></error-span>
       </div>
       <div class="form-group">
-        <button class="btn btn-success" :disabled="!credentials.isValid" @click="login()">Login</button>
+        <button class="btn btn-success" :disabled="!(credentials.isValid)" @click="login()">Login</button>
+        <div>{{ credentials }}</div>
       </div>
-      <div>{{ credentials }}</div>
     </div>
   </div>
 </template>
 
 <script>
-import { ref, reactive, computed } from "vue";
+import { ref, reactive, computed, watchEffect } from "vue";
 import Credentials from "@/models/credentials";
 import router from "@/router";
 import store from "@/store";
@@ -40,7 +40,8 @@ import store from "@/store";
 export default {
   setup() {
     const credentials = reactive(new Credentials());
-
+    watchEffect(() => credentials.validate());
+    
     async function login() {
       store.commit("clearError");
       let result = await store.dispatch("login", credentials);

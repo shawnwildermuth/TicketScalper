@@ -60,4 +60,8 @@ const router = createRouter({
   routes
 })
 
+router.afterEach((to, from) => {
+  store.commit("clearError");
+})
+
 export default router

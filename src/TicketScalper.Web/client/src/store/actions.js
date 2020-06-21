@@ -73,19 +73,16 @@ export default {
   logout({commit}) {
     commit("setToken", { token: "", expiration: Date() });
   },
-  async createUser({commit, dispatch}, credentials) {
+  async createLogin({commit, dispatch}, credentials) {
     try {
       commit("setBusy");
       const http = createHttp(false);
-      const result = await http.post("/auth/user", credentials);
+      const result = await http.post("/auth/users", credentials);
       if (result.status === 201) {
-        if (await dispatch("login", {
-          userName: credentials.userName,
-          password: credentials.password
-        })) {
           return result.data;
-        }
-      }      
+      } else {
+        commit("setError", "Failed to create user.");
+      }     
     } catch (error) {
       commit("setError", error);
     }
@@ -99,7 +96,7 @@ export default {
     try {
       commit("setBusy");
       const http = createHttp();
-      const result = await http.post("/customer", cust);
+      const result = await http.post("/customers", cust);
       if (result.status === 201) {
         commit("setCustomer", result.data);
         return true;

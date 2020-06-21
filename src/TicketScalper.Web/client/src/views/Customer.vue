@@ -24,9 +24,9 @@
           <error-span :error="customer.errors['companyName']"></error-span>
         </div>
         <div class="form-group" v-if="!isAuthenticated">
-          <label for="email">Email Address</label>
-          <input v-model="credentials.email" class="form-control" name="email" />
-          <error-span :error="credentials.errors['email']"></error-span>
+          <label for="username">Email Address</label>
+          <input v-model="credentials.username" class="form-control" name="username" />
+          <error-span :error="credentials.errors['username']"></error-span>
         </div>
         <div class="form-group" v-if="!isAuthenticated">
           <label for="password">Password</label>
@@ -53,7 +53,8 @@
             class="btn btn-success"
             :disabled="!customer.isValid || !credentials.isValid"
             @click="upsertCustomer()"
-          >Continue to Checkout</button>
+          >Continue to Checkout</button> &nbsp;
+          <route-button to="/login" class-name="btn btn-secondary" v-if="!isAuthenticated">Login Instead</route-button>
         </div>
       </div>
       <div class="col-6">
@@ -117,7 +118,7 @@ export default {
     };
     const customer = reactive(new Customer(debuggingCustomer));
     const credentials = reactive(new NewCredentials());
-    credentials.email = "shawn@wildermuth.com";
+    credentials.username = "shawn@wildermuth.com";
     credentials.password = "P@ssw0rd!";
     credentials.confirmPassword = credentials.password;
 
@@ -141,10 +142,16 @@ export default {
         // Store Cred
         const user = await store.dispatch("createLogin", credentials);
         if (user) {
-          let cust = _.clone(customer);
-          cust.userId = user.id;
-          if (await store.dispatch("saveCustomer", cust)) {
-            router.push("/checkout");
+          const loggedIn = await store.dispatch("login", {
+            username: credentials.username,
+            password: credentials.password
+          });
+          if (loggedIn) {
+            let cust = _.clone(customer);
+            cust.userId = user.id;
+            if (await store.dispatch("saveCustomer", cust)) {
+              router.push("/checkout");
+            }
           }
         }
       }

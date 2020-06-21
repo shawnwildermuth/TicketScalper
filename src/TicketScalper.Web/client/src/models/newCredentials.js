@@ -4,7 +4,7 @@ export default class NewCredentials extends ValidatableModel {
   
   constructor() {
     super();
-    this.email = "";
+    this.username = "";
     this.password = "";
     this.confirmPassword = "";
   }
@@ -20,8 +20,8 @@ export default class NewCredentials extends ValidatableModel {
 
     let success = true;
 
-    success = success & this.validateField(this.requiredValidator, "email", "Required");
-    success = success & this.validateField(this.emailValidator, "email", "Invalid email");
+    success = success & this.validateField(this.requiredValidator, "username", "Required");
+    success = success & this.validateField(this.emailValidator, "username", "Invalid email");
     success = success & this.validateField(this.passwordValidator, "password", "Password must be more complex.");
     success = success & this.validateField(passwordConfirmationValidator, "confirmPassword", "Passwords must match");
     
