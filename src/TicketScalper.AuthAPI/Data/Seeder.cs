@@ -66,7 +66,8 @@ namespace TicketScalperApp.Identity.Data
         {
           first = new TicketScalperIdentityUser()
           {
-            UserName = "shawnwildermuth",
+            Id = "{337DA5C8-115B-479D-BB1C-4E1F9C912D18}",
+            UserName = "shawn@wildermuth.com",
             Email = "shawn@wildermuth.com",
             EmailConfirmed = true
           };
@@ -94,7 +95,7 @@ namespace TicketScalperApp.Identity.Data
         {
           second = new TicketScalperIdentityUser()
           {
-            UserName = "resatrain",
+            UserName = "resa@wildermuth.com",
             Email = "resa@wildermuth.com",
             EmailConfirmed = true
           };

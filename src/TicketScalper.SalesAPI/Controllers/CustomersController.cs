@@ -46,6 +46,17 @@ namespace TicketScalper.SalesAPI.Controllers
       return _mapper.Map<CustomerModel>(result);
     }
 
+    [HttpGet("viauser/{id}")]
+    [ProducesResponseType(200)]
+    [ProducesResponseType(404)]
+    public async Task<ActionResult<CustomerModel>> GetCustomerByUserIdAsync(string id)
+    {
+      var result = await _repository.GetCustomerByUserAsync(id);
+      if (result == null) return NotFound();
+
+      return _mapper.Map<CustomerModel>(result);
+    }
+
     [HttpPost]
     [ProducesResponseType(201)]
     [ProducesResponseType(400)]

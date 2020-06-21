@@ -20,6 +20,7 @@ namespace TicketScalper.SalesAPI.Data.Entities
     public string StateProvince { get; set; }
     public string PostalCode { get; set; }
     public string Country { get; set; }
+    public string UserId { set; get; }
 
     public ICollection<TicketSale> Sales { get; set; }
 

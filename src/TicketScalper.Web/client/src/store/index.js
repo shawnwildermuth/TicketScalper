@@ -9,11 +9,12 @@ export default createStore({
     shows: [],
     busy: false,
     basket: [],
-    error: ""
+    error: "",
+    customer: null,
+    token: "",
+    tokenExpiration: Date()
   },
   mutations,
   actions,
-  getters,
-  token: "",
-  tokenExpiration: Date()
+  getters
 });

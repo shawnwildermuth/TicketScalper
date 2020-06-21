@@ -23,12 +23,12 @@
           <input v-model="customer.companyName" class="form-control" name="companyName" />
           <error-span :error="customer.errors['companyName']"></error-span>
         </div>
-        <div class="form-group">
+        <div class="form-group" v-if="!isAuthenticated">
           <label for="email">Email Address</label>
           <input v-model="credentials.email" class="form-control" name="email" />
-          <error-span :error="credentials.errors['userName']"></error-span>
+          <error-span :error="credentials.errors['email']"></error-span>
         </div>
-        <div class="form-group">
+        <div class="form-group" v-if="!isAuthenticated">
           <label for="password">Password</label>
           <input
             type="password"
@@ -38,7 +38,7 @@
           />
           <error-span :error="credentials.errors['password']"></error-span>
         </div>
-        <div class="form-group">
+        <div class="form-group" v-if="!isAuthenticated">
           <label for="confirmPassword">Confirm Password</label>
           <input
             type="password"
@@ -51,7 +51,8 @@
         <div class="form-group">
           <button
             class="btn btn-success"
-            :disabled="isValid"
+            :disabled="!customer.isValid || !credentials.isValid"
+            @click="upsertCustomer()"
           >Continue to Checkout</button>
         </div>
       </div>
@@ -96,25 +97,64 @@
   </div>
 </template>
 <script>
-import { reactive, computed } from "vue";
+import { reactive, computed, watchEffect } from "vue";
 import Customer from "@/models/customer";
 import NewCredentials from "@/models/newCredentials";
+import _ from "lodash";
+import router from "@/router";
+import store from "@/store";
 
 export default {
   setup() {
-    const customer = reactive(new Customer());
+    let debuggingCustomer = {
+      firstName: "Bob",
+      lastName: "Smith",
+      phoneNumber: "404-555-1212",
+      addressLine1: "123 Main Street",
+      cityTown: "Atlanta",
+      stateProvince: "GA",
+      postalCode: "30303"
+    };
+    const customer = reactive(new Customer(debuggingCustomer));
     const credentials = reactive(new NewCredentials());
-    
-    const isValid = computed(() => {
-      const cust = customer.isValid;
-      const cred = credentials.isValid;
-      return cust && cred;
-    });
+    credentials.email = "shawn@wildermuth.com";
+    credentials.password = "P@ssw0rd!";
+    credentials.confirmPassword = credentials.password;
+
+    const isAuthenticated = computed(() => store.getters.isAuthenticated);
+
+    watchEffect(() => customer.validate());
+    watchEffect(() => credentials.validate());
+
+    async function upsertCustomer() {
+      console.log("Upserting Customer");
+
+      if (!customer.isValid) {
+        store.commit("setError", "Customer Form invalid.");
+        return;
+      }
+
+      if (store.getters.isAuthenticated === true) {
+        console.log("Saving Customer Info for logged in user.");
+      } else {
+        console.log("Saving Customer Info for new user.");
+        // Store Cred
+        const user = await store.dispatch("createLogin", credentials);
+        if (user) {
+          let cust = _.clone(customer);
+          cust.userId = user.id;
+          if (await store.dispatch("saveCustomer", cust)) {
+            router.push("/checkout");
+          }
+        }
+      }
+    }
 
     return {
       customer,
       credentials,
-      isValid
+      isAuthenticated,
+      upsertCustomer
     };
   }
 };

@@ -9,24 +9,23 @@ export default class NewCredentials extends ValidatableModel {
     this.confirmPassword = "";
   }
 
-  get isValid() {
+  validate() {
   
-    let success = super.isValid;
-
-    let passwordValidator = (val) => {
-      return this.requiredValidator(val) && val.match(/^(?=.*\d).{4,24}$/);
-    }
-
+    super.validate();
 
     let passwordConfirmationValidator = (val) => {
-      return this.confirmPassword == this.password;
+      let result = this.confirmPassword == this.password;
+      return result;
     }
 
-    success = success & this.validate(this.emailValidator, "email", "Invalid email");
-    success = success & this.validate(passwordValidator, "password", "Invalid password");
-    success = success & this.validate(passwordConfirmationValidator, "confirmPassword", "Passwords must match");
+    let success = true;
 
-    return success;
+    success = success & this.validateField(this.requiredValidator, "email", "Required");
+    success = success & this.validateField(this.emailValidator, "email", "Invalid email");
+    success = success & this.validateField(this.passwordValidator, "password", "Password must be more complex.");
+    success = success & this.validateField(passwordConfirmationValidator, "confirmPassword", "Passwords must match");
+    
+    this.isValid = success;
   
   }
 }

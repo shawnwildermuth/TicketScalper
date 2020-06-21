@@ -64,7 +64,7 @@ export default {
         return true;
       }      
     } catch (error) {
-      console.error(error);
+      commit("setError", error);
     } finally {
       commit("clearBusy");
     }
@@ -72,5 +72,45 @@ export default {
   },
   logout({commit}) {
     commit("setToken", { token: "", expiration: Date() });
+  },
+  async createUser({commit, dispatch}, credentials) {
+    try {
+      commit("setBusy");
+      const http = createHttp(false);
+      const result = await http.post("/auth/user", credentials);
+      if (result.status === 201) {
+        if (await dispatch("login", {
+          userName: credentials.userName,
+          password: credentials.password
+        })) {
+          return result.data;
+        }
+      }      
+    } catch (error) {
+      commit("setError", error);
+    }
+    finally
+    {
+      commit("clearBusy");
+    }
+    return undefined;
+  },
+  async saveCustomer({commit}, cust) {
+    try {
+      commit("setBusy");
+      const http = createHttp();
+      const result = await http.post("/customer", cust);
+      if (result.status === 201) {
+        commit("setCustomer", result.data);
+        return true;
+      }      
+    } catch (error) {
+      commit("setError", error);
+    }
+    finally
+    {
+      commit("clearBusy");
+    }
+    return undefined;
   }
 };

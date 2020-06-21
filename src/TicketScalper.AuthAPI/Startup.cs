@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
+using AutoMapper;
 using BountyApp.Identity.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -40,6 +42,7 @@ namespace TicketScalper.AuthAPI
       services.AddAuthentication()
               .AddTicketScalperBearerToken();
 
+      services.AddAutoMapper(Assembly.GetExecutingAssembly());
 
       services.AddTicketScalperCorsPolicy();
 

@@ -30,5 +30,8 @@ export default {
   setToken(state, { token, expiration }) { 
     state.token = token; 
     state.tokenExpiration = Date.parse(expiration); 
+  },
+  setCustomer(state, customer) {
+    state.customer = customer;
   }
 };

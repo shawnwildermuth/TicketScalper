@@ -16,13 +16,14 @@ namespace TicketScalper.SalesAPI.Data
         new Customer()
         {
           Id = 1,
-          FirstName = "Resa",
+          FirstName = "Shawn",
           LastName = "Wildermuth",
           PhoneNumber = "404-555-1212",
           AddressLine1 = "123 Main Street",
           CityTown = "Atlanta",
           StateProvince = "GA",
           PostalCode = "12345",
+          UserId = "{337DA5C8-115B-479D-BB1C-4E1F9C912D18}"
         }
       };
     }

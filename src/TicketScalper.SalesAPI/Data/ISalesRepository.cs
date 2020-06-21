@@ -9,7 +9,9 @@ namespace TicketScalper.SalesAPI.Data
   {
     Task<Customer[]> GetCustomersAsync();
     Task<Customer> GetCustomerAsync(int id);
+    Task<Customer> GetCustomerByUserAsync(string id);
     Task<bool> HasCustomerAsync(string firstName, string lastName);
+
     Task<bool> HasSalesAsync(int id);
     Task<TicketSale[]> GetSalesAsync(int customerId);
     Task<TicketSale> GetSaleAsync(int customerId, int id);

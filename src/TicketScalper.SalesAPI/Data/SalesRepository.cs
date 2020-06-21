@@ -23,6 +23,13 @@ namespace TicketScalper.SalesAPI.Data
         .FirstOrDefaultAsync();
     }
 
+    public Task<Customer> GetCustomerByUserAsync(string id)
+    {
+      return Context.Customers
+        .Where(c => c.UserId == id)
+        .FirstOrDefaultAsync();
+    }
+
     public Task<Customer[]> GetCustomersAsync()
     {
       return Context.Customers.ToArrayAsync();
