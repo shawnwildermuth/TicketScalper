@@ -43,11 +43,9 @@ namespace TicketScaler.SalesAPI.Tests.IntegrationTests
     public async Task ControllerReturnsCustomers()
     {
       var result = await _controller.GetCustomersAsync();
-      var customers = result.Value;
+      var customer = result.Value;
 
-      Assert.NotNull(customers);
-      Assert.NotEmpty(customers);
-      Assert.IsType<CustomerModel[]>(customers);
+      Assert.NotNull(customer);
     }
 
     [Fact]
@@ -71,7 +69,7 @@ namespace TicketScaler.SalesAPI.Tests.IntegrationTests
       Assert.Contains(model.FirstName, customer.FirstName);
       Assert.NotEqual(model.Id, customer.Id);
 
-      result = await _controller.GetCustomerAsync(customer.Id);
+      result = await _controller.GetCustomersAsync();
       var got = result.Value;
 
       Assert.NotNull(got);
@@ -80,7 +78,7 @@ namespace TicketScaler.SalesAPI.Tests.IntegrationTests
     [Fact]
     public async Task ControllerUpdatesCustomer()
     {
-      var result = await _controller.GetCustomerAsync(1);
+      var result = await _controller.GetCustomersAsync();
       var customer = result.Value;
 
       Assert.NotNull(customer);

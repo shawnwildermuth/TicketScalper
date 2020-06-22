@@ -26,7 +26,7 @@ namespace TicketScalper.SalesAPI.Data
     public Task<Customer> GetCustomerByUserAsync(string id)
     {
       return Context.Customers
-        .Where(c => c.UserId == id)
+        .Where(c => c.UserName == id)
         .FirstOrDefaultAsync();
     }
 
@@ -51,9 +51,9 @@ namespace TicketScalper.SalesAPI.Data
         .ToArrayAsync();
     }
 
-    public Task<bool> HasCustomerAsync(string firstName, string lastName)
+    public Task<bool> HasCustomerAsync(string userName)
     {
-      return Context.Customers.AnyAsync(w => w.FirstName.ToUpper() == firstName.ToUpper() && w.LastName.ToUpper() == lastName.ToUpper());
+      return Context.Customers.AnyAsync(w => w.UserName.ToUpper() == userName.ToUpper());
     }
 
     public Task<bool> HasSalesAsync(int id)

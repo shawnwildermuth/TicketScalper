@@ -18,6 +18,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using TicketScalper.Core.Extensions;
+using TicketScalper.Core.Tokens;
 using TicketScalper.ShowsAPI.Data;
 using TicketScalper.ShowsAPI.Services;
 
@@ -42,6 +43,8 @@ namespace TicketScalper.ShowsAPI
 
       services.AddControllers();
       services.AddAutoMapper(Assembly.GetEntryAssembly());
+
+      services.AddTicketScalperAuthentication();
 
       services.AddSwaggerGen(c =>
       {

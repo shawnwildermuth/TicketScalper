@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Grpc.Core;
 using Grpc.Net.Client;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -24,6 +25,7 @@ namespace TicketScalper.SalesAPI.Controllers
   [Route("customers/{customerId:int}/[controller]")]
   [ApiVersion("1.0")]
   [ApiController]
+  [Authorize]
   public class SalesController : ControllerBase
   {
     private readonly ILogger<SalesController> _logger;

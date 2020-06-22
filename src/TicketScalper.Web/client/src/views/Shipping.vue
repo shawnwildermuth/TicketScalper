@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h3>Customer</h3>
+    <h3>Shipping Information</h3>
     <div class="row">
       <div class="col-6">
         <div class="form-group">
@@ -53,7 +53,7 @@
             class="btn btn-success"
             :disabled="!customer.isValid || !credentials.isValid"
             @click="upsertCustomer()"
-          >Continue to Checkout</button> &nbsp;
+          >Continue to Payment</button> &nbsp;
           <route-button to="/login" class-name="btn btn-secondary" v-if="!isAuthenticated">Login Instead</route-button>
         </div>
       </div>
@@ -148,7 +148,6 @@ export default {
           });
           if (loggedIn) {
             let cust = _.clone(customer);
-            cust.userId = user.id;
             if (await store.dispatch("saveCustomer", cust)) {
               router.push("/checkout");
             }

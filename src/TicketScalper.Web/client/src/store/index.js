@@ -2,6 +2,11 @@
 import mutations from "./mutations";
 import actions from "./actions";
 import getters from "./getters";
+import VuexPersistence from "vuex-persist";
+
+const vuexLocal = new VuexPersistence({
+  storage: window.sessionStorage
+});
 
 export default createStore({
   strict: true,
@@ -16,5 +21,6 @@ export default createStore({
   },
   mutations,
   actions,
-  getters
+  getters,
+  plugins: [vuexLocal.plugin]
 });

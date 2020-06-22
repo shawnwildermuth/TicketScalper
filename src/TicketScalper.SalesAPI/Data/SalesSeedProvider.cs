@@ -23,7 +23,7 @@ namespace TicketScalper.SalesAPI.Data
           CityTown = "Atlanta",
           StateProvince = "GA",
           PostalCode = "12345",
-          UserId = "{337DA5C8-115B-479D-BB1C-4E1F9C912D18}"
+          UserName = "shawn@wildermuth.com"
         }
       };
     }

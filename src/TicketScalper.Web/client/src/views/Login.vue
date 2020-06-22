@@ -41,13 +41,15 @@ export default {
   setup() {
     const credentials = reactive(new Credentials());
     watchEffect(() => credentials.validate());
-    
+
     async function login() {
       store.commit("clearError");
       let result = await store.dispatch("login", credentials);
       if (result) {
+        // Load customer if possible
+        await store.dispatch("loadCustomer");
         router.push("/");
-      } 
+      }
     }
 
     return {

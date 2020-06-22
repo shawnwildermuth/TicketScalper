@@ -13,7 +13,9 @@
         <li class="nav-item" v-if="isAuthenticated">
           <a class="nav-link" href="#" @click="logout()">Logout</a>
         </li>
-        <li class="nav-item" >{{ isAuthenticated }}</li>
+        <li class="nav-item" v-if="cartsize > 0">
+          <router-link class="nav-link" to="/checkout">Checkout ({{ cartsize }})</router-link>
+        </li>
       </ul>
     </Teleport>
     <router-view />
@@ -30,6 +32,7 @@
       const busy = computed(() => store.state.busy);
       const error = computed(() => store.state.error);
       const isAuthenticated = computed(() => store.getters.isAuthenticated);
+      const cartsize = computed(() => store.state.basket.length);
 
       function logout() { 
         store.dispatch("logout");
@@ -39,6 +42,7 @@
       return {
         busy, 
         error,
+        cartsize,
         isAuthenticated,
         logout
       };

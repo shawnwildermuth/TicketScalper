@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -6,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TicketScalper.Core.Controllers;
 using TicketScalper.SalesAPI.Data;
 using TicketScalper.SalesAPI.Data.Entities;
 using TicketScalper.SalesAPI.Models;
@@ -15,7 +18,8 @@ namespace TicketScalper.SalesAPI.Controllers
   [Route("[controller]")]
   [ApiVersion("1.0")]
   [ApiController]
-  public class CustomersController : ControllerBase
+  [Authorize]
+  public class CustomersController : UserController
   {
     private readonly ILogger<CustomersController> _logger;
     private readonly IMapper _mapper;
@@ -30,31 +34,9 @@ namespace TicketScalper.SalesAPI.Controllers
 
     [HttpGet]
     [ProducesResponseType(200)]
-    public async Task<ActionResult<CustomerModel[]>> GetCustomersAsync()
+    public async Task<ActionResult<CustomerModel>> GetCustomersAsync()
     {
-      return _mapper.Map<CustomerModel[]>(await _repository.GetCustomersAsync());
-    }
-
-    [HttpGet("{id:int}")]
-    [ProducesResponseType(200)]
-    [ProducesResponseType(404)]
-    public async Task<ActionResult<CustomerModel>> GetCustomerAsync(int id)
-    {
-      var result = await _repository.GetCustomerAsync(id);
-      if (result == null) return NotFound();
-
-      return _mapper.Map<CustomerModel>(result);
-    }
-
-    [HttpGet("viauser/{id}")]
-    [ProducesResponseType(200)]
-    [ProducesResponseType(404)]
-    public async Task<ActionResult<CustomerModel>> GetCustomerByUserIdAsync(string id)
-    {
-      var result = await _repository.GetCustomerByUserAsync(id);
-      if (result == null) return NotFound();
-
-      return _mapper.Map<CustomerModel>(result);
+      return _mapper.Map<CustomerModel>(await _repository.GetCustomerByUserAsync(UserName));
     }
 
     [HttpPost]
@@ -66,16 +48,18 @@ namespace TicketScalper.SalesAPI.Controllers
       {
         var entity = _mapper.Map<Customer>(model);
 
-        if (await _repository.HasCustomerAsync(entity.FirstName, entity.LastName))
+        if (await _repository.HasCustomerAsync(UserName))
         {
           return BadRequest("Duplicate Customer");
         }
+
+        entity.UserName = UserName;
 
         _repository.Add(entity);
 
         if (await _repository.SaveAllAsync())
         {
-          return CreatedAtRoute(new { entity.Id }, _mapper.Map<CustomerModel>(entity));
+          return CreatedAtRoute(new { }, _mapper.Map<CustomerModel>(entity));
         }
       }
       catch (Exception ex)

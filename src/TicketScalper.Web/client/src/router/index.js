@@ -28,7 +28,7 @@ const routes = [
         if (store.getters.isAuthenticated) {
           next();
         } else {
-          next("/customer")
+          next("/shipping")
         }
       } 
       else next('/');
@@ -44,15 +44,19 @@ const routes = [
     }
   },
   {
-    path: "/customer",
-    name: "Customer",
-    component: Views.Customer,
+    path: "/shipping",
+    name: "Shipping",
+    component: Views.Shipping,
     beforeEnter(to, from, next) {
-      next();
-      // if (store.state.basket.length > 0) next();
-      // else next('/');
+      if (store.state.basket.length > 0) next();
+      else next('/');
     }
-  }
+  },
+  {
+    path: "/:catchAll(.*)",
+    redirect: { name: "Home" }
+  },
+
 ]
 
 const router = createRouter({

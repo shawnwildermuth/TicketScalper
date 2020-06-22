@@ -9,5 +9,6 @@
   hasTicket: (state) => (ticket) => state.basket.findIndex(t => t.id === ticket.id) > -1,
   isAuthenticated: (state) => {
     return (state.token && state.tokenExpiration >= Date.now()) ? true : false;
-  }
+  },
+  hasCustomer: (state) => state.customer
 };

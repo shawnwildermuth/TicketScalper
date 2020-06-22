@@ -17,6 +17,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using TicketScalper.Core.Extensions;
+using TicketScalper.Core.Tokens;
 using TicketScalper.SalesAPI.Data;
 
 namespace TicketScalper.SalesAPI
@@ -40,6 +41,8 @@ namespace TicketScalper.SalesAPI
 
       services.AddControllers();
       services.AddAutoMapper(Assembly.GetEntryAssembly());
+
+      services.AddTicketScalperAuthentication();
 
       services.AddSwaggerGen(c =>
       {

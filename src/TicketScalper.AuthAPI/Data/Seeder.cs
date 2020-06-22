@@ -66,7 +66,6 @@ namespace TicketScalperApp.Identity.Data
         {
           first = new TicketScalperIdentityUser()
           {
-            Id = "{337DA5C8-115B-479D-BB1C-4E1F9C912D18}",
             UserName = "shawn@wildermuth.com",
             Email = "shawn@wildermuth.com",
             EmailConfirmed = true

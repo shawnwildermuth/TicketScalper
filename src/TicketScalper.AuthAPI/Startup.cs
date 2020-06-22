@@ -39,8 +39,7 @@ namespace TicketScalper.AuthAPI
       services.AddIdentityCore<TicketScalperIdentityUser>()
           .AddEntityFrameworkStores<TicketScalperIdentityContext>();
 
-      services.AddAuthentication()
-              .AddTicketScalperBearerToken();
+      services.AddTicketScalperAuthentication();
 
       services.AddAutoMapper(Assembly.GetExecutingAssembly());
 

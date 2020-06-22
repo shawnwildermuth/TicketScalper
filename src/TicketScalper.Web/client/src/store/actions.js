@@ -70,6 +70,22 @@ export default {
     }
     return false;
   },
+  async loadCustomer({ commit }){
+    try {
+      commit("setBusy");
+      const http = createHttp();
+      const result = await http.post("/customer");
+      if (result.status === 200) {
+        commit("setCustomer", result.data);
+        return true;
+      }      
+    } catch (error) {
+      commit("setError", error);
+    } finally {
+      commit("clearBusy");
+    }
+    return false;
+  },
   logout({commit}) {
     commit("setToken", { token: "", expiration: Date() });
   },

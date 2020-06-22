@@ -55,7 +55,7 @@
       <div class="col-2">
         <div>Total: {{ moneyFormat(total) }}</div>
         <div>
-          <route-button to="/customer" class="btn btn-success" :disabled="!allowCheckout">Checkout</route-button>
+          <route-button to="/shipping" class="btn btn-success" :disabled="!allowCheckout">Checkout</route-button>
         </div>
       </div>
     </div>

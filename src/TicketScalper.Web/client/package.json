@@ -14,7 +14,8 @@
     "lodash": "^4.17.15",
     "vue": "3.0.0-beta.15",
     "vue-router": ">4.0.0-alpha",
-    "vuex": ">4.0.0-beta"
+    "vuex": ">4.0.0-beta",
+    "vuex-persist": "^2.2.0"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^4.4.4",

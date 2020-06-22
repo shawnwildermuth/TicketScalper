@@ -2,12 +2,12 @@
 import Tickets from "./Tickets";
 import Checkout from "./Checkout";
 import Login from "./Login";
-import Customer from "./Customer";
+import Shipping from "./Shipping";
 
 export default {
   Home,
   Tickets,
   Checkout,
   Login,
-  Customer
+  Shipping
 }
