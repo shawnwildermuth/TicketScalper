@@ -25,7 +25,6 @@
       </div>
       <div class="form-group">
         <button class="btn btn-success" :disabled="!(credentials.isValid)" @click="login()">Login</button>
-        <div>{{ credentials }}</div>
       </div>
     </div>
   </div>

@@ -19,6 +19,18 @@ export default class Customer extends ValidatableModel {
     this.country = "";
     this.userId = "";
     
+    // IF DEBUG
+    raw = raw ? raw :  {
+      firstName: "Bob",
+      lastName: "Smith",
+      phoneNumber: "404-555-1212",
+      addressLine1: "123 Main Street",
+      cityTown: "Atlanta",
+      stateProvince: "GA",
+      postalCode: "30303"
+    };
+
+
     if (raw !== undefined) {
       for (const key in raw) {
         if (this.hasOwnProperty(key)) {

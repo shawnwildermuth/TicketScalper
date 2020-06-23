@@ -3,6 +3,7 @@ import mutations from "./mutations";
 import actions from "./actions";
 import getters from "./getters";
 import VuexPersistence from "vuex-persist";
+import Customer from "../models/customer";
 
 const vuexLocal = new VuexPersistence({
   storage: window.sessionStorage
@@ -15,7 +16,7 @@ export default createStore({
     busy: false,
     basket: [],
     error: "",
-    customer: null,
+    customer: new Customer(),
     token: "",
     tokenExpiration: Date()
   },

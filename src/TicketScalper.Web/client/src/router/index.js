@@ -23,14 +23,13 @@ const routes = [
     name: "Checkout",
     component: Views.Checkout,
     beforeEnter(to, from, next) {
-      if (store.state.basket.length > 0)
-      {
+      if (store.state.basket.length > 0) {
         if (store.getters.isAuthenticated) {
           next();
         } else {
           next("/shipping")
         }
-      } 
+      }
       else next('/');
     }
   },
@@ -48,8 +47,11 @@ const routes = [
     name: "Shipping",
     component: Views.Shipping,
     beforeEnter(to, from, next) {
-      if (store.state.basket.length > 0) next();
-      else next('/');
+      if (store.state.basket.length > 0) {
+          next();
+      } else {
+        next('/');
+      }
     }
   },
   {

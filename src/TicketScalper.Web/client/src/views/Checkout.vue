@@ -7,30 +7,30 @@
         <div class="form-group">
           <label>Credit Card:</label>
           <input class="form-control" v-model="payment.creditCard" />
-          <ErrorSpan error="errors['creditCard']" />
+          <error-span :error="payment.errors['creditCard']" />
         </div>
         <label>Expiration:</label>
         <div class="form-group">
           <input class="form-control col-2 d-inline" v-model="payment.expirationMonth" />/
           <input class="form-control col-2 d-inline" v-model="payment.expirationYear" />
           <br />
-          <ErrorSpan error="errors['expirationMonth']" />
+          <error-span :error="payment.errors['expirationMonth']" />
           &nbsp;
-          <ErrorSpan error="errors['expirationYear']" />
+          <error-span :error="payment.errors['expirationYear']" />
         </div>
         <div class="form-group">
           <label>Security Code</label>
           <input class="form-control col-4" v-model="payment.validationCode" />
-          <ErrorSpan error="errors['validationCode']" />
+          <error-span :error="payment.errors['validationCode']" />
         </div>
         <div class="form-group">
           <label>Security Code</label>
           <input class="form-control col-4" v-model="payment.postalCode" />
-          <ErrorSpan error="errors['postalCode']" />
+          <error-span :error="payment.errors['postalCode']" />
         </div>
         <button
           class="btn btn-success"
-          :disabled="!paymentValid"
+          :disabled="!payment.isValid"
           @click="processPayment()"
         >Process Payment</button>
       </div>
@@ -55,7 +55,7 @@
           </tbody>
         </table>
         <div>Total: {{ moneyFormat(basketTotal) }}</div>
-        <div>{{ JSON.stringify(errors) }}</div>
+        <div>{{ payment }}</div>
       </div>
     </div>
   </div>
@@ -63,7 +63,7 @@
 <script>
 import store from "@/store";
 import filters from "@/filters";
-import { computed, ref, reactive } from "vue";
+import { computed, reactive, watchEffect } from "vue";
 import router from "@/router";
 import Payment from "@/models/payment";
 
@@ -73,23 +73,22 @@ export default {
     const payment = reactive(
       new Payment("4444444444444444", "10", "2025", "30303", "123")
     );
-    const paymentValid = computed(() => payment.isValid);
-    const errors = computed(() => payment.errors);
     const basketTotal = computed(() => store.getters.basketTotal);
+
+    watchEffect(() => payment.validate());
 
     async function processPayment() {
       const result = await store.dispatch("processPayment", payment);
       if (result) {
+        store.commit("clearBasket");
         router.replace("/");
       }
     }
 
     return {
-      errors,
       payment,
       basket,
       basketTotal,
-      paymentValid,
       processPayment,
       ...filters
     };

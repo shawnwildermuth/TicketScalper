@@ -14,7 +14,7 @@
           <a class="nav-link" href="#" @click="logout()">Logout</a>
         </li>
         <li class="nav-item" v-if="cartsize > 0">
-          <router-link class="nav-link" to="/checkout">Checkout ({{ cartsize }})</router-link>
+          <router-link class="nav-link" to="/shipping">Checkout ({{ cartsize }})</router-link>
         </li>
       </ul>
     </Teleport>

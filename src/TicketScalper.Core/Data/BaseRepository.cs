@@ -24,7 +24,14 @@ namespace TicketScalper.Core.Data
 
     public async Task<bool> SaveAllAsync()
     {
-      return await Context.SaveChangesAsync() > 0;
+      if (Context.ChangeTracker.HasChanges())
+      {
+        return await Context.SaveChangesAsync() > 0;
+      }
+      else 
+      {
+        return true;
+      }
     }
   }
 }

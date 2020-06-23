@@ -1,4 +1,5 @@
 ﻿import BasketItem from "../models/basketItem";
+import Customer from "../models/customer";
 
 export default {
   setShows(state, shows) {
@@ -21,6 +22,9 @@ export default {
     let index = state.basket.findIndex(i => i.id === ticket.id);
     if (index > -1) state.basket.splice(index, 1);
   },
+  clearBasket(state) {
+    state.basket = [];
+  },
   setError(state, error) {
     if (error instanceof Error) {
       if (error.response) {
@@ -40,6 +44,7 @@ export default {
     state.tokenExpiration = Date.parse(expiration);
   },
   setCustomer(state, customer) {
-    state.customer = customer;
+    if (customer instanceof Customer) state.customer = customer;
+    state.customer = new Customer(customer);
   }
 };

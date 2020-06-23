@@ -1,4 +1,5 @@
 ﻿import createHttp from "@/services/http";
+import Customer from "@/models/customer";
 
 export default {
   async loadShows({ commit }) {
@@ -33,15 +34,19 @@ export default {
   },
   async processPayment({ state, commit }, payment) {
     try {
+      if (!(state.customer.id)) {
+        commit("setError", "Customer is invalid");
+        return false;
+      }
       commit("setBusy");
       const http = createHttp();
-      const result = await http.post("customer/1/sales", {
+      const result = await http.post(`customers/${state.customer.id}/sales/ticketrequest`, {
         creditCard: payment.creditCard,
-        expirationMonth: payment.expirationMonth,
-        expirationYear: payment.expirationYear,
+        expirationMonth: Number(payment.expirationMonth),
+        expirationYear: Number(payment.expirationYear),
         validationCode: payment.validationCode,
         postalCode: payment.postalCode,
-        ticketIds: state.basket.reduce(t => t.id)
+        ticketIds: state.basket.map(t => Number(t.id))
       });
 
       if (result.status === 201) {
@@ -74,9 +79,9 @@ export default {
     try {
       commit("setBusy");
       const http = createHttp();
-      const result = await http.post("/customer");
+      const result = await http.get("/customers");
       if (result.status === 200) {
-        commit("setCustomer", result.data);
+        commit("setCustomer", new Customer(result.data));
         return true;
       }      
     } catch (error) {
@@ -108,12 +113,17 @@ export default {
     }
     return undefined;
   },
-  async saveCustomer({commit}, cust) {
+  async saveCustomer({state, commit}, cust) {
     try {
       commit("setBusy");
       const http = createHttp();
-      const result = await http.post("/customers", cust);
-      if (result.status === 201) {
+      let result;
+      if (cust.id === 0) { // new
+        result = await http.post("/customers", cust);
+      } else {
+        result = await http.put(`/customers/${cust.id}`, cust);
+      }
+      if (result.status === 201 || result.status === 200) {
         commit("setCustomer", result.data);
         return true;
       }      

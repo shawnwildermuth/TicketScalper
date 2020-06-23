@@ -56,6 +56,8 @@
           >Continue to Payment</button> &nbsp;
           <route-button to="/login" class-name="btn btn-secondary" v-if="!isAuthenticated">Login Instead</route-button>
         </div>
+        <div>{{ customer }}</div>
+        <div>{{ credentials }}</div>
       </div>
       <div class="col-6">
         <div class="form-group">
@@ -98,7 +100,7 @@
   </div>
 </template>
 <script>
-import { reactive, computed, watchEffect } from "vue";
+import { reactive, computed, watchEffect, onMounted } from "vue";
 import Customer from "@/models/customer";
 import NewCredentials from "@/models/newCredentials";
 import _ from "lodash";
@@ -107,16 +109,7 @@ import store from "@/store";
 
 export default {
   setup() {
-    let debuggingCustomer = {
-      firstName: "Bob",
-      lastName: "Smith",
-      phoneNumber: "404-555-1212",
-      addressLine1: "123 Main Street",
-      cityTown: "Atlanta",
-      stateProvince: "GA",
-      postalCode: "30303"
-    };
-    const customer = reactive(new Customer(debuggingCustomer));
+    const customer = computed(() => store.state.customer);
     const credentials = reactive(new NewCredentials());
     credentials.username = "shawn@wildermuth.com";
     credentials.password = "P@ssw0rd!";
@@ -124,35 +117,41 @@ export default {
 
     const isAuthenticated = computed(() => store.getters.isAuthenticated);
 
-    watchEffect(() => customer.validate());
+    watchEffect(() => customer.value.validate());
     watchEffect(() => credentials.validate());
+
+    onMounted(async () => {
+      await store.dispatch("loadCustomer");
+    });
 
     async function upsertCustomer() {
       console.log("Upserting Customer");
 
-      if (!customer.isValid) {
+      if (!customer.value.isValid) {
         store.commit("setError", "Customer Form invalid.");
         return;
       }
 
-      if (store.getters.isAuthenticated === true) {
-        console.log("Saving Customer Info for logged in user.");
-      } else {
+      if (store.getters.isAuthenticated === false) {
         console.log("Saving Customer Info for new user.");
         // Store Cred
         const user = await store.dispatch("createLogin", credentials);
         if (user) {
-          const loggedIn = await store.dispatch("login", {
+          await store.dispatch("login", {
             username: credentials.username,
             password: credentials.password
           });
-          if (loggedIn) {
-            let cust = _.clone(customer);
-            if (await store.dispatch("saveCustomer", cust)) {
-              router.push("/checkout");
-            }
-          }
         }
+      }
+      // Store Customer
+      if (store.getters.isAuthenticated === false) { // Only should fire if the login fails, shouldn't happen
+        console.log("Login didn't work");
+        store.commit("setError", "Failed to login during save");
+        return;
+      }
+
+      if (await store.dispatch("saveCustomer", customer.value)) {
+        router.push("/checkout");
       }
     }
 

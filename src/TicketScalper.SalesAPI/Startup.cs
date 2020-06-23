@@ -19,6 +19,7 @@ using Microsoft.OpenApi.Models;
 using TicketScalper.Core.Extensions;
 using TicketScalper.Core.Tokens;
 using TicketScalper.SalesAPI.Data;
+using TicketScalper.SalesAPI.Services;
 
 namespace TicketScalper.SalesAPI
 {
@@ -54,6 +55,9 @@ namespace TicketScalper.SalesAPI
           c.IncludeXmlComments(xmlPath);
         }
       });
+
+      services.AddScoped<ITicketService, TicketService>();
+      services.AddScoped<ITicketChannelProvider, TicketChannelProvider>();
 
       services.AddApiVersioning(cfg =>
       {

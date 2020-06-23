@@ -9,12 +9,12 @@ export default class Payment extends ValidatableModel {
     this.expirationYear = expirationYear;
     this.postalCode = postalCode;
     this.validationCode = validationCode;
-
   }
 
-  get isValid() {
+  validate() {
 
-    const creditCardValidator = (val) => val.match(/^(?:4[0-9]{12}(?:[0-9]{3})?|[25][1-7][0-9]{14}|6(?:011|5[0-9][0-9])[0-9]{12}|3[47][0-9]{13}|3(?:0[0-5]|[68][0-9])[0-9]{11}|(?:2131|1800|35\d{3})\d{11})$/);
+    super.validate();
+
     const monthValidator = (val) => {
       var parsed = Number.parseInt(val);
       return !isNaN(parsed) && parsed > 0 && parsed < 13;
@@ -24,35 +24,16 @@ export default class Payment extends ValidatableModel {
       const today = new Date();
       return !isNaN(parsed) && parsed > (today.getFullYear() -  1) && parsed < (today.getFullYear() + 20);
     };
-    const postalCodeValidator = (val) => val.match(/^[0-9]{5}(?:-[0-9]{4})?$/);
-    const validationCodeValidator = (val) => val.match(/^[0-9]{3,4}$/);
+    const validationCodeValidator = (val) => /^[0-9]{3,4}$/.test(val);
 
-    let success = super.isValid;
+    let success = true;
 
-    if (!creditCardValidator(this.creditCard)) {
-      success = false;
-      this.errors["creditCard"] = "Invalid Credit Card";
-    }
+    success = success & this.validateField(this.creditCardValidator, "creditCard", "Invalid Credit Card.");
+    success = success & this.validateField(monthValidator, "expirationMonth", "Invalid Expiration Month.");
+    success = success & this.validateField(yearValidator, "expirationYear", "Invalid Expiration Year.");
+    success = success & this.validateField(validationCodeValidator, "validationCode", "Invalid Validation Code.");
+    success = success & this.validateField(this.postalCodeValidator, "postalCode", "Invalid Postal Code.");
 
-    if (!monthValidator(this.expirationMonth)) {
-      success = false;
-      this.errors["expirationMonth"] = "Invalid Month";
-    }
-
-    if (!yearValidator(this.expirationYear)) {
-      success = false;
-      this.errors["expirationYear"] = "Invalid Year";
-    }
-
-    if (!validationCodeValidator(this.validationCode)) {
-      success = false;
-      this.errors["validationCode"] = "Invalid Validation Code";
-    }
-    if (!postalCodeValidator(this.postalCode)) {
-      success = false;
-      this.errors["postalCode"] = "Invalid Postal Code";
-    }
-
-    return success
+    this.isValid = success;
   }
 }
