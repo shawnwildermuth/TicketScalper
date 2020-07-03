@@ -24,14 +24,24 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{EA58305E-004F-48EA-834E-7D535CA2D18C}"
 	ProjectSection(SolutionItems) = preProject
 		..\.gitignore = ..\.gitignore
+		docker-compose.yml = docker-compose.yml
 		..\README.md = ..\README.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TicketScalper.AuthAPI", "TicketScalper.AuthAPI\TicketScalper.AuthAPI.csproj", "{AAD1CA5A-46B5-45D7-8FFA-DE3371C8BBB3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TicketScalper.AuthAPI", "TicketScalper.AuthAPI\TicketScalper.AuthAPI.csproj", "{AAD1CA5A-46B5-45D7-8FFA-DE3371C8BBB3}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{5BDF172D-F607-4177-A1C1-C2744D255B01}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TicketScalper.Gateway", "TicketScalper.Gateway\TicketScalper.Gateway.csproj", "{D963D8A3-634A-4C3B-81DF-FCA760E09947}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TicketScalper.Gateway", "TicketScalper.Gateway\TicketScalper.Gateway.csproj", "{D963D8A3-634A-4C3B-81DF-FCA760E09947}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".k8s", ".k8s", "{A38D0A3E-1C15-4C80-8AD3-7E018F8A8B6C}"
+	ProjectSection(SolutionItems) = preProject
+		.k8s\auth.deploy.yml = .k8s\auth.deploy.yml
+		.k8s\gateway.deploy.yml = .k8s\gateway.deploy.yml
+		.k8s\sales.deploy.yml = .k8s\sales.deploy.yml
+		.k8s\shows.deploy.yml = .k8s\shows.deploy.yml
+		.k8s\web.deploy.yml = .k8s\web.deploy.yml
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -84,6 +94,7 @@ Global
 		{A79C0F40-B378-430F-9512-5010C193AA3A} = {D02F806B-147B-4023-A94E-A37E67D68C6D}
 		{AAD1CA5A-46B5-45D7-8FFA-DE3371C8BBB3} = {C1B7DA66-4BDF-451A-8435-08E524D7B588}
 		{D963D8A3-634A-4C3B-81DF-FCA760E09947} = {C1B7DA66-4BDF-451A-8435-08E524D7B588}
+		{A38D0A3E-1C15-4C80-8AD3-7E018F8A8B6C} = {EA58305E-004F-48EA-834E-7D535CA2D18C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {78C044F1-B4A3-4492-B688-0DE1D4C34D98}

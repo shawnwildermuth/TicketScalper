@@ -30,6 +30,7 @@ namespace TicketScalper.Gateway
               .AddJsonFile("appsettings.json")
               .AddJsonFile("appsettings.Development.json", true)
               .AddJsonFile("ocelot.json", false, true)
+              .AddJsonFile("ocelot.development.json", true, true)
               .AddEnvironmentVariables();
 
         })

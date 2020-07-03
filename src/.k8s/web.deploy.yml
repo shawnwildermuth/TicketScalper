@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ticketscalper-web
+spec:
+  selector:
+    matchLabels:
+      app: ticketscalper-web 
+  template:
+    metadata:
+      labels:
+        app: ticketscalper-web
+    spec:
+      containers:
+      - name: ticketscalper-web
+        image: ticketscalperweb:latest
+        ports:
+          - containerPort: 80
+        resources:
+          limits:
+            memory: "128Mi" #128 MB
+            cpu: "200m" 

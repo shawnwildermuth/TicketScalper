@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ticketscalper-sales
+spec:
+  selector:
+    matchLabels:
+      app: ticketscalper-sales
+  template:
+    metadata:
+      labels:
+        app: ticketscalper-sales
+    spec:
+      containers:
+      - name: ticketscalper-sales
+        image: ticketscalpersales:latest
+        resources:
+          limits:
+            memory: "512Mi"
+            cpu: "200m" 
+      - name: ticketscalper-salesdb
+        image: mcr.microsoft.com/mssql/server:2019-latest
+        env:
+          - name: SA_PASSWORD
+            value: "P@ssw0rd!"
+          - name: ACCEPT_EULA
+            value: "Y"
+        resources:
+          limits:
+            memory: "512Mi"
+            cpu: "500m" 

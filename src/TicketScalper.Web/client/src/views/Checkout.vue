@@ -69,11 +69,10 @@ import Payment from "@/models/payment";
 
 export default {
   setup(props, ctx) {
-    const basket = computed(() => store.state.basket);
-    const payment = reactive(
-      new Payment("4444444444444444", "10", "2025", "30303", "123")
-    );
+    const payment = reactive(new Payment());
+
     const basketTotal = computed(() => store.getters.basketTotal);
+    const basket = computed(() => store.state.basket);
 
     watchEffect(() => payment.validate());
 

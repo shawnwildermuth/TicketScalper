@@ -12,19 +12,19 @@
     "axios": "0.19.2",
     "core-js": "^3.6.5",
     "lodash": "^4.17.15",
-    "vue": "3.0.0-beta.15",
+    "vue": ">3.0.0-beta",
     "vue-router": ">4.0.0-alpha",
     "vuex": ">4.0.0-beta",
     "vuex-persist": "^2.2.0"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "^4.4.4",
-    "@vue/cli-plugin-router": "^4.4.4",
-    "@vue/cli-plugin-unit-mocha": "^4.4.4",
-    "@vue/cli-plugin-vuex": "^4.4.4",
-    "@vue/cli-service": "^4.4.4",
+    "@vue/cli-plugin-babel": "^4.4.6",
+    "@vue/cli-plugin-router": "^4.4.6",
+    "@vue/cli-plugin-unit-mocha": "^4.4.6",
+    "@vue/cli-plugin-vuex": "^4.4.6",
+    "@vue/cli-service": "^4.4.6",
     "@vue/compiler-sfc": "^3.0.0-beta.15",
-    "@vue/test-utils": "^2.0.0-alpha.1",
+    "@vue/test-utils": "^2.0.0-alpha.7",
     "chai": "^4.1.2",
     "vue-cli-plugin-vue-next": "~0.1.3"
   }

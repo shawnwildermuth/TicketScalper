@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ticketscalper-gateway
+spec:
+  selector:
+     matchLabels:
+       app: ticketscalper-gateway
+  template:
+    metadata:
+      labels:
+        app: ticketscalper-gateway
+    spec:
+      containers:
+      - name: ticketscalper-gateway
+        image: ticketscalpergateway
+        resources:
+          limits:
+            memory: "128Mi" #128 MB
+            cpu: "200m" 

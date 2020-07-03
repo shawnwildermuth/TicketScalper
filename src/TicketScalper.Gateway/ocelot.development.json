@@ -5,7 +5,7 @@
 			"DownstreamScheme": "https",
 			"DownstreamHostAndPorts": [
 				{
-					"Host": "showsApi",
+					"Host": "localhost",
 					"Port": 5001
 				}
 			],
@@ -17,7 +17,7 @@
 			"DownstreamScheme": "https",
 			"DownstreamHostAndPorts": [
 				{
-					"Host": "showsApi",
+					"Host": "localhost",
 					"Port": 5001
 				}
 			],
@@ -29,7 +29,7 @@
 			"DownstreamScheme": "https",
 			"DownstreamHostAndPorts": [
 				{
-					"Host": "salesApi",
+					"Host": "localhost",
 					"Port": 5002
 				}
 			],
@@ -41,7 +41,7 @@
 			"DownstreamScheme": "https",
 			"DownstreamHostAndPorts": [
 				{
-					"Host": "salesApi",
+					"Host": "localhost",
 					"Port": 5002
 				}
 			],
@@ -53,7 +53,7 @@
 			"DownstreamScheme": "https",
 			"DownstreamHostAndPorts": [
 				{
-					"Host": "salesApi",
+					"Host": "localhost",
 					"Port": 5002
 				}
 			],
@@ -65,7 +65,7 @@
 			"DownstreamScheme": "https",
 			"DownstreamHostAndPorts": [
 				{
-					"Host": "authApi",
+					"Host": "localhost",
 					"Port": 5003
 				}
 			],
@@ -75,6 +75,6 @@
 
 	],
 	"GlobalConfiguration": {
-		"BaseUrl": "https://gateway:5999/"
+		"BaseUrl": "https://localhost:5999/"
 	}
 }
