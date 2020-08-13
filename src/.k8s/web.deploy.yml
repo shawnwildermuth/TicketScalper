@@ -13,10 +13,25 @@ spec:
     spec:
       containers:
       - name: ticketscalper-web
-        image: ticketscalperweb:latest
+        image: shawnwildermuth/ticketscalperweb:latest
         ports:
           - containerPort: 80
         resources:
           limits:
             memory: "128Mi" #128 MB
             cpu: "200m" 
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: ticketscalper
+spec:
+  type: LoadBalancer
+  selector:
+    app: ticketscalper-web
+  ports:
+    - protocol: TCP
+      port: 8888
+      targetPort: 80

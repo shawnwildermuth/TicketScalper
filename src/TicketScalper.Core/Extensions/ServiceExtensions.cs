@@ -23,5 +23,6 @@ namespace TicketScalper.Core.Extensions
         });
       });
     }
+
   }
 }

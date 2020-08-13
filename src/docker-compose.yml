@@ -4,56 +4,56 @@ services:
 
 # Web Servers 
 
-  web:
-    image: ${DOCKER_REGISTRY-}ticketscalperweb
-    build:
-      context: .
-      dockerfile: TicketScalper.Web/Dockerfile
+  # web:
+  #   image: shawnwildermuth/ticketscalperweb:latest
+  #   build:
+  #     context: .
+  #     dockerfile: TicketScalper.Web/Dockerfile
     
 
   showsApi:
-    image: ${DOCKER_REGISTRY-}ticketscalpershows
+    image: shawnwildermuth/ticketscalpershows:latest
     build:
       context: .
       dockerfile: TicketScalper.ShowsAPI/Dockerfile
 
-  salesApi:
-    image: ${DOCKER_REGISTRY-}ticketscalpersales
-    build:
-      context: .
-      dockerfile: TicketScalper.SalesAPI/Dockerfile
+  # salesApi:
+  #   image: shawnwildermuth/ticketscalpersales:latest
+  #   build:
+  #     context: .
+  #     dockerfile: TicketScalper.SalesAPI/Dockerfile
 
-  authApi:
-    image: ${DOCKER_REGISTRY-}ticketscalperauth
-    build:
-      context: .
-      dockerfile: TicketScalper.AuthAPI/Dockerfile
+  # authApi:
+  #   image: shawnwildermuth/ticketscalperauth:latest
+  #   build:
+  #     context: .
+  #     dockerfile: TicketScalper.AuthAPI/Dockerfile
 
 # Databases
 
-  showsDb: 
-    image: "mcr.microsoft.com/mssql/server:2019-latest"
-    environment:
-        SA_PASSWORD: "P@ssw0rd!"
-        ACCEPT_EULA: "Y"
+  # showsDb: 
+  #   image: "mcr.microsoft.com/mssql/server:2019-latest"
+  #   environment:
+  #       SA_PASSWORD: "P@ssw0rd!"
+  #       ACCEPT_EULA: "Y"
 
-  salesDb:
-    image: "mcr.microsoft.com/mssql/server:2019-latest"
-    environment:
-        SA_PASSWORD: "P@ssw0rd!"
-        ACCEPT_EULA: "Y"
+  # salesDb:
+  #   image: "mcr.microsoft.com/mssql/server:2019-latest"
+  #   environment:
+  #       SA_PASSWORD: "P@ssw0rd!"
+  #       ACCEPT_EULA: "Y"
 
-  authDb:
-    image: "mcr.microsoft.com/mssql/server:2019-latest"
-    environment:
-        SA_PASSWORD: "P@ssw0rd!"
-        ACCEPT_EULA: "Y"
+  # authDb:
+  #   image: "mcr.microsoft.com/mssql/server:2019-latest"
+  #   environment:
+  #       SA_PASSWORD: "P@ssw0rd!"
+  #       ACCEPT_EULA: "Y"
 
 # GATEWAY 
 
-  gateway:
-    image: ${DOCKER_REGISTRY-}ticketscalpergateway
-    build:
-      context: .
-      dockerfile: TicketScalper.Gateway/Dockerfile
+  # gateway:
+  #   image: shawnwildermuth/ticketscalpergateway
+  #   build:
+  #     context: .
+  #     dockerfile: TicketScalper.Gateway/Dockerfile
 

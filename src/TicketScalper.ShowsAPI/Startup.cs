@@ -38,7 +38,7 @@ namespace TicketScalper.ShowsAPI
     // This method gets called by the runtime. Use this method to add services to the container.
     public void ConfigureServices(IServiceCollection services)
     {
-      services.AddDbContext<ShowContext>(cfg => cfg.UseSqlServer(_config.GetConnectionString("ShowDb")));
+      services.AddDbContext<ShowContext>(cfg => cfg.UseSqlServer(_config.GetConnectionString("DbServer")));
       services.AddScoped<IShowRepository, ShowRepository>();
 
       services.AddControllers();

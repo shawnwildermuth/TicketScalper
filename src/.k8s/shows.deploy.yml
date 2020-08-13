@@ -13,7 +13,7 @@ spec:
     spec:
       containers:
       - name: ticketscalper-shows
-        image: ticketscalpershows:latest
+        image: shawnwildermuth/ticketscalpershows:latest
         resources:
           limits:
             memory: "512Mi"
@@ -29,3 +29,18 @@ spec:
           limits:
             memory: "512Mi"
             cpu: "500m" 
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: ticketscalper-shows
+spec:
+  type: LoadBalancer
+  selector:
+    app: ticketscalper-shows
+  ports:
+    - protocol: TCP
+      port: 5001
+      targetPort: 5001

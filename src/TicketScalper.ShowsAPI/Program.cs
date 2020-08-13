@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using TicketScalper.Core.Extensions;
+using TicketScalper.ShowsAPI.Data;
 
 namespace TicketScalper.ShowsAPI
 {
@@ -13,7 +15,10 @@ namespace TicketScalper.ShowsAPI
   {
     public static void Main(string[] args)
     {
-      CreateHostBuilder(args).Build().Run();
+      CreateHostBuilder(args)
+        .Build()
+        .Seed<ShowContext>()
+        .Run();
     }
 
     public static IHostBuilder CreateHostBuilder(string[] args) =>

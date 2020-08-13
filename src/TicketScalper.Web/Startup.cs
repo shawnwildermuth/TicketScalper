@@ -39,12 +39,6 @@ namespace TicketScalper.Web
         app.UseExceptionHandler("/Error");
       }
 
-      // Vue Specific
-      app.UseStaticFiles(new StaticFileOptions()
-      {
-        FileProvider = new PhysicalFileProvider(Path.Combine(env.ContentRootPath, "client/dist")),
-        RequestPath = "/app"
-      });
       // wwwroot
       app.UseStaticFiles();
 

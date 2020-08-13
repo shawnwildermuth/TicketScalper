@@ -13,10 +13,6 @@
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.10.9" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="client\src\services\" />
-  </ItemGroup>
-
   <Target Name="PrepublishScript" BeforeTargets="BeforePublish">
     <Exec Command="npm install" WorkingDirectory="client" />
     <Exec Command="npm run build" WorkingDirectory="client" />

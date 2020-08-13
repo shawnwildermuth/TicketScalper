@@ -6,15 +6,16 @@ EXPOSE 80
 
 FROM mcr.microsoft.com/dotnet/core/sdk:3.1-buster AS build
 
+WORKDIR /src
+COPY ["TicketScalper.Web/TicketScalper.Web.csproj", "TicketScalper.Web/"]
+RUN dotnet restore "TicketScalper.Web/TicketScalper.Web.csproj"
+COPY . .
+
 RUN apt-get install -y curl \
   && curl -sL https://deb.nodesource.com/setup_14.x | bash - \
   && apt-get install -y nodejs \
   && curl -L https://www.npmjs.com/install.sh | sh
 
-WORKDIR /src
-COPY ["TicketScalper.Web/TicketScalper.Web.csproj", "TicketScalper.Web/"]
-RUN dotnet restore "TicketScalper.Web/TicketScalper.Web.csproj"
-COPY . .
 WORKDIR "/src/TicketScalper.Web"
 RUN dotnet build "TicketScalper.Web.csproj" -c Release -o /app/build
 
