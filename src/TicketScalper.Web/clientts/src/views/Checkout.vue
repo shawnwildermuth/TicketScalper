@@ -69,7 +69,7 @@ import Payment from "@/models/Payment";
 
 export default defineComponent({
   setup(props, ctx) {
-    const payment = reactive(new Payment());
+    const payment = reactive({} as Payment);
 
     const basketTotal = computed(() => store.getters.basketTotal);
     const basket = computed(() => store.state.basket);

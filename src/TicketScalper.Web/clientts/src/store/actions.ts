@@ -1,17 +1,20 @@
 ﻿import createHttp from "../services/http";
 import Customer from "../models/Customer";
+import User from "../models/User";
+import Show from "../models/Show";
 import Payment from '@/models/Payment';
 import NewCredentials from '@/models/NewCredentials';
 import Credentials from '@/models/Credentials';
 import IState from './IState';
 import { ActionTree } from "vuex";
+import Ticket from '@/models/Ticket';
 
 const actions: ActionTree<IState, IState> = {
-  async loadShows({ commit }) {
+  async loadShows({ commit }): Promise<void> {
     try {
       commit("setBusy");
       const http = createHttp(false);
-      const result = await http.get("shows/latest");
+      const result = await http.get<Array<Show>>("shows/latest");
       if (result.status === 200) {
         commit("setShows", result.data);
       }
@@ -22,11 +25,11 @@ const actions: ActionTree<IState, IState> = {
       commit("clearBusy");
     }
   },
-  async loadTickets({ commit, getters }, id: number) {
+  async loadTickets({ commit, getters }, id: number): Promise<void> {
     try {
       commit("setBusy");
       const http = createHttp(false);
-      const result = await http.get(`shows/${id}/tickets`);
+      const result = await http.get<Array<Ticket>>(`shows/${id}/tickets`);
       if (result.status === 200) {
         const show = getters.getShow(id);
         commit("setTicketsForShow", { show: show, tickets: result.data });
@@ -37,7 +40,7 @@ const actions: ActionTree<IState, IState> = {
       commit("clearBusy");
     }
   },
-  async processPayment({ state, commit }, payment: Payment) {
+  async processPayment({ state, commit }, payment: Payment): Promise<boolean> {
     try {
       if (!(state.customer.id)) {
         commit("setError", "Customer is invalid");
@@ -64,7 +67,7 @@ const actions: ActionTree<IState, IState> = {
     }
     return false;
   },
-  async login({ commit }, credentials: Credentials){
+  async login({ commit }, credentials: Credentials): Promise<boolean> {
     try {
       commit("setBusy");
       const http = createHttp(false);
@@ -80,13 +83,13 @@ const actions: ActionTree<IState, IState> = {
     }
     return false;
   },
-  async loadCustomer({ commit }){
+  async loadCustomer({ commit }): Promise<boolean>{
     try {
       commit("setBusy");
       const http = createHttp();
-      const result = await http.get("/customers");
+      const result = await http.get<Customer>("/customers");
       if (result.status === 200) {
-        commit("setCustomer", new Customer(result.data));
+        commit("setCustomer", result.data);
         return true;
       }      
     } catch (error) {
@@ -99,11 +102,11 @@ const actions: ActionTree<IState, IState> = {
   logout({commit}) {
     commit("setToken", { token: "", expiration: Date() });
   },
-  async createLogin({commit}, credentials: NewCredentials) {
+  async createLogin({commit}, credentials: NewCredentials): Promise<User | undefined> {
     try {
       commit("setBusy");
       const http = createHttp(false);
-      const result = await http.post("/auth/users", credentials);
+      const result = await http.post<User>("/auth/users", credentials);
       if (result.status === 201) {
           return result.data;
       } else {
@@ -118,7 +121,7 @@ const actions: ActionTree<IState, IState> = {
     }
     return undefined;
   },
-  async saveCustomer({commit}, cust: Customer) {
+  async saveCustomer({commit}, cust: Customer): Promise<boolean> {
     try {
       commit("setBusy");
       const http = createHttp();
@@ -139,7 +142,7 @@ const actions: ActionTree<IState, IState> = {
     {
       commit("clearBusy");
     }
-    return undefined;
+    return false;
   }
 };
 

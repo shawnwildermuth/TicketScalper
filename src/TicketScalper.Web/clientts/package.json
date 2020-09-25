@@ -9,22 +9,23 @@
   },
   "dependencies": {
     "axios": "0.19.2",
-    "class-validator": "^0.12.2",
+    "@vuelidate/core": "2.0.0-alpha.4",
+    "@vuelidate/validators": "2.0.0-alpha.2",
     "core-js": "^3.6.5",
-    "lodash": "^4.17.15",
-    "vue": "^3.0.0-0",
-    "vue-router": "^4.0.0-0",
-    "vuex": "^4.0.0-0",
-    "vuex-persist": "^2.2.0"
+    "lodash": "^4.17.20",
+    "vue": "^3.0.0",
+    "vue-router": "4.0.0-0",
+    "vuex": "4.0.0-0",
+    "vuex-persist": "^2.3.0"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "~4.5.0",
-    "@vue/cli-plugin-router": "~4.5.0",
-    "@vue/cli-plugin-typescript": "~4.5.0",
-    "@vue/cli-plugin-vuex": "~4.5.0",
-    "@vue/cli-service": "~4.5.0",
-    "@vue/compiler-sfc": "^3.0.0-0",
-    "typescript": "~3.9.3",
-    "@types/lodash": "^4.14.159"
+    "@types/lodash": "^4.14.161",
+    "@vue/cli-plugin-babel": "^4.5.6",
+    "@vue/cli-plugin-router": "^4.5.6",
+    "@vue/cli-plugin-typescript": "^4.5.6",
+    "@vue/cli-plugin-vuex": "^4.5.6",
+    "@vue/cli-service": "^4.5.6",
+    "@vue/compiler-sfc": "^3.0.0",
+    "typescript": "~3.9.3"
   }
 }

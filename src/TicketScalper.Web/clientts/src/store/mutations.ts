@@ -1,26 +1,33 @@
 ﻿import BasketItem from "../models/BasketItem";
-import Customer from "../models/Customer";
 import IState from './IState';
 import { MutationTree } from 'vuex';
+import Ticket from '@/models/Ticket';
+import Show from '@/models/Show';
+import Customer from '@/models/Customer';
 
 const mutations: MutationTree<IState> = {
-  setShows(state, shows) {
+  setShows(state, shows: Array<Show>) {
     state.shows = shows;
   },
-  setBusy(state) {
+  setBusy(state): void {
     state.busy = true;
   },
-  clearBusy(state) {
+  clearBusy(state): void {
     state.busy = false;
   },
-  setTicketsForShow(state, { show, tickets }) {
-    show.tickets = tickets;
+  setTicketsForShow(state, data: TicketsForShow) {
+    data.show.tickets = data.tickets;
   },
-  addToBasket(state, { ticket, show }) {
-    let index = state.basket.findIndex(i => i.id === ticket.id);
-    if (index === -1) state.basket.push(new BasketItem(ticket, show));
+  addToBasket(state, data: ShowTicket) {
+    let index = state.basket.findIndex(i => i.id === data.ticket.id);
+    if (index === -1) {
+      let item = {} as BasketItem;
+      item.show = data.show.name;
+      item.seat = data.ticket.seat
+      state.basket.push(item);
+    } 
   },
-  removeFromBasket(state, ticket) {
+  removeFromBasket(state, ticket: Ticket) {
     let index = state.basket.findIndex(i => i.id === ticket.id);
     if (index > -1) state.basket.splice(index, 1);
   },
@@ -45,10 +52,19 @@ const mutations: MutationTree<IState> = {
     state.token = token;
     state.tokenExpiration = Date.parse(expiration);
   },
-  setCustomer(state, customer) {
-    if (customer instanceof Customer) state.customer = customer;
-    state.customer = new Customer(customer);
+  setCustomer(state, customer: Customer) {
+    state.customer = customer;
   }
 };
+
+interface TicketsForShow {
+  show: Show;
+  tickets: Array<Ticket>
+}
+
+interface ShowTicket {
+  show: Show;
+  ticket: Ticket;
+}
 
 export default mutations;

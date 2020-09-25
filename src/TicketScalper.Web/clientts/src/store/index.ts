@@ -18,7 +18,7 @@ export default createStore<IState>({
     busy: false,
     basket: [],
     error: "",
-    customer: new Customer(),
+    customer: {} as Customer,
     token: "",
     tokenExpiration: 0  
   },

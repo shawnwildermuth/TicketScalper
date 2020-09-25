@@ -38,8 +38,7 @@ import store from "@/store";
 
 export default defineComponent({
   setup() {
-    const credentials = reactive(new Credentials());
-    //watchEffect(() => credentials.validate());
+    const credentials = reactive({} as Credentials);
 
     async function login() {
       store.commit("clearError");

@@ -110,15 +110,12 @@ import store from "@/store";
 export default defineComponent({
   setup() {
     const customer = computed(() => store.state.customer);
-    const credentials = reactive(new NewCredentials());
+    const credentials = reactive({} as NewCredentials);
     credentials.username = "shawn@wildermuth.com";
     credentials.password = "P@ssw0rd!";
     credentials.confirmPassword = credentials.password;
 
     const isAuthenticated = computed(() => store.getters.isAuthenticated);
-
-    watchEffect(() => customer.value.validate());
-    //watchEffect(() => credentials.validate());
 
     onMounted(async () => {
       await store.dispatch("loadCustomer");
@@ -127,10 +124,10 @@ export default defineComponent({
     async function upsertCustomer() {
       console.log("Upserting Customer");
 
-      if (!customer.value.isValid) {
-        store.commit("setError", "Customer Form invalid.");
-        return;
-      }
+      // if (!customer.value.isValid) {
+      //   store.commit("setError", "Customer Form invalid.");
+      //   return;
+      // }
 
       if (store.getters.isAuthenticated === false) {
         console.log("Saving Customer Info for new user.");
