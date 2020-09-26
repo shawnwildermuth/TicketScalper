@@ -1,14 +1,20 @@
 <template>
   <span v-if="model.$invalid" class="text-danger">
-    <slot>{{ model.$errors[0].$message }}: {{ model.$errors[0].$property }}</slot>
+    <slot>
+      <ul class="list-unstyled">
+        <li v-for="e in model.$errors" :key="e.$message">
+          {{ e.$message }}
+        </li>
+      </ul>
+    </slot>
   </span>
 </template>
 <script>
 export default {
   props: {
     model: {
-      required: true
-    }
-  }
-}
+      required: true,
+    },
+  },
+};
 </script>

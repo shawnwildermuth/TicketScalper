@@ -42,31 +42,31 @@
         <div class="form-group" v-if="!isAuthenticated">
           <label for="username">Email Address</label>
           <input
-            v-model="model.username.$model"
+            v-model="authModel.username.$model"
             class="form-control"
             name="username"
           />
-          <error-span :model="model.username"></error-span>
+          <error-span :model="authModel.username"></error-span>
         </div>
         <div class="form-group" v-if="!isAuthenticated">
           <label for="password">Password</label>
           <input
             type="password"
-            v-model="model.password.$model"
+            v-model="authModel.password.$model"
             class="form-control"
             name="password"
           />
-          <error-span :model="model.password"></error-span>
+          <error-span :model="authModel.password"></error-span>
         </div>
         <div class="form-group" v-if="!isAuthenticated">
           <label for="confirmPassword">Confirm Password</label>
           <input
             type="password"
-            v-model="model.confirmPassword.$model"
+            v-model="authModel.confirmPassword.$model"
             class="form-control"
             name="password"
           />
-          <error-span :model="model.confirmPassword"></error-span>
+          <error-span :model="authModel.confirmPassword"></error-span>
         </div>
         <div class="form-group">
           <button
@@ -84,6 +84,7 @@
             >Login Instead</route-button
           >
         </div>
+        <pre>{{ model }}</pre>
       </div>
       <div class="col-6">
         <div class="form-group">
@@ -154,7 +155,7 @@
   </div>
 </template>
 <script lang="ts">
-import { reactive, computed, onMounted, defineComponent } from "vue";
+import { ref, reactive, computed, onMounted, defineComponent, useCssVars } from "vue";
 import Customer from "@/models/Customer";
 import NewCredentials from "@/models/NewCredentials";
 import router from "@/router";
@@ -162,6 +163,7 @@ import store from "@/store";
 import { useVuelidate } from "@vuelidate/core";
 import {
   required,
+  email,
   requiredIf,
   minLength,
   maxLength,
@@ -171,7 +173,7 @@ import { phone } from "@/validators";
 
 export default defineComponent({
   setup() {
-    const customer = computed(() => store.state.customer);
+    const customer = reactive({} as Customer);
     const credentials = reactive({} as NewCredentials);
 
     // TESTING
@@ -182,12 +184,6 @@ export default defineComponent({
     const isAuthenticated = computed(() => store.getters.isAuthenticated);
 
     const rules = {
-      username: { requiredIf: requiredIf(() => !isAuthenticated) },
-      password: { requiredIf: requiredIf(() => !isAuthenticated) },
-      confirmPassword: {
-        requiredIf: requiredIf(() => !isAuthenticated),
-        sameAs: sameAs("password"),
-      },
       firstName: { required, maxLength: maxLength(50) },
       lastName: { required, maxLength: maxLength(50) },
       phoneNumber: { required, phone },
@@ -201,16 +197,21 @@ export default defineComponent({
       country: { maxLength: maxLength(50) },
     };
 
-    const model = useVuelidate(rules, { ...customer, ...credentials });
+    const model = useVuelidate(rules, customer);
 
     onMounted(async () => {
-      if (store.getters.isAuthenticated) await store.dispatch("loadCustomer");
+      if (store.getters.isAuthenticated) {
+        if (await store.dispatch("loadCustomer")) {
+          // Shallow copy if the customer is loaded
+          Object.assign(customer, store.state.customer);
+        }
+      }
     });
 
     async function upsertCustomer(): Promise<void> {
       console.log("Upserting Customer");
 
-      if (await model.value.$validate()) {
+      if (await model.value.$validate() && (isAuthenticated.value || await authModel.value.$validate())) {
         if (store.getters.isAuthenticated === false) {
           console.log("Saving Customer Info for new user.");
           // Store Cred
@@ -230,17 +231,39 @@ export default defineComponent({
           return;
         }
 
-        if (await store.dispatch("saveCustomer", customer.value)) {
+        if (await store.dispatch("saveCustomer", customer)) {
           router.push("/checkout");
         }
       }
     }
 
+    let authModel: any;
+
+    if (!isAuthenticated.value) {
+      const authRules = {
+        username: {
+          requiredIf: requiredIf(() => !isAuthenticated.value),
+          email,
+        },
+        password: { requiredIf: requiredIf(() => !isAuthenticated.value) },
+        confirmPassword: {
+          requiredIf: requiredIf(() => !isAuthenticated),
+          sameAs: sameAs(credentials.password, "Password"),
+        },
+      };
+
+      authModel = useVuelidate(authRules, credentials);
+    }
+
+
+
     return {
       model,
+      authModel,
       isAuthenticated,
       upsertCustomer,
     };
   },
 });
+
 </script>
