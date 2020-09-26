@@ -24,6 +24,8 @@ const mutations: MutationTree<IState> = {
       let item = {} as BasketItem;
       item.show = data.show.name;
       item.seat = data.ticket.seat
+      item.price = data.ticket.currentPrice;
+      item.date = data.show.startDate;
       state.basket.push(item);
     } 
   },

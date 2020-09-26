@@ -1,5 +1,5 @@
-﻿export function dateFormat(val:Date) {
-  return val.toLocaleDateString();
+﻿export function dateFormat(val:any) {
+  return new Date(val).toLocaleDateString();
 }
 
 

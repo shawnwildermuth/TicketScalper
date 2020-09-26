@@ -59,6 +59,7 @@
         </div>
       </div>
     </div>
+    <div>{{ basket  }}</div>
   </div>
 </template>
 
@@ -75,6 +76,7 @@ export default defineComponent({
       console.log(`Basket: ${store.getters.basketTotal}`);
       return store.getters.basketTotal > 0;
     });
+    const basket = computed(() => store.state.basket);
     const total = computed(() => store.getters.basketTotal);
     onMounted(() => store.dispatch("loadTickets", props.id));
 
@@ -91,6 +93,7 @@ export default defineComponent({
     }
 
     return {
+      basket,
       show,
       total,
       allowCheckout,

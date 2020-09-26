@@ -6,33 +6,39 @@
         <div>Enter your payment information:</div>
         <div class="form-group">
           <label>Credit Card:</label>
-          <input class="form-control" v-model="payment.creditCard" />
-          <error-span :error="payment.errors['creditCard']" />
+          <input class="form-control" v-model="model.creditCard.$model" />
+          <error-span :model="model.creditCard" />
         </div>
         <label>Expiration:</label>
         <div class="form-group">
-          <input class="form-control col-2 d-inline" v-model="payment.expirationMonth" />/
-          <input class="form-control col-2 d-inline" v-model="payment.expirationYear" />
+          <input
+            class="form-control col-2 d-inline"
+            v-model="model.expirationMonth.$model"
+          />/
+          <input
+            class="form-control col-2 d-inline"
+            v-model="model.expirationYear.$model"
+          />
           <br />
-          <error-span :error="payment.errors['expirationMonth']" />
-          &nbsp;
-          <error-span :error="payment.errors['expirationYear']" />
+          <error-span :model="model.payment" />
         </div>
         <div class="form-group">
           <label>Security Code</label>
-          <input class="form-control col-4" v-model="payment.validationCode" />
-          <error-span :error="payment.errors['validationCode']" />
+          <input class="form-control col-4" v-model="model.validationCode.$model" />
+          <error-span :model="model.validationCode" />
         </div>
         <div class="form-group">
           <label>Security Code</label>
-          <input class="form-control col-4" v-model="payment.postalCode" />
-          <error-span :error="payment.errors['postalCode']" />
+          <input class="form-control col-4" v-model="model.postalCode.$model" />
+          <error-span :model="model.payment" />
         </div>
         <button
           class="btn btn-success"
-          :disabled="!payment.isValid"
+          :disabled="model.$invalid"
           @click="processPayment()"
-        >Process Payment</button>
+        >
+          Process Payment
+        </button>
       </div>
       <div class="col-6">
         <div>Order Summary</div>
@@ -61,11 +67,14 @@
   </div>
 </template>
 <script lang="ts">
-import store from '@/store';
+import store from "@/store";
 import filters from "@/filters";
 import { computed, reactive, watchEffect, defineComponent } from "vue";
 import router from "@/router";
 import Payment from "@/models/Payment";
+import { useVuelidate } from "@vuelidate/core";
+import { required, numeric, minLength } from "@vuelidate/validators";
+import { creditCard, length } from "@/validators";
 
 export default defineComponent({
   setup(props, ctx) {
@@ -74,23 +83,33 @@ export default defineComponent({
     const basketTotal = computed(() => store.getters.basketTotal);
     const basket = computed(() => store.state.basket);
 
-    //watchEffect(() => payment.validate());
+    const rules = {
+      creditCard: { required },
+      expirationMonth: { required, numeric, length: length(2) },
+      expirationYear: { required, numeric,  length: length(2) },
+      postalCode: { required, minLength: minLength(5) },
+      validationCode: { required, numeric },
+    };
 
-    async function processPayment() {
-      const result = await store.dispatch("processPayment", payment);
-      if (result) {
-        store.commit("clearBasket");
-        router.replace("/");
+    const model = useVuelidate(rules, payment);
+
+    async function processPayment(): Promise<void> {
+      if (await model.value.$validate()) {
+        const result = await store.dispatch("processPayment", payment);
+        if (result) {
+          store.commit("clearBasket");
+          router.replace("/");
+        }
       }
     }
 
     return {
-      payment,
+      model,
       basket,
       basketTotal,
       processPayment,
-      ...filters
+      ...filters,
     };
-  }
+  },
 });
 </script>

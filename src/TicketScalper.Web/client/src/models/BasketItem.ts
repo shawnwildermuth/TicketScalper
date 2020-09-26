@@ -3,6 +3,6 @@
   show: string;
   date: Date;
   seat: string;
-  price: string;
+  price: number;
 
 }
