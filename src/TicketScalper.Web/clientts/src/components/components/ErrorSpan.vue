@@ -1,10 +1,12 @@
 <template>
-  <span v-if="error" class="text-danger">{{ error }}</span>
+  <span v-if="model.$invalid" class="text-danger">
+    <slot>{{ model.$errors[0].$message }}: {{ model.$errors[0].$property }}</slot>
+  </span>
 </template>
 <script>
 export default {
   props: {
-    error: {
+    model: {
       required: true
     }
   }

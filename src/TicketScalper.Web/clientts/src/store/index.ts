@@ -2,13 +2,13 @@ import { createStore } from 'vuex'
 import mutations from './mutations'
 import actions from './actions'
 import getters from './getters'
-import VuexPersistence from "vuex-persist";
+//import VuexPersistence from "vuex-persist";
 import Customer from "../models/Customer";
 import IState from './IState';
 
-const vuexLocal = new VuexPersistence({
-  storage: window.sessionStorage
-});
+// const vuexLocal = new VuexPersistence({
+//   storage: window.sessionStorage
+// });
 
 
 export default createStore<IState>({
@@ -25,5 +25,5 @@ export default createStore<IState>({
   mutations: mutations, 
   actions: actions,
   getters: getters,
-  plugins: [vuexLocal.plugin]
+//  plugins: [vuexLocal.plugin]
 })
