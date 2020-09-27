@@ -6,8 +6,9 @@
         <div>Enter your payment information:</div>
         <div class="form-group">
           <label>Credit Card:</label>
-          <input class="form-control" v-model="model.creditCard.$model" />
-          <error-span :model="model.creditCard" />
+          <input class="form-control" 
+                  v-model="model.creditCard.$model" />
+          <error-span :property="model.creditCard" />
         </div>
         <label>Expiration:</label>
         <div class="form-group">
@@ -20,17 +21,20 @@
             v-model="model.expirationYear.$model"
           />
           <br />
-          <error-span :model="model.payment" />
+          <error-span :property="model.payment" />
         </div>
         <div class="form-group">
           <label>Security Code</label>
-          <input class="form-control col-4" v-model="model.validationCode.$model" />
-          <error-span :model="model.validationCode" />
+          <input
+            class="form-control col-4"
+            v-model="model.validationCode.$model"
+          />
+          <error-span :property="model.validationCode" />
         </div>
         <div class="form-group">
           <label>Security Code</label>
           <input class="form-control col-4" v-model="model.postalCode.$model" />
-          <error-span :model="model.payment" />
+          <error-span :property="model.payment" />
         </div>
         <button
           class="btn btn-success"
@@ -86,7 +90,7 @@ export default defineComponent({
     const rules = {
       creditCard: { required },
       expirationMonth: { required, numeric, length: length(2) },
-      expirationYear: { required, numeric,  length: length(2) },
+      expirationYear: { required, numeric, length: length(2) },
       postalCode: { required, minLength: minLength(5) },
       validationCode: { required, numeric },
     };
