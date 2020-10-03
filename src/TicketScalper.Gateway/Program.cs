@@ -46,7 +46,6 @@ namespace TicketScalper.Gateway
             cfg.AddTicketScalperCorsPolicy();
             cfg.AddOcelot()
               .AddKubernetes();  
-            //.AddKubernetesEnvironmentServices();
           });
           webBuilder.Configure(async cfg => 
           {

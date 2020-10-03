@@ -354,3 +354,5 @@ MigrationBackup/
 
 # ignore dist folders in Vue projects
 **/client/dist/**/*
+
+secrets.deploy.yml
