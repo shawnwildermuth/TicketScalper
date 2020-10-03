@@ -3,88 +3,43 @@
 		{
 			"DownstreamPathTemplate": "/shows/{everything}",
 			"DownstreamScheme": "http",
-			"DownstreamHeaderTransform": {
-				"Ocelot-Down": "True"
-			},
-			"DownstreamHostAndPorts": [
-				{
-					"Host": "tsshows",
-					"Port": 5003
-				}
-			],
+			"ServiceName": "tsshows",
 			"UpstreamPathTemplate": "/shows/{everything}",
-			"UpstreamHeaderTransform": {
-				"Ocelot-Up": "True"
-			},
 			"UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ]
 		},
 		{
 			"DownstreamPathTemplate": "/shows",
 			"DownstreamScheme": "http",
-			"DownstreamHeaderTransform": {
-				"X-Forwarded-For": "{RemoteIpAddress}"
-			},
-			"DownstreamHostAndPorts": [
-				{
-					"Host": "tsshows",
-					"Port": 5003
-				}
-			],
+			"ServiceName": "tsshows",
 			"UpstreamPathTemplate": "/shows",
 			"UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ]
 		},
 		{
 			"DownstreamPathTemplate": "/customers",
 			"DownstreamScheme": "http",
-			"DownstreamHostAndPorts": [
-				{
-					"Host": "tssales",
-					"Port": 5002
-				}
-			],
+			"ServiceName": "tssales",
 			"UpstreamPathTemplate": "/customers",
 			"UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ]
 		},
 		{
 			"DownstreamPathTemplate": "/customers/{everything}",
 			"DownstreamScheme": "http",
-			"DownstreamHostAndPorts": [
-				{
-					"Host": "tssales",
-					"Port": 5002
-				}
-			],
+			"ServiceName": "tssales",
 			"UpstreamPathTemplate": "/customers/{everything}",
 			"UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ]
 		},
 		{
 			"DownstreamPathTemplate": "/sales/{everything}",
 			"DownstreamScheme": "http",
-			"DownstreamHostAndPorts": [
-				{
-					"Host": "tssales",
-					"Port": 5002
-				}
-			],
+			"ServiceName": "tssales",
 			"UpstreamPathTemplate": "/sales/{everything}",
 			"UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ]
 		},
 		{
 			"DownstreamPathTemplate": "/auth/{everything}",
 			"DownstreamScheme": "http",
-			"DownstreamHeaderTransform": {
-				"Ocelot-Down": "True"
-			},
-			"DownstreamHostAndPorts": [
-				{
-					"Host": "tsauth",
-					"Port": 5001
-				}
-			],
+			"ServiceName": "tsauth",
 			"UpstreamPathTemplate": "/auth/{everything}",
-			"UpstreamHeaderTransform": {
-				"Ocelot-Up": "True"
-			},
 			"UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ]
 		}
 

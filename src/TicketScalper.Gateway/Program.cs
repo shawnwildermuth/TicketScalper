@@ -13,6 +13,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Primitives;
 using Ocelot.DependencyInjection;
 using Ocelot.Middleware;
+using Ocelot.Provider.Kubernetes;
 using TicketScalper.Core.Extensions;
 
 namespace TicketScalper.Gateway
@@ -42,7 +43,8 @@ namespace TicketScalper.Gateway
           webBuilder.ConfigureServices(cfg =>
           {
             cfg.AddTicketScalperCorsPolicy();
-            cfg.AddOcelot();
+            cfg.AddOcelot()
+              .AddKubernetes();
           });
           webBuilder.Configure(async cfg => 
           {
