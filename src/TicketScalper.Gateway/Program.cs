@@ -15,7 +15,6 @@ using Ocelot.DependencyInjection;
 using Ocelot.Middleware;
 using Ocelot.Provider.Kubernetes;
 using TicketScalper.Core.Extensions;
-using TicketScalper.Gateway.KubernetesEnvironment;
 
 namespace TicketScalper.Gateway
 {

@@ -2,8 +2,19 @@
 @model IndexModel
 @{
   ViewData["Title"] = "Home page - TEST";
+  var baseApiUrl = $"http://{Request.Host.Host}:5001"; // Testing
+  if (!string.IsNullOrWhiteSpace(Environment.GetEnvironmentVariable("TSGATEWAY_SERVICE_HOST")))
+  {
+    // Kubernetes
+    baseApiUrl = $"http://{Request.Host.Host}:{Environment.GetEnvironmentVariable("TSGATEWAY_SERVICE_PORT")}/";
+  }
 }
 @section Scripts {
+  <script>
+    function getTicketScalperBaseApiUrl() {
+      return `@(baseApiUrl)`;
+    }
+  </script>
   <script src="~/app/js/chunk-vendors.js"></script>
   <script src="~/app/js/app.js"></script>
 }

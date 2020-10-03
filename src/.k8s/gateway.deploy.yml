@@ -27,6 +27,11 @@ spec:
               secretKeyRef:
                 name: tssecrets
                 key: gatewayBaseUrl
+          - name: 
+            valueFrom:
+              secretKeyRef: GlobalConfiguration__ServiceDiscoveryProvider__Token
+                name: tssecrets
+                key: kubeServiceToken
 
 ---
 

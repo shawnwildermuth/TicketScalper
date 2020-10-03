@@ -1,9 +1,10 @@
 import axios, { AxiosInstance } from "axios";
 import store from "@/store";
+declare function getTicketScalperBaseApiUrl(): string;
 
 export default function createHttp(secured: boolean = true) : AxiosInstance {
 
-  const base = "http://localhost:8889/"
+  const base = getTicketScalperBaseApiUrl();
 
   if (secured) {
     return axios.create({
