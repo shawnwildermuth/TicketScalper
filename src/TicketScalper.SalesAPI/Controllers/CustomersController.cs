@@ -15,6 +15,10 @@ using TicketScalper.SalesAPI.Models;
 
 namespace TicketScalper.SalesAPI.Controllers
 {
+  /// <summary>
+  /// The controller for Customers
+  /// </summary>
+  /// <seealso cref="TicketScalper.Core.Controllers.UserController" />
   [Route("[controller]")]
   [ApiVersion("1.0")]
   [ApiController]
@@ -25,6 +29,12 @@ namespace TicketScalper.SalesAPI.Controllers
     private readonly IMapper _mapper;
     private readonly ISalesRepository _repository;
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="CustomersController"/> class.
+    /// </summary>
+    /// <param name="logger">The logger.</param>
+    /// <param name="mapper">The mapper.</param>
+    /// <param name="repository">The repository.</param>
     public CustomersController(ILogger<CustomersController> logger, IMapper mapper, ISalesRepository repository)
     {
       _logger = logger;
@@ -32,6 +42,10 @@ namespace TicketScalper.SalesAPI.Controllers
       _repository = repository;
     }
 
+    /// <summary>
+    /// Gets the customers asynchronous.
+    /// </summary>
+    /// <returns></returns>
     [HttpGet]
     [ProducesResponseType(200)]
     public async Task<ActionResult<CustomerModel>> GetCustomersAsync()
@@ -39,6 +53,11 @@ namespace TicketScalper.SalesAPI.Controllers
       return _mapper.Map<CustomerModel>(await _repository.GetCustomerByUserAsync(UserName));
     }
 
+    /// <summary>
+    /// Posts the asynchronous.
+    /// </summary>
+    /// <param name="model">The model.</param>
+    /// <returns></returns>
     [HttpPost]
     [ProducesResponseType(201)]
     [ProducesResponseType(400)]
@@ -70,6 +89,12 @@ namespace TicketScalper.SalesAPI.Controllers
       return BadRequest("Could not create new Customer");
     }
 
+    /// <summary>
+    /// Puts the specified identifier.
+    /// </summary>
+    /// <param name="id">The identifier.</param>
+    /// <param name="model">The model.</param>
+    /// <returns></returns>
     [HttpPut("{id:int}")]
     [ProducesResponseType(200)]
     [ProducesResponseType(404)]
@@ -97,6 +122,11 @@ namespace TicketScalper.SalesAPI.Controllers
       return BadRequest("Could not update Customer");
     }
 
+    /// <summary>
+    /// Deletes the specified identifier.
+    /// </summary>
+    /// <param name="id">The identifier.</param>
+    /// <returns></returns>
     [HttpDelete("{id:int}")]
     [ProducesResponseType(200)]
     [ProducesResponseType(404)]

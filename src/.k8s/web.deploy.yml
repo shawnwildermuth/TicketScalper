@@ -1,19 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: ticketscalper-web
+  name: tsweb
 spec:
   selector:
     matchLabels:
-      app: ticketscalper-web 
+      app: tsweb
   template:
     metadata:
       labels:
-        app: ticketscalper-web
+        app: tsweb
     spec:
       containers:
-      - name: ticketscalper-web
-        image: shawnwildermuth/ticketscalperweb:latest
+      - name: tsweb
+        image: shawnwildermuth/ticketscalperweb:test
         ports:
           - containerPort: 80
         resources:
@@ -26,11 +26,11 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: ticketscalper
+  name: tsweb
 spec:
   type: LoadBalancer
   selector:
-    app: ticketscalper-web
+    app: tsweb
   ports:
     - protocol: TCP
       port: 8888

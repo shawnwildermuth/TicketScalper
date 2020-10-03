@@ -59,7 +59,6 @@
         </div>
       </div>
     </div>
-    <div>{{ basket  }}</div>
   </div>
 </template>
 

@@ -11,6 +11,10 @@ using TicketScalper.ShowsAPI.Models;
 
 namespace TicketScalper.ShowsAPI.Controllers
 {
+  /// <summary>
+  /// Controller to return data about Shows
+  /// </summary>
+  /// <seealso cref="Microsoft.AspNetCore.Mvc.ControllerBase" />
   [Route("[controller]")]
   [ApiVersion("1.0")]
   [ApiController]
@@ -19,20 +23,42 @@ namespace TicketScalper.ShowsAPI.Controllers
     private readonly IShowRepository _repository;
     private readonly IMapper _mapper;
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="ShowsController"/> class.
+    /// </summary>
+    /// <param name="repository">The repository.</param>
+    /// <param name="mapper">The mapper.</param>
     public ShowsController(IShowRepository repository, IMapper mapper)
     {
       _repository = repository;
       _mapper = mapper;
     }
 
+    /// <summary>
+    /// Gets the latest.
+    /// </summary>
+    /// <returns>Shows</returns>
     [HttpGet("latest")]
     [ProducesResponseType(200)]
     public async Task<ActionResult<ShowModel[]>> GetLatest()
     {
-      var result = await _repository.GetLatestShowsAsync();
-      return _mapper.Map<IEnumerable<Show>, ShowModel[]>(result);
+      try
+      {
+        var result = await _repository.GetLatestShowsAsync();
+        return _mapper.Map<IEnumerable<Show>, ShowModel[]>(result);
+      }
+      catch (Exception ex)
+      {
+        return BadRequest(ex);
+      }
     }
 
+
+    /// <summary>
+    /// Gets the specified Show.
+    /// </summary>
+    /// <param name="id">The id.</param>
+    /// <returns></returns>
     [HttpGet("{id:int}")]
     [ProducesResponseType(200)]
     public async Task<ActionResult<ShowModel>> Get(int id)
@@ -41,6 +67,11 @@ namespace TicketScalper.ShowsAPI.Controllers
       return _mapper.Map<Show, ShowModel>(result);
     }
 
+    /// <summary>
+    /// Gets the tickets.
+    /// </summary>
+    /// <param name="id">The id of the show.</param>
+    /// <returns></returns>
     [HttpGet("{id:int}/tickets")]
     [ProducesResponseType(200)]
     [ProducesResponseType(404)]

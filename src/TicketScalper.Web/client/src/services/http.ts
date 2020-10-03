@@ -3,7 +3,7 @@ import store from "@/store";
 
 export default function createHttp(secured: boolean = true) : AxiosInstance {
 
-  const base = "https://localhost:5999/"
+  const base = "http://localhost:8889/"
 
   if (secured) {
     return axios.create({

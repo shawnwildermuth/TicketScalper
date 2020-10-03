@@ -10,7 +10,7 @@
           v-model="model.username.$model"
           placeholder="(e.g. bob@aol.com)"
         />
-        <error-span :model="model.username">Username is required.</error-span>
+        <error-span :property="model.username">Username is required.</error-span>
       </div>
       <div class="form-group">
         <label for="password">Password</label>
@@ -21,7 +21,7 @@
           v-model="model.password.$model"
           placeholder="***********"
         />
-        <error-span :model="model.password"></error-span>
+        <error-span :property="model.password"></error-span>
       </div>
       <div class="form-group">
         <button
@@ -32,7 +32,6 @@
           Login
         </button>
       </div>
-      <pre>{{ model }}</pre>
     </div>
   </div>
 </template>

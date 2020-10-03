@@ -1,46 +1,45 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: ticketscalper-shows
+  name: tsshows
 spec:
   selector:
     matchLabels:
-      app: ticketscalper-shows
+      app: tsshows
   template:
     metadata:
       labels:
-        app: ticketscalper-shows
+        app: tsshows
     spec:
       containers:
-      - name: ticketscalper-shows
-        image: shawnwildermuth/ticketscalpershows:latest
+      - name: tsshows
+        image: shawnwildermuth/ticketscalpershows:test
+        ports:
+          - containerPort: 80
         resources:
           limits:
             memory: "512Mi"
             cpu: "200m" 
-      - name: ticketscalper-showsdb
-        image: mcr.microsoft.com/mssql/server:2019-latest
         env:
-          - name: SA_PASSWORD
-            value: "P@ssw0rd!"
-          - name: ACCEPT_EULA
-            value: "Y"
-        resources:
-          limits:
-            memory: "512Mi"
-            cpu: "500m" 
+          - name: ConnectionStrings__DbServer
+            valueFrom:
+              secretKeyRef:
+                name: tssecrets
+                key: showsDb
+
 
 ---
 
 apiVersion: v1
 kind: Service
 metadata:
-  name: ticketscalper-shows
+  name: tsshows
+  labels:
+    app: tsshows
 spec:
-  type: LoadBalancer
   selector:
-    app: ticketscalper-shows
+    app: tsshows
   ports:
-    - protocol: TCP
-      port: 5001
-      targetPort: 5001
+  - port: 5003
+    protocol: TCP
+    targetPort: 80 

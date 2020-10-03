@@ -12,8 +12,15 @@ using TicketScalper.ShowsAPI.Services;
 
 namespace TicketScalper.ShowsAPI.Data.Maps
 {
+  /// <summary>
+  /// The Mapping Profile for Shows
+  /// </summary>
+  /// <seealso cref="AutoMapper.Profile" />
   public class ShowMaps : Profile
   {
+    /// <summary>
+    /// Initializes a new instance of the <see cref="ShowMaps"/> class.
+    /// </summary>
     public ShowMaps()
     {
       CreateMap<Show, ShowModel>()

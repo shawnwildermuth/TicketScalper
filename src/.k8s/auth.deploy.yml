@@ -5,27 +5,40 @@ metadata:
 spec:
   selector:
     matchLabels:
-      app: ticketscalper-auth
+      app: tsauth
   template:
     metadata:
       labels:
-        app: ticketscalper-auth
+        app: tsauth
     spec:
       containers:
-      - name: ticketscalper-auth
-        image: ticketscalperauth:latest
+      - name: tsauth
+        image: shawnwildermuth/ticketscalperauth:test
+        ports:
+          - containerPort: 80
         resources:
           limits:
             memory: "512Mi"
             cpu: "200m" 
-      - name: ticketscalper-authdb
-        image: mcr.microsoft.com/mssql/server:2019-latest
         env:
-          - name: SA_PASSWORD
-            value: "P@ssw0rd!"
-          - name: ACCEPT_EULA
-            value: "Y"
-        resources:
-          limits:
-            memory: "512Mi"
-            cpu: "500m" 
+          - name: ConnectionStrings__DbServer
+            valueFrom:
+              secretKeyRef:
+                name: tssecrets
+                key: authDb
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: tsauth
+  labels:
+    app: tsauth
+spec:
+  ports:
+  - port: 5001
+    protocol: TCP
+    targetPort: 80 
+  selector:
+    app: tsauth

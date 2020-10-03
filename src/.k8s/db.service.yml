@@ -1,0 +1,21 @@
+﻿kind: Service
+apiVersion: v1
+metadata:
+  name: sql
+spec:
+  type: ClusterIP
+  ports:
+  - port: 1433
+    targetPort: 1433
+
+---
+
+kind: Endpoints
+apiVersion: v1
+metadata:
+  name: sql
+subsets:
+  - addresses:
+    - ip: 192.168.123.149
+    ports:
+    - port: 1433

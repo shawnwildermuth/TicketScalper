@@ -39,7 +39,6 @@ namespace TicketScalper.Web
         app.UseExceptionHandler("/Error");
       }
 
-      // wwwroot
       app.UseStaticFiles();
 
       app.UseRouting();

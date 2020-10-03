@@ -32,6 +32,8 @@ namespace TicketScalper.AuthAPI.Controllers
     [HttpPost]
     public async Task<ActionResult<TicketScalperToken>> Post([FromBody] TokenRequestViewModel model)
     {
+      _logger.LogError("Calling Connect");
+
       // Allow by username or email
       var user = await _userManager.FindByNameAsync(model.Username);
       if (user == null) user = await _userManager.FindByEmailAsync(model.Username);

@@ -17,7 +17,6 @@ namespace TicketScalper.ShowsAPI
     {
       CreateHostBuilder(args)
         .Build()
-        .Seed<ShowContext>()
         .Run();
     }
 

@@ -8,11 +8,13 @@ using BountyApp.Identity.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Versioning;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 using TicketScalper.Core.Extensions;
 using TicketScalper.Core.Identity;
 using TicketScalper.Core.Tokens;
@@ -33,7 +35,7 @@ namespace TicketScalper.AuthAPI
     {
       services.AddDbContext<TicketScalperIdentityContext>(cfg =>
       {
-        cfg.UseSqlServer(_config.GetConnectionString("AuthDb"));
+        cfg.UseSqlServer(_config.GetConnectionString("DbServer"));
       });
 
       services.AddIdentityCore<TicketScalperIdentityUser>()
@@ -47,7 +49,21 @@ namespace TicketScalper.AuthAPI
 
       services.AddScoped<TicketScalperTokenFactory>();
 
-      services.AddControllers();
+      services.AddControllers()
+        .AddNewtonsoftJson(cfg =>
+        {
+          cfg.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+        });
+
+
+      services.AddApiVersioning(cfg =>
+      {
+        cfg.ReportApiVersions = true;
+        cfg.DefaultApiVersion = new ApiVersion(1, 0);
+        cfg.AssumeDefaultVersionWhenUnspecified = true;
+        cfg.ApiVersionReader = new HeaderApiVersionReader("X-Version");
+      });
+
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

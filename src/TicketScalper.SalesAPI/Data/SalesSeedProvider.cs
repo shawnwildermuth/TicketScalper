@@ -7,8 +7,15 @@ using TicketScalper.SalesAPI.Data.Entities;
 
 namespace TicketScalper.SalesAPI.Data
 {
+  /// <summary>
+  /// Sample data generator
+  /// </summary>
   public static class SalesSeedProvider
   {
+    /// <summary>
+    /// Generates the customers.
+    /// </summary>
+    /// <returns></returns>
     public static Customer[] GenerateCustomers()
     {
       return new Customer[]

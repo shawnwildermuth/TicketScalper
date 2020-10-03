@@ -12,17 +12,31 @@ using TicketScalper.ShowsAPI.Services;
 
 namespace TicketScalper.SalesAPI.Services
 {
+  /// <summary>
+  /// Service for returning Tickets
+  /// </summary>
+  /// <seealso cref="TicketScalper.SalesAPI.Services.ITicketService" />
   public class TicketService : ITicketService
   {
     private readonly ITicketChannelProvider _channelProvider;
     private readonly IMapper _mapper;
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="TicketService"/> class.
+    /// </summary>
+    /// <param name="channelProvider">The channel provider.</param>
+    /// <param name="mapper">The mapper.</param>
     public TicketService(ITicketChannelProvider channelProvider, IMapper mapper)
     {
       _channelProvider = channelProvider;
       _mapper = mapper;
     }
 
+    /// <summary>
+    /// Reserves the tickets.
+    /// </summary>
+    /// <param name="tickets">The tickets.</param>
+    /// <returns></returns>
     public async Task<bool> ReserveTickets(int[] tickets)
     {
       var client = new TicketMessageService.TicketMessageServiceClient(_channelProvider.ProvideChannel());
@@ -32,6 +46,11 @@ namespace TicketScalper.SalesAPI.Services
       return response.Success;
     }
 
+    /// <summary>
+    /// Finalizes the tickets.
+    /// </summary>
+    /// <param name="tickets">The tickets.</param>
+    /// <returns></returns>
     public async Task<FinalizedTicketResponse> FinalizeTickets(int[] tickets)
     {
       var client = new TicketMessageService.TicketMessageServiceClient(_channelProvider.ProvideChannel());

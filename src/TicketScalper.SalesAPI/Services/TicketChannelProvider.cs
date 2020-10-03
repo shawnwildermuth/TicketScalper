@@ -1,5 +1,6 @@
 ﻿using Grpc.Net.Client;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using System;
 using System.Collections.Generic;
@@ -10,15 +11,30 @@ using System.Threading.Tasks;
 
 namespace TicketScalper.SalesAPI.Services
 {
+  /// <summary>
+  /// Service for providing the gRPC channel
+  /// </summary>
+  /// <seealso cref="TicketScalper.SalesAPI.Services.ITicketChannelProvider" />
   public class TicketChannelProvider : ITicketChannelProvider
   {
     private readonly IWebHostEnvironment _environment;
+    private readonly IConfiguration _config;
 
-    public TicketChannelProvider(IWebHostEnvironment environment)
+    /// <summary>
+    /// Initializes a new instance of the <see cref="TicketChannelProvider" /> class.
+    /// </summary>
+    /// <param name="environment">The environment.</param>
+    /// <param name="config">The configuration.</param>
+    public TicketChannelProvider(IWebHostEnvironment environment, IConfiguration config)
     {
       _environment = environment;
+      _config = config;
     }
 
+    /// <summary>
+    /// Provides the channel.
+    /// </summary>
+    /// <returns></returns>
     public GrpcChannel ProvideChannel()
     {
       GrpcChannel channel;
@@ -27,14 +43,14 @@ namespace TicketScalper.SalesAPI.Services
         var httpHandler = new HttpClientHandler();
         httpHandler.ServerCertificateCustomValidationCallback =
             HttpClientHandler.DangerousAcceptAnyServerCertificateValidator;
-        channel = GrpcChannel.ForAddress("https://localhost:5001", new GrpcChannelOptions
+        channel = GrpcChannel.ForAddress(_config["Grpc.BaseUrl"], new GrpcChannelOptions
         {
           HttpHandler = httpHandler
-        }); // TODO Move to configuration/Kube
+        }); 
       }
       else
       {
-        channel = GrpcChannel.ForAddress("https://localhost:5001"); // TODO Move to configuration/Kube
+        channel = GrpcChannel.ForAddress(_config["Grpc.BaseUrl"]); 
       }
 
       return channel;

@@ -1,0 +1,859 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>TicketScalper.ShowsAPI</name>
+    </assembly>
+    <members>
+        <member name="T:TicketScalper.ShowsAPI.Controllers.ShowsController">
+            <summary>
+            Controller to return data about Shows
+            </summary>
+            <seealso cref="T:Microsoft.AspNetCore.Mvc.ControllerBase" />
+        </member>
+        <member name="M:TicketScalper.ShowsAPI.Controllers.ShowsController.#ctor(TicketScalper.ShowsAPI.Data.IShowRepository,AutoMapper.IMapper)">
+            <summary>
+            Initializes a new instance of the <see cref="T:TicketScalper.ShowsAPI.Controllers.ShowsController"/> class.
+            </summary>
+            <param name="repository">The repository.</param>
+            <param name="mapper">The mapper.</param>
+        </member>
+        <member name="M:TicketScalper.ShowsAPI.Controllers.ShowsController.GetLatest">
+            <summary>
+            Gets the latest.
+            </summary>
+            <returns>Shows</returns>
+        </member>
+        <member name="M:TicketScalper.ShowsAPI.Controllers.ShowsController.Get(System.Int32)">
+            <summary>
+            Gets the specified Show.
+            </summary>
+            <param name="id">The id.</param>
+            <returns></returns>
+        </member>
+        <member name="M:TicketScalper.ShowsAPI.Controllers.ShowsController.GetTickets(System.Int32)">
+            <summary>
+            Gets the tickets.
+            </summary>
+            <param name="id">The id of the show.</param>
+            <returns></returns>
+        </member>
+        <member name="T:TicketScalper.ShowsAPI.Data.Entities.Act">
+            <summary>
+            Entity that represents an Act for a Show
+            </summary>
+        </member>
+        <member name="P:TicketScalper.ShowsAPI.Data.Entities.Act.Id">
+            <summary>
+            Gets or sets the identifier.
+            </summary>
+            <value>
+            The identifier.
+            </value>
+        </member>
+        <member name="P:TicketScalper.ShowsAPI.Data.Entities.Act.Name">
+            <summary>
+            Gets or sets the name.
+            </summary>
+            <value>
+            The name.
+            </value>
+        </member>
+        <member name="P:TicketScalper.ShowsAPI.Data.Entities.Act.Description">
+            <summary>
+            Gets or sets the description.
+            </summary>
+            <value>
+            The description.
+            </value>
+        </member>
+        <member name="P:TicketScalper.ShowsAPI.Data.Entities.Act.ActShows">
+            <summary>
+            Gets or sets the act shows.
+            </summary>
+            <value>
+            The act shows.
+            </value>
+        </member>
+        <member name="T:TicketScalper.ShowsAPI.Data.Entities.ActShow">
+            <summary>
+            Entity for one to many collection of Acts to Shows
+            </summary>
+        </member>
+        <member name="P:TicketScalper.ShowsAPI.Data.Entities.ActShow.ActId">
+            <summary>
+            Gets or sets the act identifier.
+            </summary>
+            <value>
+            The act identifier.
+            </value>
+        </member>
+        <member name="P:TicketScalper.ShowsAPI.Data.Entities.ActShow.Act">
+            <summary>
+            Gets or sets the act.
+            </summary>
+            <value>
+            The act.
+            </value>
+        </member>
+        <member name="P:TicketScalper.ShowsAPI.Data.Entities.ActShow.ShowId">
+            <summary>
+            Gets or sets the show identifier.
+            </summary>
+            <value>
+            The show identifier.
+            </value>
+        </member>
+        <member name="P:TicketScalper.ShowsAPI.Data.Entities.ActShow.Show">
+            <summary>
+            Gets or sets the show.
+            </summary>
+            <value>
+            The show.
+            </value>
+        </member>
+        <member name="T:TicketScalper.ShowsAPI.Data.Entities.Address">
+            <summary>
+            Entity for an Address
+            </summary>
+        </member>
+        <member name="P:TicketScalper.ShowsAPI.Data.Entities.Address.Address1">
+            <summary>
+            Gets or sets the address1.
+            </summary>
+            <value>
+            The address1.
+            </value>
+        </member>
+        <member name="P:TicketScalper.ShowsAPI.Data.Entities.Address.Address2">
+            <summary>
+            Gets or sets the address2.
+            </summary>
+            <value>
+            The address2.
+            </value>
+        </member>
+        <member name="P:TicketScalper.ShowsAPI.Data.Entities.Address.Address3">
+            <summary>
+            Gets or sets the address3.
+            </summary>
+            <value>
+            The address3.
+            </value>
+        </member>
+        <member name="P:TicketScalper.ShowsAPI.Data.Entities.Address.CityTown">
+            <summary>
+            Gets or sets the city town.
+            </summary>
+            <value>
+            The city town.
+            </value>
+        </member>
+        <member name="P:TicketScalper.ShowsAPI.Data.Entities.Address.StateProvince">
+            <summary>
+            Gets or sets the state province.
+            </summary>
+            <value>
+            The state province.
+            </value>
+        </member>
+        <member name="P:TicketScalper.ShowsAPI.Data.Entities.Address.PostalCode">
+            <summary>
+            Gets or sets the postal code.
+            </summary>
+            <value>
+            The postal code.
+            </value>
+        </member>
+        <member name="P:TicketScalper.ShowsAPI.Data.Entities.Address.Country">
+            <summary>
+            Gets or sets the country.
+            </summary>
+            <value>
+            The country.
+            </value>
+        </member>
+        <member name="P:TicketScalper.ShowsAPI.Data.Entities.Address.VenueId">
+            <summary>
+            Gets the venue identifier.
+            </summary>
+            <value>
+            The venue identifier.
+            </value>
+        </member>
+        <member name="T:TicketScalper.ShowsAPI.Data.Entities.Show">
+            <summary>
+            The Entity that represents a Show
+            </summary>
+        </member>
+        <member name="P:TicketScalper.ShowsAPI.Data.Entities.Show.Id">
+            <summary>
+            Gets or sets the identifier.
+            </summary>
+            <value>
+            The identifier.
+            </value>
+        </member>
+        <member name="P:TicketScalper.ShowsAPI.Data.Entities.Show.Name">
+            <summary>
+            Gets or sets the name.
+            </summary>
+            <value>
+            The name.
+            </value>
+        </member>
+        <member name="P:TicketScalper.ShowsAPI.Data.Entities.Show.StartDate">
+            <summary>
+            Gets or sets the start date.
+            </summary>
+            <value>
+            The start date.
+            </value>
+        </member>
+        <member name="P:TicketScalper.ShowsAPI.Data.Entities.Show.Length">
+            <summary>
+            Gets or sets the length.
+            </summary>
+            <value>
+            The length.
+            </value>
+        </member>
+        <member name="P:TicketScalper.ShowsAPI.Data.Entities.Show.IsGeneralAdmission">
+            <summary>
+            Gets or sets a value indicating whether this instance is general admission.
+            </summary>
+            <value>
+              <c>true</c> if this instance is general admission; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:TicketScalper.ShowsAPI.Data.Entities.Show.VenueId">
+            <summary>
+            Gets or sets the venue identifier.
+            </summary>
+            <value>
+            The venue identifier.
+            </value>
+        </member>
+        <member name="P:TicketScalper.ShowsAPI.Data.Entities.Show.Venue">
+            <summary>
+            Gets or sets the venue.
+            </summary>
+            <value>
+            The venue.
+            </value>
+        </member>
+        <member name="P:TicketScalper.ShowsAPI.Data.Entities.Show.ActShows">
+            <summary>
+            Gets or sets the act shows.
+            </summary>
+            <value>
+            The act shows.
+            </value>
+        </member>
+        <member name="P:TicketScalper.ShowsAPI.Data.Entities.Show.Tickets">
+            <summary>
+            Gets or sets the tickets.
+            </summary>
+            <value>
+            The tickets.
+            </value>
+        </member>
+        <member name="T:TicketScalper.ShowsAPI.Data.Entities.Ticket">
+            <summary>
+            Entity for Tickets
+            </summary>
+        </member>
+        <member name="P:TicketScalper.ShowsAPI.Data.Entities.Ticket.Id">
+            <summary>
+            Gets or sets the identifier.
+            </summary>
+            <value>
+            The identifier.
+            </value>
+        </member>
+        <member name="P:TicketScalper.ShowsAPI.Data.Entities.Ticket.Seat">
+            <summary>
+            Gets or sets the seat.
+            </summary>
+            <value>
+            The seat.
+            </value>
+        </member>
+        <member name="P:TicketScalper.ShowsAPI.Data.Entities.Ticket.OriginalPrice">
+            <summary>
+            Gets or sets the original price.
+            </summary>
+            <value>
+            The original price.
+            </value>
+        </member>
+        <member name="P:TicketScalper.ShowsAPI.Data.Entities.Ticket.CurrentPrice">
+            <summary>
+            Gets or sets the current price.
+            </summary>
+            <value>
+            The current price.
+            </value>
+        </member>
+        <member name="P:TicketScalper.ShowsAPI.Data.Entities.Ticket.Date">
+            <summary>
+            Gets or sets the date.
+            </summary>
+            <value>
+            The date.
+            </value>
+        </member>
+        <member name="P:TicketScalper.ShowsAPI.Data.Entities.Ticket.ShowId">
+            <summary>
+            Gets or sets the show identifier.
+            </summary>
+            <value>
+            The show identifier.
+            </value>
+        </member>
+        <member name="P:TicketScalper.ShowsAPI.Data.Entities.Ticket.Show">
+            <summary>
+            Gets or sets the show.
+            </summary>
+            <value>
+            The show.
+            </value>
+        </member>
+        <member name="T:TicketScalper.ShowsAPI.Data.Entities.Venue">
+            <summary>
+            Entity for the Venue
+            </summary>
+        </member>
+        <member name="P:TicketScalper.ShowsAPI.Data.Entities.Venue.Id">
+            <summary>
+            Gets or sets the identifier.
+            </summary>
+            <value>
+            The identifier.
+            </value>
+        </member>
+        <member name="P:TicketScalper.ShowsAPI.Data.Entities.Venue.Name">
+            <summary>
+            Gets or sets the name.
+            </summary>
+            <value>
+            The name.
+            </value>
+        </member>
+        <member name="P:TicketScalper.ShowsAPI.Data.Entities.Venue.Phone">
+            <summary>
+            Gets or sets the phone.
+            </summary>
+            <value>
+            The phone.
+            </value>
+        </member>
+        <member name="P:TicketScalper.ShowsAPI.Data.Entities.Venue.Address">
+            <summary>
+            Gets or sets the address.
+            </summary>
+            <value>
+            The address.
+            </value>
+        </member>
+        <member name="P:TicketScalper.ShowsAPI.Data.Entities.Venue.Shows">
+            <summary>
+            Gets or sets the shows.
+            </summary>
+            <value>
+            The shows.
+            </value>
+        </member>
+        <member name="T:TicketScalper.ShowsAPI.Data.IShowRepository">
+            <summary>
+            THe interface for the Shows' Repository
+            </summary>
+            <seealso cref="T:TicketScalper.Core.Data.IRepository" />
+        </member>
+        <member name="M:TicketScalper.ShowsAPI.Data.IShowRepository.GetLatestShowsAsync">
+            <summary>
+            Gets the latest shows asynchronous.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:TicketScalper.ShowsAPI.Data.IShowRepository.GetShowAsync(System.Int32)">
+            <summary>
+            Gets the show asynchronous.
+            </summary>
+            <param name="id">The identifier.</param>
+            <returns></returns>
+        </member>
+        <member name="M:TicketScalper.ShowsAPI.Data.IShowRepository.GetTicketsForShowAsync(System.Int32)">
+            <summary>
+            Gets the tickets for show asynchronous.
+            </summary>
+            <param name="showId">The show identifier.</param>
+            <returns></returns>
+        </member>
+        <member name="M:TicketScalper.ShowsAPI.Data.IShowRepository.GetTicketsAsync(System.Int32[])">
+            <summary>
+            Gets the tickets asynchronous.
+            </summary>
+            <param name="ticketIds">The ticket ids.</param>
+            <returns></returns>
+        </member>
+        <member name="T:TicketScalper.ShowsAPI.Data.Maps.ShowMaps">
+            <summary>
+            The Mapping Profile for Shows
+            </summary>
+            <seealso cref="T:AutoMapper.Profile" />
+        </member>
+        <member name="M:TicketScalper.ShowsAPI.Data.Maps.ShowMaps.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:TicketScalper.ShowsAPI.Data.Maps.ShowMaps"/> class.
+            </summary>
+        </member>
+        <member name="T:TicketScalper.ShowsAPI.Data.SeedDataProvider">
+            <summary>
+            A provider for sample data
+            </summary>
+        </member>
+        <member name="M:TicketScalper.ShowsAPI.Data.SeedDataProvider.GenerateTickets">
+            <summary>
+            Generates the tickets.
+            </summary>
+            <returns>A collection of Tickets</returns>
+        </member>
+        <member name="M:TicketScalper.ShowsAPI.Data.SeedDataProvider.GenerateActShows">
+            <summary>
+            Generates the act shows.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:TicketScalper.ShowsAPI.Data.SeedDataProvider.GenerateShows">
+            <summary>
+            Generates the shows.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:TicketScalper.ShowsAPI.Data.SeedDataProvider.GenerateVenues">
+            <summary>
+            Generates the venues.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:TicketScalper.ShowsAPI.Data.SeedDataProvider.GenerateAddresses">
+            <summary>
+            Generates the addresses.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:TicketScalper.ShowsAPI.Data.SeedDataProvider.GenerateActs">
+            <summary>
+            Generates the acts.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:TicketScalper.ShowsAPI.Data.ShowContext">
+            <summary>
+            The Context class for Shows
+            </summary>
+            <seealso cref="T:Microsoft.EntityFrameworkCore.DbContext" />
+        </member>
+        <member name="M:TicketScalper.ShowsAPI.Data.ShowContext.#ctor(Microsoft.EntityFrameworkCore.DbContextOptions)">
+            <summary>
+            Initializes a new instance of the <see cref="T:TicketScalper.ShowsAPI.Data.ShowContext"/> class.
+            </summary>
+            <param name="options">The options for this context.</param>
+        </member>
+        <member name="P:TicketScalper.ShowsAPI.Data.ShowContext.Shows">
+            <summary>
+            Gets or sets the shows.
+            </summary>
+            <value>
+            The shows.
+            </value>
+        </member>
+        <member name="P:TicketScalper.ShowsAPI.Data.ShowContext.Acts">
+            <summary>
+            Gets or sets the acts.
+            </summary>
+            <value>
+            The acts.
+            </value>
+        </member>
+        <member name="P:TicketScalper.ShowsAPI.Data.ShowContext.Tickets">
+            <summary>
+            Gets or sets the tickets.
+            </summary>
+            <value>
+            The tickets.
+            </value>
+        </member>
+        <member name="P:TicketScalper.ShowsAPI.Data.ShowContext.Venues">
+            <summary>
+            Gets or sets the venues.
+            </summary>
+            <value>
+            The venues.
+            </value>
+        </member>
+        <member name="M:TicketScalper.ShowsAPI.Data.ShowContext.OnModelCreating(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <summary>
+            Called when [model creating].
+            </summary>
+            <param name="bldr">The BLDR.</param>
+        </member>
+        <member name="T:TicketScalper.ShowsAPI.Data.ShowRepository">
+            <summary>
+            The Repository for the Show API
+            </summary>
+        </member>
+        <member name="M:TicketScalper.ShowsAPI.Data.ShowRepository.#ctor(TicketScalper.ShowsAPI.Data.ShowContext)">
+            <summary>
+            Initializes a new instance of the <see cref="T:TicketScalper.ShowsAPI.Data.ShowRepository"/> class.
+            </summary>
+            <param name="context">The context.</param>
+        </member>
+        <member name="M:TicketScalper.ShowsAPI.Data.ShowRepository.GetLatestShowsAsync">
+            <summary>
+            Gets the latest shows asynchronous.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:TicketScalper.ShowsAPI.Data.ShowRepository.GetShowAsync(System.Int32)">
+            <summary>
+            Gets the show asynchronous.
+            </summary>
+            <param name="id">The identifier.</param>
+            <returns></returns>
+        </member>
+        <member name="M:TicketScalper.ShowsAPI.Data.ShowRepository.GetTicketsForShowAsync(System.Int32)">
+            <summary>
+            Gets the tickets for show asynchronous.
+            </summary>
+            <param name="showId">The show identifier.</param>
+            <returns></returns>
+        </member>
+        <member name="M:TicketScalper.ShowsAPI.Data.ShowRepository.GetTicketsAsync(System.Int32[])">
+            <summary>
+            Gets the tickets asynchronous.
+            </summary>
+            <param name="ticketIds">The ticket ids.</param>
+            <returns></returns>
+        </member>
+        <member name="T:TicketScalper.ShowsAPI.Models.ActModel">
+            <summary>
+            Model fro the Act
+            </summary>
+        </member>
+        <member name="P:TicketScalper.ShowsAPI.Models.ActModel.Name">
+            <summary>
+            Gets or sets the name.
+            </summary>
+            <value>
+            The name.
+            </value>
+        </member>
+        <member name="T:TicketScalper.ShowsAPI.Models.ShowModel">
+            <summary>
+            Model class for Shows
+            </summary>
+        </member>
+        <member name="P:TicketScalper.ShowsAPI.Models.ShowModel.Id">
+            <summary>
+            Gets or sets the identifier.
+            </summary>
+            <value>
+            The identifier.
+            </value>
+        </member>
+        <member name="P:TicketScalper.ShowsAPI.Models.ShowModel.Name">
+            <summary>
+            Gets or sets the name.
+            </summary>
+            <value>
+            The name.
+            </value>
+        </member>
+        <member name="P:TicketScalper.ShowsAPI.Models.ShowModel.StartDate">
+            <summary>
+            Gets or sets the start date.
+            </summary>
+            <value>
+            The start date.
+            </value>
+        </member>
+        <member name="P:TicketScalper.ShowsAPI.Models.ShowModel.Length">
+            <summary>
+            Gets or sets the length.
+            </summary>
+            <value>
+            The length.
+            </value>
+        </member>
+        <member name="P:TicketScalper.ShowsAPI.Models.ShowModel.IsGeneralAdmission">
+            <summary>
+            Gets or sets a value indicating whether this instance is general admission.
+            </summary>
+            <value>
+              <c>true</c> if this instance is general admission; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:TicketScalper.ShowsAPI.Models.ShowModel.SoldOut">
+            <summary>
+            Gets or sets a value indicating whether [sold out].
+            </summary>
+            <value>
+              <c>true</c> if [sold out]; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:TicketScalper.ShowsAPI.Models.ShowModel.Venue">
+            <summary>
+            Gets or sets the venue.
+            </summary>
+            <value>
+            The venue.
+            </value>
+        </member>
+        <member name="P:TicketScalper.ShowsAPI.Models.ShowModel.Acts">
+            <summary>
+            Gets or sets the acts.
+            </summary>
+            <value>
+            The acts.
+            </value>
+        </member>
+        <member name="T:TicketScalper.ShowsAPI.Models.TicketModel">
+            <summary>
+            Model for the Ticket Entity
+            </summary>
+        </member>
+        <member name="P:TicketScalper.ShowsAPI.Models.TicketModel.Id">
+            <summary>
+            Gets or sets the identifier.
+            </summary>
+            <value>
+            The identifier.
+            </value>
+        </member>
+        <member name="P:TicketScalper.ShowsAPI.Models.TicketModel.Seat">
+            <summary>
+            Gets or sets the seat.
+            </summary>
+            <value>
+            The seat.
+            </value>
+        </member>
+        <member name="P:TicketScalper.ShowsAPI.Models.TicketModel.OriginalPrice">
+            <summary>
+            Gets or sets the original price.
+            </summary>
+            <value>
+            The original price.
+            </value>
+        </member>
+        <member name="P:TicketScalper.ShowsAPI.Models.TicketModel.CurrentPrice">
+            <summary>
+            Gets or sets the current price.
+            </summary>
+            <value>
+            The current price.
+            </value>
+        </member>
+        <member name="T:TicketScalper.ShowsAPI.Models.VenueModel">
+            <summary>
+            Model for the Show Venue
+            </summary>
+        </member>
+        <member name="P:TicketScalper.ShowsAPI.Models.VenueModel.Id">
+            <summary>
+            Gets or sets the identifier.
+            </summary>
+            <value>
+            The identifier.
+            </value>
+        </member>
+        <member name="P:TicketScalper.ShowsAPI.Models.VenueModel.Name">
+            <summary>
+            Gets or sets the name.
+            </summary>
+            <value>
+            The name.
+            </value>
+        </member>
+        <member name="P:TicketScalper.ShowsAPI.Models.VenueModel.Phone">
+            <summary>
+            Gets or sets the phone.
+            </summary>
+            <value>
+            The phone.
+            </value>
+        </member>
+        <member name="P:TicketScalper.ShowsAPI.Models.VenueModel.Address1">
+            <summary>
+            Gets or sets the address1.
+            </summary>
+            <value>
+            The address1.
+            </value>
+        </member>
+        <member name="P:TicketScalper.ShowsAPI.Models.VenueModel.Address2">
+            <summary>
+            Gets or sets the address2.
+            </summary>
+            <value>
+            The address2.
+            </value>
+        </member>
+        <member name="P:TicketScalper.ShowsAPI.Models.VenueModel.Address3">
+            <summary>
+            Gets or sets the address3.
+            </summary>
+            <value>
+            The address3.
+            </value>
+        </member>
+        <member name="P:TicketScalper.ShowsAPI.Models.VenueModel.CityTown">
+            <summary>
+            Gets or sets the city town.
+            </summary>
+            <value>
+            The city town.
+            </value>
+        </member>
+        <member name="P:TicketScalper.ShowsAPI.Models.VenueModel.StateProvince">
+            <summary>
+            Gets or sets the state province.
+            </summary>
+            <value>
+            The state province.
+            </value>
+        </member>
+        <member name="P:TicketScalper.ShowsAPI.Models.VenueModel.PostalCode">
+            <summary>
+            Gets or sets the postal code.
+            </summary>
+            <value>
+            The postal code.
+            </value>
+        </member>
+        <member name="P:TicketScalper.ShowsAPI.Models.VenueModel.Country">
+            <summary>
+            Gets or sets the country.
+            </summary>
+            <value>
+            The country.
+            </value>
+        </member>
+        <member name="T:TicketScalper.ShowsAPI.Services.TicketService">
+            <summary>
+            The gRPC Ticket Service, called form Sales API
+            </summary>
+            <seealso cref="T:TicketScalper.ShowsAPI.Services.TicketMessageService.TicketMessageServiceBase" />
+        </member>
+        <member name="M:TicketScalper.ShowsAPI.Services.TicketService.#ctor(Microsoft.Extensions.Logging.ILogger{TicketScalper.ShowsAPI.Services.TicketService},TicketScalper.ShowsAPI.Data.IShowRepository,AutoMapper.IMapper)">
+            <summary>
+            Initializes a new instance of the <see cref="T:TicketScalper.ShowsAPI.Services.TicketService"/> class.
+            </summary>
+            <param name="logger">The logger.</param>
+            <param name="repository">The repository.</param>
+            <param name="mapper">The mapper.</param>
+        </member>
+        <member name="M:TicketScalper.ShowsAPI.Services.TicketService.FinalizeTickets(TicketScalper.ShowsAPI.Services.TicketRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            Finalizes the tickets.
+            </summary>
+            <param name="request">The request.</param>
+            <param name="context">The context.</param>
+            <returns></returns>
+        </member>
+        <member name="M:TicketScalper.ShowsAPI.Services.TicketService.ReserveTickets(TicketScalper.ShowsAPI.Services.TicketRequest,Grpc.Core.ServerCallContext)">
+            <summary>
+            Reserves the tickets.
+            </summary>
+            <param name="request">The request.</param>
+            <param name="context">The context.</param>
+            <returns></returns>
+        </member>
+        <member name="T:TicketScalper.ShowsAPI.Services.TicketMessageServiceReflection">
+            <summary>Holder for reflection information generated from Protos/TicketMessageService.proto</summary>
+        </member>
+        <member name="P:TicketScalper.ShowsAPI.Services.TicketMessageServiceReflection.Descriptor">
+            <summary>File descriptor for Protos/TicketMessageService.proto</summary>
+        </member>
+        <member name="F:TicketScalper.ShowsAPI.Services.TicketRequest.TicketIdsFieldNumber">
+            <summary>Field number for the "TicketIds" field.</summary>
+        </member>
+        <member name="F:TicketScalper.ShowsAPI.Services.TicketResponse.SuccessFieldNumber">
+            <summary>Field number for the "Success" field.</summary>
+        </member>
+        <member name="F:TicketScalper.ShowsAPI.Services.TicketResponse.UserMessageFieldNumber">
+            <summary>Field number for the "UserMessage" field.</summary>
+        </member>
+        <member name="F:TicketScalper.ShowsAPI.Services.TicketMessage.IdFieldNumber">
+            <summary>Field number for the "Id" field.</summary>
+        </member>
+        <member name="F:TicketScalper.ShowsAPI.Services.TicketMessage.SeatFieldNumber">
+            <summary>Field number for the "Seat" field.</summary>
+        </member>
+        <member name="F:TicketScalper.ShowsAPI.Services.TicketMessage.ShowNameFieldNumber">
+            <summary>Field number for the "ShowName" field.</summary>
+        </member>
+        <member name="F:TicketScalper.ShowsAPI.Services.TicketMessage.ShowDateFieldNumber">
+            <summary>Field number for the "ShowDate" field.</summary>
+        </member>
+        <member name="F:TicketScalper.ShowsAPI.Services.TicketMessage.ActsFieldNumber">
+            <summary>Field number for the "Acts" field.</summary>
+        </member>
+        <member name="F:TicketScalper.ShowsAPI.Services.TicketMessage.PriceFieldNumber">
+            <summary>Field number for the "Price" field.</summary>
+        </member>
+        <member name="F:TicketScalper.ShowsAPI.Services.TicketMessage.VenueNameFieldNumber">
+            <summary>Field number for the "VenueName" field.</summary>
+        </member>
+        <member name="F:TicketScalper.ShowsAPI.Services.TicketMessage.PhoneFieldNumber">
+            <summary>Field number for the "Phone" field.</summary>
+        </member>
+        <member name="F:TicketScalper.ShowsAPI.Services.TicketMessage.Address1FieldNumber">
+            <summary>Field number for the "Address1" field.</summary>
+        </member>
+        <member name="F:TicketScalper.ShowsAPI.Services.TicketMessage.Address2FieldNumber">
+            <summary>Field number for the "Address2" field.</summary>
+        </member>
+        <member name="F:TicketScalper.ShowsAPI.Services.TicketMessage.Address3FieldNumber">
+            <summary>Field number for the "Address3" field.</summary>
+        </member>
+        <member name="F:TicketScalper.ShowsAPI.Services.TicketMessage.CityTownFieldNumber">
+            <summary>Field number for the "CityTown" field.</summary>
+        </member>
+        <member name="F:TicketScalper.ShowsAPI.Services.TicketMessage.StateProvinceFieldNumber">
+            <summary>Field number for the "StateProvince" field.</summary>
+        </member>
+        <member name="F:TicketScalper.ShowsAPI.Services.TicketMessage.PostalCodeFieldNumber">
+            <summary>Field number for the "PostalCode" field.</summary>
+        </member>
+        <member name="F:TicketScalper.ShowsAPI.Services.TicketMessage.CountryFieldNumber">
+            <summary>Field number for the "Country" field.</summary>
+        </member>
+        <member name="F:TicketScalper.ShowsAPI.Services.ConfirmedTicketResponse.SuccessFieldNumber">
+            <summary>Field number for the "Success" field.</summary>
+        </member>
+        <member name="F:TicketScalper.ShowsAPI.Services.ConfirmedTicketResponse.UserMessageFieldNumber">
+            <summary>Field number for the "UserMessage" field.</summary>
+        </member>
+        <member name="F:TicketScalper.ShowsAPI.Services.ConfirmedTicketResponse.TicketsFieldNumber">
+            <summary>Field number for the "Tickets" field.</summary>
+        </member>
+        <member name="P:TicketScalper.ShowsAPI.Services.TicketMessageService.Descriptor">
+            <summary>Service descriptor</summary>
+        </member>
+        <member name="T:TicketScalper.ShowsAPI.Services.TicketMessageService.TicketMessageServiceBase">
+            <summary>Base class for server-side implementations of TicketMessageService</summary>
+        </member>
+        <member name="M:TicketScalper.ShowsAPI.Services.TicketMessageService.BindService(TicketScalper.ShowsAPI.Services.TicketMessageService.TicketMessageServiceBase)">
+            <summary>Creates service definition that can be registered with a server</summary>
+            <param name="serviceImpl">An object implementing the server-side handling logic.</param>
+        </member>
+        <member name="M:TicketScalper.ShowsAPI.Services.TicketMessageService.BindService(Grpc.Core.ServiceBinderBase,TicketScalper.ShowsAPI.Services.TicketMessageService.TicketMessageServiceBase)">
+            <summary>Register service method with a service binder with or without implementation. Useful when customizing the  service binding logic.
+            Note: this method is part of an experimental API that can change or be removed without any prior notice.</summary>
+            <param name="serviceBinder">Service methods will be bound by calling <c>AddMethod</c> on this object.</param>
+            <param name="serviceImpl">An object implementing the server-side handling logic.</param>
+        </member>
+    </members>
+</doc>

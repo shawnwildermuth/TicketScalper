@@ -2,23 +2,32 @@
 	"Routes": [
 		{
 			"DownstreamPathTemplate": "/shows/{everything}",
-			"DownstreamScheme": "https",
+			"DownstreamScheme": "http",
+			"DownstreamHeaderTransform": {
+				"Ocelot-Down": "True"
+			},
 			"DownstreamHostAndPorts": [
 				{
-					"Host": "showsApi",
-					"Port": 5001
+					"Host": "tsshows",
+					"Port": 5003
 				}
 			],
 			"UpstreamPathTemplate": "/shows/{everything}",
+			"UpstreamHeaderTransform": {
+				"Ocelot-Up": "True"
+			},
 			"UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ]
 		},
 		{
 			"DownstreamPathTemplate": "/shows",
-			"DownstreamScheme": "https",
+			"DownstreamScheme": "http",
+			"DownstreamHeaderTransform": {
+				"X-Forwarded-For": "{RemoteIpAddress}"
+			},
 			"DownstreamHostAndPorts": [
 				{
-					"Host": "showsApi",
-					"Port": 5001
+					"Host": "tsshows",
+					"Port": 5003
 				}
 			],
 			"UpstreamPathTemplate": "/shows",
@@ -26,10 +35,10 @@
 		},
 		{
 			"DownstreamPathTemplate": "/customers",
-			"DownstreamScheme": "https",
+			"DownstreamScheme": "http",
 			"DownstreamHostAndPorts": [
 				{
-					"Host": "salesApi",
+					"Host": "tssales",
 					"Port": 5002
 				}
 			],
@@ -38,10 +47,10 @@
 		},
 		{
 			"DownstreamPathTemplate": "/customers/{everything}",
-			"DownstreamScheme": "https",
+			"DownstreamScheme": "http",
 			"DownstreamHostAndPorts": [
 				{
-					"Host": "salesApi",
+					"Host": "tssales",
 					"Port": 5002
 				}
 			],
@@ -50,10 +59,10 @@
 		},
 		{
 			"DownstreamPathTemplate": "/sales/{everything}",
-			"DownstreamScheme": "https",
+			"DownstreamScheme": "http",
 			"DownstreamHostAndPorts": [
 				{
-					"Host": "salesApi",
+					"Host": "tssales",
 					"Port": 5002
 				}
 			],
@@ -62,19 +71,25 @@
 		},
 		{
 			"DownstreamPathTemplate": "/auth/{everything}",
-			"DownstreamScheme": "https",
+			"DownstreamScheme": "http",
+			"DownstreamHeaderTransform": {
+				"Ocelot-Down": "True"
+			},
 			"DownstreamHostAndPorts": [
 				{
-					"Host": "authApi",
-					"Port": 5003
+					"Host": "tsauth",
+					"Port": 5001
 				}
 			],
 			"UpstreamPathTemplate": "/auth/{everything}",
+			"UpstreamHeaderTransform": {
+				"Ocelot-Up": "True"
+			},
 			"UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ]
 		}
 
 	],
 	"GlobalConfiguration": {
-		"BaseUrl": "https://gateway:5999/"
+		"BaseUrl": "http://localhost:5999/"
 	}
 }

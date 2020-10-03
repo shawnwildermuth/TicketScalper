@@ -1,20 +1,43 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: ticketscalper-gateway
+  name: tsgateway
 spec:
   selector:
-     matchLabels:
-       app: ticketscalper-gateway
+    matchLabels:
+      app: tsgateway
   template:
     metadata:
       labels:
-        app: ticketscalper-gateway
+        app: tsgateway
     spec:
       containers:
-      - name: ticketscalper-gateway
-        image: ticketscalpergateway
+      - name: tsgateway
+        image: shawnwildermuth/ticketscalpergateway:test
+        ports:
+          - containerPort: 80
         resources:
           limits:
-            memory: "128Mi" #128 MB
+            memory: "512Mi"
             cpu: "200m" 
+        env:
+          - name: GlobalConfiguration__BaseUrl
+            valueFrom:
+              secretKeyRef:
+                name: tssecrets
+                key: gatewayBaseUrl
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: tsgateway
+spec:
+  type: LoadBalancer
+  selector:
+    app: tsgateway
+  ports:
+    - protocol: TCP
+      port: 8889
+      targetPort: 80

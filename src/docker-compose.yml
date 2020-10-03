@@ -4,18 +4,18 @@ services:
 
 # Web Servers 
 
-  # web:
-  #   image: shawnwildermuth/ticketscalperweb:latest
-  #   build:
-  #     context: .
-  #     dockerfile: TicketScalper.Web/Dockerfile
-    
-
-  showsApi:
-    image: shawnwildermuth/ticketscalpershows:latest
+  web:
+    image: shawnwildermuth/ticketscalperweb:latest
     build:
       context: .
-      dockerfile: TicketScalper.ShowsAPI/Dockerfile
+      dockerfile: TicketScalper.Web/Dockerfile
+    
+
+  # showsApi:
+  #   image: shawnwildermuth/ticketscalpershows:latest
+  #   build:
+  #     context: .
+  #     dockerfile: TicketScalper.ShowsAPI/Dockerfile
 
   # salesApi:
   #   image: shawnwildermuth/ticketscalpersales:latest

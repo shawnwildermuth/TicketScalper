@@ -10,7 +10,7 @@
             class="form-control"
             name="firstName"
           />
-          <error-span :model="model.firstName"></error-span>
+          <error-span :property="model.firstName"></error-span>
         </div>
         <div class="form-group">
           <label for="lastName">Last Name</label>
@@ -19,7 +19,7 @@
             class="form-control"
             name="lastName"
           />
-          <error-span :model="model.lastName"></error-span>
+          <error-span :property="model.lastName"></error-span>
         </div>
         <div class="form-group">
           <label for="phoneNumber">Phone</label>
@@ -28,7 +28,7 @@
             class="form-control"
             name="phoneNumber"
           />
-          <error-span :model="model.phoneNumber"></error-span>
+          <error-span :property="model.phoneNumber"></error-span>
         </div>
         <div class="form-group">
           <label for="companyName">Company Name</label>
@@ -37,7 +37,7 @@
             class="form-control"
             name="companyName"
           />
-          <error-span :model="model.companyName"></error-span>
+          <error-span :property="model.companyName"></error-span>
         </div>
         <div class="form-group" v-if="!isAuthenticated">
           <label for="username">Email Address</label>
@@ -46,7 +46,7 @@
             class="form-control"
             name="username"
           />
-          <error-span :model="authModel.username"></error-span>
+          <error-span :property="authModel.username"></error-span>
         </div>
         <div class="form-group" v-if="!isAuthenticated">
           <label for="password">Password</label>
@@ -56,7 +56,7 @@
             class="form-control"
             name="password"
           />
-          <error-span :model="authModel.password"></error-span>
+          <error-span :property="authModel.password"></error-span>
         </div>
         <div class="form-group" v-if="!isAuthenticated">
           <label for="confirmPassword">Confirm Password</label>
@@ -66,7 +66,7 @@
             class="form-control"
             name="password"
           />
-          <error-span :model="authModel.confirmPassword"></error-span>
+          <error-span :property="authModel.confirmPassword"></error-span>
         </div>
         <div class="form-group">
           <button
@@ -84,7 +84,6 @@
             >Login Instead</route-button
           >
         </div>
-        <pre>{{ model }}</pre>
       </div>
       <div class="col-6">
         <div class="form-group">
@@ -94,7 +93,7 @@
             class="form-control"
             name="addressLine1"
           />
-          <error-span :model="model.addressLine1"></error-span>
+          <error-span :property="model.addressLine1"></error-span>
         </div>
         <div class="form-group">
           <label for="addressLine2">&nbsp;</label>
@@ -103,7 +102,7 @@
             class="form-control"
             name="addressLine2"
           />
-          <error-span :model="model.addressLine2"></error-span>
+          <error-span :property="model.addressLine2"></error-span>
         </div>
         <div class="form-group">
           <label for="addressLine3">&nbsp;</label>
@@ -112,7 +111,7 @@
             class="form-control"
             name="addressLine3"
           />
-          <error-span :model="model.addressLine3"></error-span>
+          <error-span :property="model.addressLine3"></error-span>
         </div>
         <div class="form-group">
           <label for="cityTown">City</label>
@@ -121,7 +120,7 @@
             class="form-control"
             name="cityTown"
           />
-          <error-span :model="model.cityTown"></error-span>
+          <error-span :property="model.cityTown"></error-span>
         </div>
         <div class="form-group">
           <label for="stateProvince">State</label>
@@ -130,7 +129,7 @@
             class="form-control"
             name="stateProvince"
           />
-          <error-span :model="model.stateProvince"></error-span>
+          <error-span :property="model.stateProvince"></error-span>
         </div>
         <div class="form-group">
           <label for="postalCode">Postal Code</label>
@@ -139,7 +138,7 @@
             class="form-control"
             name="postalCode"
           />
-          <error-span :model="model.postalCode"></error-span>
+          <error-span :property="model.postalCode"></error-span>
         </div>
         <div class="form-group">
           <label for="country">Country</label>
@@ -148,7 +147,7 @@
             class="form-control"
             name="country"
           />
-          <error-span :model="model.country"></error-span>
+          <error-span :property="model.country"></error-span>
         </div>
       </div>
     </div>

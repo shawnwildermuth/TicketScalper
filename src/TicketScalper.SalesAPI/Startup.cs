@@ -16,6 +16,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using Newtonsoft.Json;
 using TicketScalper.Core.Extensions;
 using TicketScalper.Core.Tokens;
 using TicketScalper.SalesAPI.Data;
@@ -23,6 +24,8 @@ using TicketScalper.SalesAPI.Services;
 
 namespace TicketScalper.SalesAPI
 {
+
+#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
   public class Startup
   {
     private IConfiguration _config;
@@ -37,10 +40,15 @@ namespace TicketScalper.SalesAPI
     // This method gets called by the runtime. Use this method to add services to the container.
     public void ConfigureServices(IServiceCollection services)
     {
-      services.AddDbContext<SalesContext>(cfg => cfg.UseSqlServer(_config.GetConnectionString("SalesDb")));
+      services.AddDbContext<SalesContext>(cfg => cfg.UseSqlServer(_config.GetConnectionString("DbServer")));
       services.AddScoped<ISalesRepository, SalesRepository>();
 
-      services.AddControllers();
+      services.AddControllers()
+        .AddNewtonsoftJson(cfg =>
+          {
+            cfg.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+          });
+
       services.AddAutoMapper(Assembly.GetEntryAssembly());
 
       services.AddTicketScalperAuthentication();
@@ -80,8 +88,6 @@ namespace TicketScalper.SalesAPI
       }
 
 
-      app.UseHttpsRedirection();
-
       app.UseSwagger();
       app.UseSwaggerUI(cfg =>
       {
@@ -101,4 +107,5 @@ namespace TicketScalper.SalesAPI
       });
     }
   }
+#pragma warning restore CS1591 // Missing XML comment for publicly visible type or member
 }

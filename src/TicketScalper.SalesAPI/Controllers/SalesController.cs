@@ -22,6 +22,10 @@ using TicketScalper.ShowsAPI.Services;
 
 namespace TicketScalper.SalesAPI.Controllers
 {
+  /// <summary>
+  /// Controller for Sales
+  /// </summary>
+  /// <seealso cref="Microsoft.AspNetCore.Mvc.ControllerBase" />
   [Route("customers/{customerId:int}/[controller]")]
   [ApiVersion("1.0")]
   [ApiController]
@@ -33,6 +37,13 @@ namespace TicketScalper.SalesAPI.Controllers
     private readonly ISalesRepository _repository;
     private readonly ITicketService _ticketService;
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="SalesController"/> class.
+    /// </summary>
+    /// <param name="logger">The logger.</param>
+    /// <param name="mapper">The mapper.</param>
+    /// <param name="repository">The repository.</param>
+    /// <param name="ticketService">The ticket service.</param>
     public SalesController(ILogger<SalesController> logger, 
       IMapper mapper, 
       ISalesRepository repository,
@@ -44,6 +55,11 @@ namespace TicketScalper.SalesAPI.Controllers
       _ticketService = ticketService;
     }
 
+    /// <summary>
+    /// Gets the specified customer identifier.
+    /// </summary>
+    /// <param name="customerId">The customer identifier.</param>
+    /// <returns></returns>
     [HttpGet]
     [ProducesResponseType(StatusCodes.Status200OK)]
     public async Task<ActionResult<TicketSaleModel[]>> Get(int customerId)
@@ -52,6 +68,12 @@ namespace TicketScalper.SalesAPI.Controllers
       return _mapper.Map<TicketSaleModel[]>(result);
     }
 
+    /// <summary>
+    /// Gets the specified customer identifier.
+    /// </summary>
+    /// <param name="customerId">The customer identifier.</param>
+    /// <param name="id">The identifier.</param>
+    /// <returns></returns>
     [HttpGet("{id:int}")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     public async Task<ActionResult<TicketSaleModel>> Get(int customerId, int id)
@@ -60,6 +82,12 @@ namespace TicketScalper.SalesAPI.Controllers
       return _mapper.Map<TicketSaleModel>(result);
     }
 
+    /// <summary>
+    /// Posts the specified customer identifier.
+    /// </summary>
+    /// <param name="customerId">The customer identifier.</param>
+    /// <param name="model">The model.</param>
+    /// <returns></returns>
     [HttpPost("ticketrequest")]
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]

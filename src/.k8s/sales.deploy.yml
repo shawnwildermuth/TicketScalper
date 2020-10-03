@@ -1,31 +1,49 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: ticketscalper-sales
+  name: tssales
 spec:
   selector:
     matchLabels:
-      app: ticketscalper-sales
+      app: tssales
   template:
     metadata:
       labels:
-        app: ticketscalper-sales
+        app: tssales
     spec:
       containers:
-      - name: ticketscalper-sales
-        image: ticketscalpersales:latest
+      - name: tssales
+        image: shawnwildermuth/ticketscalpersales:test
+        ports:
+          - containerPort: 80
         resources:
           limits:
             memory: "512Mi"
             cpu: "200m" 
-      - name: ticketscalper-salesdb
-        image: mcr.microsoft.com/mssql/server:2019-latest
         env:
-          - name: SA_PASSWORD
-            value: "P@ssw0rd!"
-          - name: ACCEPT_EULA
-            value: "Y"
-        resources:
-          limits:
-            memory: "512Mi"
-            cpu: "500m" 
+          - name: ConnectionStrings__DbServer
+            valueFrom:
+              secretKeyRef:
+                name: tssecrets
+                key: salesDb
+          - name: gRPC__BaseUrl
+            valueFrom:
+              secretKeyRef:
+                name: tssecrets
+                key: grpcBaseUrl
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: tssales
+  labels:
+    app: tssales
+spec:
+  selector:
+    app: tssales
+  ports:
+  - port: 5002
+    protocol: TCP
+    targetPort: 80 

@@ -11,12 +11,22 @@ using TicketScalper.ShowsAPI.Data;
 
 namespace TicketScalper.ShowsAPI.Services
 {
+  /// <summary>
+  /// The gRPC Ticket Service, called form Sales API
+  /// </summary>
+  /// <seealso cref="TicketScalper.ShowsAPI.Services.TicketMessageService.TicketMessageServiceBase" />
   public class TicketService : TicketMessageService.TicketMessageServiceBase
   {
     private readonly ILogger<TicketService> _logger;
     private readonly IShowRepository _repository;
     private readonly IMapper _mapper;
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="TicketService"/> class.
+    /// </summary>
+    /// <param name="logger">The logger.</param>
+    /// <param name="repository">The repository.</param>
+    /// <param name="mapper">The mapper.</param>
     public TicketService(ILogger<TicketService> logger, IShowRepository repository, IMapper mapper)
     {
       _logger = logger;
@@ -24,6 +34,12 @@ namespace TicketScalper.ShowsAPI.Services
       _mapper = mapper;
     }
 
+    /// <summary>
+    /// Finalizes the tickets.
+    /// </summary>
+    /// <param name="request">The request.</param>
+    /// <param name="context">The context.</param>
+    /// <returns></returns>
     public override async Task<ConfirmedTicketResponse> FinalizeTickets(TicketRequest request, ServerCallContext context)
     {
       var response = new ConfirmedTicketResponse()
@@ -60,6 +76,12 @@ namespace TicketScalper.ShowsAPI.Services
       return response;
     }
 
+    /// <summary>
+    /// Reserves the tickets.
+    /// </summary>
+    /// <param name="request">The request.</param>
+    /// <param name="context">The context.</param>
+    /// <returns></returns>
     public override async Task<TicketResponse> ReserveTickets(TicketRequest request, ServerCallContext context)
     {
       var response = new TicketResponse()

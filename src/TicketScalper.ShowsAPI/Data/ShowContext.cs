@@ -11,17 +11,53 @@ using TicketScalper.ShowsAPI.Data.Entities;
 
 namespace TicketScalper.ShowsAPI.Data
 {
+  /// <summary>
+  /// The Context class for Shows
+  /// </summary>
+  /// <seealso cref="Microsoft.EntityFrameworkCore.DbContext" />
   public class ShowContext : DbContext
   {
+    /// <summary>
+    /// Initializes a new instance of the <see cref="ShowContext"/> class.
+    /// </summary>
+    /// <param name="options">The options for this context.</param>
     public ShowContext(DbContextOptions options) : base(options)
     {
     }
 
+    /// <summary>
+    /// Gets or sets the shows.
+    /// </summary>
+    /// <value>
+    /// The shows.
+    /// </value>
     public DbSet<Show> Shows { get; set; }
+    /// <summary>
+    /// Gets or sets the acts.
+    /// </summary>
+    /// <value>
+    /// The acts.
+    /// </value>
     public DbSet<Act> Acts { get; set; }
+    /// <summary>
+    /// Gets or sets the tickets.
+    /// </summary>
+    /// <value>
+    /// The tickets.
+    /// </value>
     public DbSet<Ticket> Tickets { get; set; }
+    /// <summary>
+    /// Gets or sets the venues.
+    /// </summary>
+    /// <value>
+    /// The venues.
+    /// </value>
     public DbSet<Venue> Venues { get; set; }
 
+    /// <summary>
+    /// Called when [model creating].
+    /// </summary>
+    /// <param name="bldr">The BLDR.</param>
     protected override void OnModelCreating(ModelBuilder bldr)
     {
       base.OnModelCreating(bldr);

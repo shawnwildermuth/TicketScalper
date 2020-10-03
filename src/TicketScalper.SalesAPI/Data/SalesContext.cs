@@ -10,15 +10,39 @@ using TicketScalper.SalesAPI.Data.Entities;
 
 namespace TicketScalper.SalesAPI.Data
 {
+  /// <summary>
+  /// Context object for accessing Database information
+  /// </summary>
+  /// <seealso cref="Microsoft.EntityFrameworkCore.DbContext" />
   public class SalesContext : DbContext
   {
+    /// <summary>
+    /// Initializes a new instance of the <see cref="SalesContext"/> class.
+    /// </summary>
+    /// <param name="options">The options for this context.</param>
     public SalesContext([NotNullAttribute] DbContextOptions options) : base(options)
     {
     }
 
+    /// <summary>
+    /// Gets or sets the customers.
+    /// </summary>
+    /// <value>
+    /// The customers.
+    /// </value>
     public DbSet<Customer>  Customers { get; set; }
+    /// <summary>
+    /// Gets or sets the ticket sales.
+    /// </summary>
+    /// <value>
+    /// The ticket sales.
+    /// </value>
     public DbSet<TicketSale> TicketSales { get; set; }
 
+    /// <summary>
+    /// Called when [model creating].
+    /// </summary>
+    /// <param name="bldr">The BLDR.</param>
     protected override void OnModelCreating(ModelBuilder bldr)
     {
       base.OnModelCreating(bldr);

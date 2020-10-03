@@ -16,6 +16,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using Newtonsoft.Json;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using TicketScalper.Core.Extensions;
 using TicketScalper.Core.Tokens;
@@ -38,10 +39,18 @@ namespace TicketScalper.ShowsAPI
     // This method gets called by the runtime. Use this method to add services to the container.
     public void ConfigureServices(IServiceCollection services)
     {
-      services.AddDbContext<ShowContext>(cfg => cfg.UseSqlServer(_config.GetConnectionString("DbServer")));
+      services.AddDbContext<ShowContext>(cfg =>
+      {
+        cfg.UseSqlServer(_config.GetConnectionString("DbServer"));
+      });
       services.AddScoped<IShowRepository, ShowRepository>();
 
-      services.AddControllers();
+      services.AddControllers()
+        .AddNewtonsoftJson(cfg =>
+        {
+          cfg.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+        });
+
       services.AddAutoMapper(Assembly.GetEntryAssembly());
 
       services.AddTicketScalperAuthentication();
@@ -77,8 +86,11 @@ namespace TicketScalper.ShowsAPI
       {
         app.UseDeveloperExceptionPage();
       }
-
-      app.UseHttpsRedirection();
+      else
+      {
+        app.UseExceptionHandler("/Error");
+        app.UseHsts();
+      }
 
       app.UseSwagger();
       app.UseSwaggerUI(cfg =>

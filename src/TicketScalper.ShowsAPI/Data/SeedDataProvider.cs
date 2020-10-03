@@ -7,8 +7,15 @@ using TicketScalper.ShowsAPI.Data.Entities;
 
 namespace TicketScalper.ShowsAPI.Data
 {
+  /// <summary>
+  /// A provider for sample data
+  /// </summary>
   public static class SeedDataProvider
   {
+    /// <summary>
+    /// Generates the tickets.
+    /// </summary>
+    /// <returns>A collection of Tickets</returns>
     public static Ticket[] GenerateTickets()
     {
       return new Ticket[]
@@ -32,6 +39,10 @@ namespace TicketScalper.ShowsAPI.Data
       };
     }
 
+    /// <summary>
+    /// Generates the act shows.
+    /// </summary>
+    /// <returns></returns>
     public static ActShow[] GenerateActShows()
     {
       return new ActShow[]
@@ -43,6 +54,10 @@ namespace TicketScalper.ShowsAPI.Data
       };
     }
 
+    /// <summary>
+    /// Generates the shows.
+    /// </summary>
+    /// <returns></returns>
     public static Show[] GenerateShows()
     {
       return new Show[]
@@ -77,6 +92,10 @@ namespace TicketScalper.ShowsAPI.Data
       };
     }
 
+    /// <summary>
+    /// Generates the venues.
+    /// </summary>
+    /// <returns></returns>
     public static Venue[] GenerateVenues()
     {
 
@@ -97,6 +116,10 @@ namespace TicketScalper.ShowsAPI.Data
       };
     }
 
+    /// <summary>
+    /// Generates the addresses.
+    /// </summary>
+    /// <returns></returns>
     public static Address[] GenerateAddresses()
     {
       return new Address[]
@@ -123,6 +146,10 @@ namespace TicketScalper.ShowsAPI.Data
       };
     }
 
+    /// <summary>
+    /// Generates the acts.
+    /// </summary>
+    /// <returns></returns>
     public static Act[] GenerateActs()
     {
       return new Act[]

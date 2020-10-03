@@ -11,8 +11,15 @@ using TicketScalper.ShowsAPI.Services;
 
 namespace TicketScalper.SalesAPI.Data
 {
+  /// <summary>
+  /// Mapping profile for Automapper
+  /// </summary>
+  /// <seealso cref="AutoMapper.Profile" />
   public class SalesMaps : Profile
   {
+    /// <summary>
+    /// Initializes a new instance of the <see cref="SalesMaps"/> class.
+    /// </summary>
     public SalesMaps()
     {
       CreateMap<Customer, CustomerModel>()

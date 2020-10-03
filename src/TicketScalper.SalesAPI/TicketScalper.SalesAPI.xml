@@ -1,0 +1,1140 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>TicketScalper.SalesAPI</name>
+    </assembly>
+    <members>
+        <member name="T:TicketScalper.SalesAPI.Controllers.CustomersController">
+            <summary>
+            The controller for Customers
+            </summary>
+            <seealso cref="T:TicketScalper.Core.Controllers.UserController" />
+        </member>
+        <member name="M:TicketScalper.SalesAPI.Controllers.CustomersController.#ctor(Microsoft.Extensions.Logging.ILogger{TicketScalper.SalesAPI.Controllers.CustomersController},AutoMapper.IMapper,TicketScalper.SalesAPI.Data.ISalesRepository)">
+            <summary>
+            Initializes a new instance of the <see cref="T:TicketScalper.SalesAPI.Controllers.CustomersController"/> class.
+            </summary>
+            <param name="logger">The logger.</param>
+            <param name="mapper">The mapper.</param>
+            <param name="repository">The repository.</param>
+        </member>
+        <member name="M:TicketScalper.SalesAPI.Controllers.CustomersController.GetCustomersAsync">
+            <summary>
+            Gets the customers asynchronous.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:TicketScalper.SalesAPI.Controllers.CustomersController.PostAsync(TicketScalper.SalesAPI.Models.CustomerModel)">
+            <summary>
+            Posts the asynchronous.
+            </summary>
+            <param name="model">The model.</param>
+            <returns></returns>
+        </member>
+        <member name="M:TicketScalper.SalesAPI.Controllers.CustomersController.Put(System.Int32,TicketScalper.SalesAPI.Models.CustomerModel)">
+            <summary>
+            Puts the specified identifier.
+            </summary>
+            <param name="id">The identifier.</param>
+            <param name="model">The model.</param>
+            <returns></returns>
+        </member>
+        <member name="M:TicketScalper.SalesAPI.Controllers.CustomersController.Delete(System.Int32)">
+            <summary>
+            Deletes the specified identifier.
+            </summary>
+            <param name="id">The identifier.</param>
+            <returns></returns>
+        </member>
+        <member name="T:TicketScalper.SalesAPI.Controllers.SalesController">
+            <summary>
+            Controller for Sales
+            </summary>
+            <seealso cref="T:Microsoft.AspNetCore.Mvc.ControllerBase" />
+        </member>
+        <member name="M:TicketScalper.SalesAPI.Controllers.SalesController.#ctor(Microsoft.Extensions.Logging.ILogger{TicketScalper.SalesAPI.Controllers.SalesController},AutoMapper.IMapper,TicketScalper.SalesAPI.Data.ISalesRepository,TicketScalper.SalesAPI.Services.ITicketService)">
+            <summary>
+            Initializes a new instance of the <see cref="T:TicketScalper.SalesAPI.Controllers.SalesController"/> class.
+            </summary>
+            <param name="logger">The logger.</param>
+            <param name="mapper">The mapper.</param>
+            <param name="repository">The repository.</param>
+            <param name="ticketService">The ticket service.</param>
+        </member>
+        <member name="M:TicketScalper.SalesAPI.Controllers.SalesController.Get(System.Int32)">
+            <summary>
+            Gets the specified customer identifier.
+            </summary>
+            <param name="customerId">The customer identifier.</param>
+            <returns></returns>
+        </member>
+        <member name="M:TicketScalper.SalesAPI.Controllers.SalesController.Get(System.Int32,System.Int32)">
+            <summary>
+            Gets the specified customer identifier.
+            </summary>
+            <param name="customerId">The customer identifier.</param>
+            <param name="id">The identifier.</param>
+            <returns></returns>
+        </member>
+        <member name="M:TicketScalper.SalesAPI.Controllers.SalesController.Post(System.Int32,TicketScalper.SalesAPI.Models.TicketRequestModel)">
+            <summary>
+            Posts the specified customer identifier.
+            </summary>
+            <param name="customerId">The customer identifier.</param>
+            <param name="model">The model.</param>
+            <returns></returns>
+        </member>
+        <member name="T:TicketScalper.SalesAPI.Data.Entities.Customer">
+            <summary>
+            Entity for Customer
+            </summary>
+        </member>
+        <member name="P:TicketScalper.SalesAPI.Data.Entities.Customer.Id">
+            <summary>
+            Gets or sets the identifier.
+            </summary>
+            <value>
+            The identifier.
+            </value>
+        </member>
+        <member name="P:TicketScalper.SalesAPI.Data.Entities.Customer.FirstName">
+            <summary>
+            Gets or sets the first name.
+            </summary>
+            <value>
+            The first name.
+            </value>
+        </member>
+        <member name="P:TicketScalper.SalesAPI.Data.Entities.Customer.LastName">
+            <summary>
+            Gets or sets the last name.
+            </summary>
+            <value>
+            The last name.
+            </value>
+        </member>
+        <member name="P:TicketScalper.SalesAPI.Data.Entities.Customer.PhoneNumber">
+            <summary>
+            Gets or sets the phone number.
+            </summary>
+            <value>
+            The phone number.
+            </value>
+        </member>
+        <member name="P:TicketScalper.SalesAPI.Data.Entities.Customer.CompanyName">
+            <summary>
+            Gets or sets the name of the company.
+            </summary>
+            <value>
+            The name of the company.
+            </value>
+        </member>
+        <member name="P:TicketScalper.SalesAPI.Data.Entities.Customer.AddressLine1">
+            <summary>
+            Gets or sets the address line1.
+            </summary>
+            <value>
+            The address line1.
+            </value>
+        </member>
+        <member name="P:TicketScalper.SalesAPI.Data.Entities.Customer.AddressLine2">
+            <summary>
+            Gets or sets the address line2.
+            </summary>
+            <value>
+            The address line2.
+            </value>
+        </member>
+        <member name="P:TicketScalper.SalesAPI.Data.Entities.Customer.AddressLine3">
+            <summary>
+            Gets or sets the address line3.
+            </summary>
+            <value>
+            The address line3.
+            </value>
+        </member>
+        <member name="P:TicketScalper.SalesAPI.Data.Entities.Customer.CityTown">
+            <summary>
+            Gets or sets the city town.
+            </summary>
+            <value>
+            The city town.
+            </value>
+        </member>
+        <member name="P:TicketScalper.SalesAPI.Data.Entities.Customer.StateProvince">
+            <summary>
+            Gets or sets the state province.
+            </summary>
+            <value>
+            The state province.
+            </value>
+        </member>
+        <member name="P:TicketScalper.SalesAPI.Data.Entities.Customer.PostalCode">
+            <summary>
+            Gets or sets the postal code.
+            </summary>
+            <value>
+            The postal code.
+            </value>
+        </member>
+        <member name="P:TicketScalper.SalesAPI.Data.Entities.Customer.Country">
+            <summary>
+            Gets or sets the country.
+            </summary>
+            <value>
+            The country.
+            </value>
+        </member>
+        <member name="P:TicketScalper.SalesAPI.Data.Entities.Customer.UserName">
+            <summary>
+            Gets or sets the name of the user.
+            </summary>
+            <value>
+            The name of the user.
+            </value>
+        </member>
+        <member name="P:TicketScalper.SalesAPI.Data.Entities.Customer.Sales">
+            <summary>
+            Gets or sets the sales.
+            </summary>
+            <value>
+            The sales.
+            </value>
+        </member>
+        <member name="T:TicketScalper.SalesAPI.Data.Entities.TicketInfo">
+            <summary>
+            Entity for TicketInfo
+            </summary>
+        </member>
+        <member name="P:TicketScalper.SalesAPI.Data.Entities.TicketInfo.Id">
+            <summary>
+            Gets or sets the identifier.
+            </summary>
+            <value>
+            The identifier.
+            </value>
+        </member>
+        <member name="P:TicketScalper.SalesAPI.Data.Entities.TicketInfo.ShowName">
+            <summary>
+            Gets or sets the name of the show.
+            </summary>
+            <value>
+            The name of the show.
+            </value>
+        </member>
+        <member name="P:TicketScalper.SalesAPI.Data.Entities.TicketInfo.Acts">
+            <summary>
+            Gets or sets the acts.
+            </summary>
+            <value>
+            The acts.
+            </value>
+        </member>
+        <member name="P:TicketScalper.SalesAPI.Data.Entities.TicketInfo.Seat">
+            <summary>
+            Gets or sets the seat.
+            </summary>
+            <value>
+            The seat.
+            </value>
+        </member>
+        <member name="P:TicketScalper.SalesAPI.Data.Entities.TicketInfo.Price">
+            <summary>
+            Gets or sets the price.
+            </summary>
+            <value>
+            The price.
+            </value>
+        </member>
+        <member name="P:TicketScalper.SalesAPI.Data.Entities.TicketInfo.ShowDate">
+            <summary>
+            Gets or sets the show date.
+            </summary>
+            <value>
+            The show date.
+            </value>
+        </member>
+        <member name="P:TicketScalper.SalesAPI.Data.Entities.TicketInfo.VenueName">
+            <summary>
+            Gets or sets the name of the venue.
+            </summary>
+            <value>
+            The name of the venue.
+            </value>
+        </member>
+        <member name="P:TicketScalper.SalesAPI.Data.Entities.TicketInfo.PhoneNumber">
+            <summary>
+            Gets or sets the phone number.
+            </summary>
+            <value>
+            The phone number.
+            </value>
+        </member>
+        <member name="P:TicketScalper.SalesAPI.Data.Entities.TicketInfo.AddressLine1">
+            <summary>
+            Gets or sets the address line1.
+            </summary>
+            <value>
+            The address line1.
+            </value>
+        </member>
+        <member name="P:TicketScalper.SalesAPI.Data.Entities.TicketInfo.AddressLine2">
+            <summary>
+            Gets or sets the address line2.
+            </summary>
+            <value>
+            The address line2.
+            </value>
+        </member>
+        <member name="P:TicketScalper.SalesAPI.Data.Entities.TicketInfo.AddressLine3">
+            <summary>
+            Gets or sets the address line3.
+            </summary>
+            <value>
+            The address line3.
+            </value>
+        </member>
+        <member name="P:TicketScalper.SalesAPI.Data.Entities.TicketInfo.CityTown">
+            <summary>
+            Gets or sets the city town.
+            </summary>
+            <value>
+            The city town.
+            </value>
+        </member>
+        <member name="P:TicketScalper.SalesAPI.Data.Entities.TicketInfo.StateProvince">
+            <summary>
+            Gets or sets the state province.
+            </summary>
+            <value>
+            The state province.
+            </value>
+        </member>
+        <member name="P:TicketScalper.SalesAPI.Data.Entities.TicketInfo.PostalCode">
+            <summary>
+            Gets or sets the postal code.
+            </summary>
+            <value>
+            The postal code.
+            </value>
+        </member>
+        <member name="P:TicketScalper.SalesAPI.Data.Entities.TicketInfo.Country">
+            <summary>
+            Gets or sets the country.
+            </summary>
+            <value>
+            The country.
+            </value>
+        </member>
+        <member name="P:TicketScalper.SalesAPI.Data.Entities.TicketInfo.Sale">
+            <summary>
+            Gets or sets the sale.
+            </summary>
+            <value>
+            The sale.
+            </value>
+        </member>
+        <member name="P:TicketScalper.SalesAPI.Data.Entities.TicketInfo.SaleId">
+            <summary>
+            Gets or sets the sale identifier.
+            </summary>
+            <value>
+            The sale identifier.
+            </value>
+        </member>
+        <member name="T:TicketScalper.SalesAPI.Data.Entities.TicketSale">
+            <summary>
+            Entity for a Ticket Sale
+            </summary>
+        </member>
+        <member name="P:TicketScalper.SalesAPI.Data.Entities.TicketSale.Id">
+            <summary>
+            Gets or sets the identifier.
+            </summary>
+            <value>
+            The identifier.
+            </value>
+        </member>
+        <member name="P:TicketScalper.SalesAPI.Data.Entities.TicketSale.ApprovalCode">
+            <summary>
+            Gets or sets the approval code.
+            </summary>
+            <value>
+            The approval code.
+            </value>
+        </member>
+        <member name="P:TicketScalper.SalesAPI.Data.Entities.TicketSale.PaymentType">
+            <summary>
+            Gets or sets the type of the payment.
+            </summary>
+            <value>
+            The type of the payment.
+            </value>
+        </member>
+        <member name="P:TicketScalper.SalesAPI.Data.Entities.TicketSale.TransactionNumber">
+            <summary>
+            Gets or sets the transaction number.
+            </summary>
+            <value>
+            The transaction number.
+            </value>
+        </member>
+        <member name="P:TicketScalper.SalesAPI.Data.Entities.TicketSale.Completed">
+            <summary>
+            Gets or sets a value indicating whether this <see cref="T:TicketScalper.SalesAPI.Data.Entities.TicketSale"/> is completed.
+            </summary>
+            <value>
+              <c>true</c> if completed; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:TicketScalper.SalesAPI.Data.Entities.TicketSale.TransactionTotal">
+            <summary>
+            Gets or sets the transaction total.
+            </summary>
+            <value>
+            The transaction total.
+            </value>
+        </member>
+        <member name="P:TicketScalper.SalesAPI.Data.Entities.TicketSale.Customer">
+            <summary>
+            Gets or sets the customer.
+            </summary>
+            <value>
+            The customer.
+            </value>
+        </member>
+        <member name="P:TicketScalper.SalesAPI.Data.Entities.TicketSale.CustomerId">
+            <summary>
+            Gets or sets the customer identifier.
+            </summary>
+            <value>
+            The customer identifier.
+            </value>
+        </member>
+        <member name="P:TicketScalper.SalesAPI.Data.Entities.TicketSale.Tickets">
+            <summary>
+            Gets or sets the tickets.
+            </summary>
+            <value>
+            The tickets.
+            </value>
+        </member>
+        <member name="T:TicketScalper.SalesAPI.Data.ISalesRepository">
+            <summary>
+            Interface for the Repository for Sales
+            </summary>
+            <seealso cref="T:TicketScalper.Core.Data.IRepository" />
+        </member>
+        <member name="M:TicketScalper.SalesAPI.Data.ISalesRepository.GetCustomersAsync">
+            <summary>
+            Gets the customers asynchronous.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:TicketScalper.SalesAPI.Data.ISalesRepository.GetCustomerAsync(System.Int32)">
+            <summary>
+            Gets the customer asynchronous.
+            </summary>
+            <param name="id">The identifier.</param>
+            <returns></returns>
+        </member>
+        <member name="M:TicketScalper.SalesAPI.Data.ISalesRepository.GetCustomerByUserAsync(System.String)">
+            <summary>
+            Gets the customer by user asynchronous.
+            </summary>
+            <param name="id">The identifier.</param>
+            <returns></returns>
+        </member>
+        <member name="M:TicketScalper.SalesAPI.Data.ISalesRepository.HasCustomerAsync(System.String)">
+            <summary>
+            Determines whether [has customer asynchronous] [the specified user name].
+            </summary>
+            <param name="userName">Name of the user.</param>
+            <returns></returns>
+        </member>
+        <member name="M:TicketScalper.SalesAPI.Data.ISalesRepository.HasSalesAsync(System.Int32)">
+            <summary>
+            Determines whether [has sales asynchronous] [the specified identifier].
+            </summary>
+            <param name="id">The identifier.</param>
+            <returns></returns>
+        </member>
+        <member name="M:TicketScalper.SalesAPI.Data.ISalesRepository.GetSalesAsync(System.Int32)">
+            <summary>
+            Gets the sales asynchronous.
+            </summary>
+            <param name="customerId">The customer identifier.</param>
+            <returns></returns>
+        </member>
+        <member name="M:TicketScalper.SalesAPI.Data.ISalesRepository.GetSaleAsync(System.Int32,System.Int32)">
+            <summary>
+            Gets the sale asynchronous.
+            </summary>
+            <param name="customerId">The customer identifier.</param>
+            <param name="id">The identifier.</param>
+            <returns></returns>
+        </member>
+        <member name="T:TicketScalper.SalesAPI.Data.SalesContext">
+            <summary>
+            Context object for accessing Database information
+            </summary>
+            <seealso cref="T:Microsoft.EntityFrameworkCore.DbContext" />
+        </member>
+        <member name="M:TicketScalper.SalesAPI.Data.SalesContext.#ctor(Microsoft.EntityFrameworkCore.DbContextOptions)">
+            <summary>
+            Initializes a new instance of the <see cref="T:TicketScalper.SalesAPI.Data.SalesContext"/> class.
+            </summary>
+            <param name="options">The options for this context.</param>
+        </member>
+        <member name="P:TicketScalper.SalesAPI.Data.SalesContext.Customers">
+            <summary>
+            Gets or sets the customers.
+            </summary>
+            <value>
+            The customers.
+            </value>
+        </member>
+        <member name="P:TicketScalper.SalesAPI.Data.SalesContext.TicketSales">
+            <summary>
+            Gets or sets the ticket sales.
+            </summary>
+            <value>
+            The ticket sales.
+            </value>
+        </member>
+        <member name="M:TicketScalper.SalesAPI.Data.SalesContext.OnModelCreating(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <summary>
+            Called when [model creating].
+            </summary>
+            <param name="bldr">The BLDR.</param>
+        </member>
+        <member name="T:TicketScalper.SalesAPI.Data.SalesMaps">
+            <summary>
+            Mapping profile for Automapper
+            </summary>
+            <seealso cref="T:AutoMapper.Profile" />
+        </member>
+        <member name="M:TicketScalper.SalesAPI.Data.SalesMaps.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:TicketScalper.SalesAPI.Data.SalesMaps"/> class.
+            </summary>
+        </member>
+        <member name="T:TicketScalper.SalesAPI.Data.SalesRepository">
+            <summary>
+            Repository for Sales information
+            </summary>
+        </member>
+        <member name="M:TicketScalper.SalesAPI.Data.SalesRepository.#ctor(TicketScalper.SalesAPI.Data.SalesContext)">
+            <summary>
+            Initializes a new instance of the <see cref="T:TicketScalper.SalesAPI.Data.SalesRepository"/> class.
+            </summary>
+            <param name="context">The context.</param>
+        </member>
+        <member name="M:TicketScalper.SalesAPI.Data.SalesRepository.GetCustomerAsync(System.Int32)">
+            <summary>
+            Gets the customer asynchronous.
+            </summary>
+            <param name="id">The identifier.</param>
+            <returns></returns>
+        </member>
+        <member name="M:TicketScalper.SalesAPI.Data.SalesRepository.GetCustomerByUserAsync(System.String)">
+            <summary>
+            Gets the customer by user asynchronous.
+            </summary>
+            <param name="id">The identifier.</param>
+            <returns></returns>
+        </member>
+        <member name="M:TicketScalper.SalesAPI.Data.SalesRepository.GetCustomersAsync">
+            <summary>
+            Gets the customers asynchronous.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:TicketScalper.SalesAPI.Data.SalesRepository.GetSaleAsync(System.Int32,System.Int32)">
+            <summary>
+            Gets the sale asynchronous.
+            </summary>
+            <param name="customerId">The customer identifier.</param>
+            <param name="id">The identifier.</param>
+            <returns></returns>
+        </member>
+        <member name="M:TicketScalper.SalesAPI.Data.SalesRepository.GetSalesAsync(System.Int32)">
+            <summary>
+            Gets the sales asynchronous.
+            </summary>
+            <param name="customerId">The customer identifier.</param>
+            <returns></returns>
+        </member>
+        <member name="M:TicketScalper.SalesAPI.Data.SalesRepository.HasCustomerAsync(System.String)">
+            <summary>
+            Determines whether [has customer asynchronous] [the specified user name].
+            </summary>
+            <param name="userName">Name of the user.</param>
+            <returns></returns>
+        </member>
+        <member name="M:TicketScalper.SalesAPI.Data.SalesRepository.HasSalesAsync(System.Int32)">
+            <summary>
+            Determines whether [has sales asynchronous] [the specified identifier].
+            </summary>
+            <param name="id">The identifier.</param>
+            <returns></returns>
+        </member>
+        <member name="T:TicketScalper.SalesAPI.Data.SalesSeedProvider">
+            <summary>
+            Sample data generator
+            </summary>
+        </member>
+        <member name="M:TicketScalper.SalesAPI.Data.SalesSeedProvider.GenerateCustomers">
+            <summary>
+            Generates the customers.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:TicketScalper.SalesAPI.Models.CustomerModel">
+            <summary>
+            Model for Customer data
+            </summary>
+        </member>
+        <member name="P:TicketScalper.SalesAPI.Models.CustomerModel.Id">
+            <summary>
+            Gets or sets the identifier.
+            </summary>
+            <value>
+            The identifier.
+            </value>
+        </member>
+        <member name="P:TicketScalper.SalesAPI.Models.CustomerModel.FullName">
+            <summary>
+            Gets or sets the full name.
+            </summary>
+            <value>
+            The full name.
+            </value>
+        </member>
+        <member name="P:TicketScalper.SalesAPI.Models.CustomerModel.FirstName">
+            <summary>
+            Gets or sets the first name.
+            </summary>
+            <value>
+            The first name.
+            </value>
+        </member>
+        <member name="P:TicketScalper.SalesAPI.Models.CustomerModel.LastName">
+            <summary>
+            Gets or sets the last name.
+            </summary>
+            <value>
+            The last name.
+            </value>
+        </member>
+        <member name="P:TicketScalper.SalesAPI.Models.CustomerModel.PhoneNumber">
+            <summary>
+            Gets or sets the phone number.
+            </summary>
+            <value>
+            The phone number.
+            </value>
+        </member>
+        <member name="P:TicketScalper.SalesAPI.Models.CustomerModel.CompanyName">
+            <summary>
+            Gets or sets the name of the company.
+            </summary>
+            <value>
+            The name of the company.
+            </value>
+        </member>
+        <member name="P:TicketScalper.SalesAPI.Models.CustomerModel.AddressLine1">
+            <summary>
+            Gets or sets the address line1.
+            </summary>
+            <value>
+            The address line1.
+            </value>
+        </member>
+        <member name="P:TicketScalper.SalesAPI.Models.CustomerModel.AddressLine2">
+            <summary>
+            Gets or sets the address line2.
+            </summary>
+            <value>
+            The address line2.
+            </value>
+        </member>
+        <member name="P:TicketScalper.SalesAPI.Models.CustomerModel.AddressLine3">
+            <summary>
+            Gets or sets the address line3.
+            </summary>
+            <value>
+            The address line3.
+            </value>
+        </member>
+        <member name="P:TicketScalper.SalesAPI.Models.CustomerModel.CityTown">
+            <summary>
+            Gets or sets the city town.
+            </summary>
+            <value>
+            The city town.
+            </value>
+        </member>
+        <member name="P:TicketScalper.SalesAPI.Models.CustomerModel.StateProvince">
+            <summary>
+            Gets or sets the state province.
+            </summary>
+            <value>
+            The state province.
+            </value>
+        </member>
+        <member name="P:TicketScalper.SalesAPI.Models.CustomerModel.PostalCode">
+            <summary>
+            Gets or sets the postal code.
+            </summary>
+            <value>
+            The postal code.
+            </value>
+        </member>
+        <member name="P:TicketScalper.SalesAPI.Models.CustomerModel.Country">
+            <summary>
+            Gets or sets the country.
+            </summary>
+            <value>
+            The country.
+            </value>
+        </member>
+        <member name="T:TicketScalper.SalesAPI.Models.FinalizedTicketResponse">
+            <summary>
+            Response design for a Finalized Tickets
+            </summary>
+        </member>
+        <member name="P:TicketScalper.SalesAPI.Models.FinalizedTicketResponse.Success">
+            <summary>
+            Gets or sets a value indicating whether this <see cref="T:TicketScalper.SalesAPI.Models.FinalizedTicketResponse"/> is success.
+            </summary>
+            <value>
+              <c>true</c> if success; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:TicketScalper.SalesAPI.Models.FinalizedTicketResponse.Tickets">
+            <summary>
+            Gets or sets the tickets.
+            </summary>
+            <value>
+            The tickets.
+            </value>
+        </member>
+        <member name="T:TicketScalper.SalesAPI.Models.TicketModel">
+            <summary>
+            Model for a Ticket
+            </summary>
+        </member>
+        <member name="P:TicketScalper.SalesAPI.Models.TicketModel.Id">
+            <summary>
+            Gets or sets the identifier.
+            </summary>
+            <value>
+            The identifier.
+            </value>
+        </member>
+        <member name="P:TicketScalper.SalesAPI.Models.TicketModel.ShowName">
+            <summary>
+            Gets or sets the name of the show.
+            </summary>
+            <value>
+            The name of the show.
+            </value>
+        </member>
+        <member name="P:TicketScalper.SalesAPI.Models.TicketModel.Acts">
+            <summary>
+            Gets or sets the acts.
+            </summary>
+            <value>
+            The acts.
+            </value>
+        </member>
+        <member name="P:TicketScalper.SalesAPI.Models.TicketModel.Seat">
+            <summary>
+            Gets or sets the seat.
+            </summary>
+            <value>
+            The seat.
+            </value>
+        </member>
+        <member name="P:TicketScalper.SalesAPI.Models.TicketModel.Price">
+            <summary>
+            Gets or sets the price.
+            </summary>
+            <value>
+            The price.
+            </value>
+        </member>
+        <member name="P:TicketScalper.SalesAPI.Models.TicketModel.ShowDate">
+            <summary>
+            Gets or sets the show date.
+            </summary>
+            <value>
+            The show date.
+            </value>
+        </member>
+        <member name="P:TicketScalper.SalesAPI.Models.TicketModel.VenueName">
+            <summary>
+            Gets or sets the name of the venue.
+            </summary>
+            <value>
+            The name of the venue.
+            </value>
+        </member>
+        <member name="P:TicketScalper.SalesAPI.Models.TicketModel.PhoneNumber">
+            <summary>
+            Gets or sets the phone number.
+            </summary>
+            <value>
+            The phone number.
+            </value>
+        </member>
+        <member name="P:TicketScalper.SalesAPI.Models.TicketModel.AddressLine1">
+            <summary>
+            Gets or sets the address line1.
+            </summary>
+            <value>
+            The address line1.
+            </value>
+        </member>
+        <member name="P:TicketScalper.SalesAPI.Models.TicketModel.AddressLine2">
+            <summary>
+            Gets or sets the address line2.
+            </summary>
+            <value>
+            The address line2.
+            </value>
+        </member>
+        <member name="P:TicketScalper.SalesAPI.Models.TicketModel.AddressLine3">
+            <summary>
+            Gets or sets the address line3.
+            </summary>
+            <value>
+            The address line3.
+            </value>
+        </member>
+        <member name="P:TicketScalper.SalesAPI.Models.TicketModel.CityTown">
+            <summary>
+            Gets or sets the city town.
+            </summary>
+            <value>
+            The city town.
+            </value>
+        </member>
+        <member name="P:TicketScalper.SalesAPI.Models.TicketModel.StateProvince">
+            <summary>
+            Gets or sets the state province.
+            </summary>
+            <value>
+            The state province.
+            </value>
+        </member>
+        <member name="P:TicketScalper.SalesAPI.Models.TicketModel.PostalCode">
+            <summary>
+            Gets or sets the postal code.
+            </summary>
+            <value>
+            The postal code.
+            </value>
+        </member>
+        <member name="P:TicketScalper.SalesAPI.Models.TicketModel.Country">
+            <summary>
+            Gets or sets the country.
+            </summary>
+            <value>
+            The country.
+            </value>
+        </member>
+        <member name="T:TicketScalper.SalesAPI.Models.TicketRequestModel">
+            <summary>
+            Model for a ticket request
+            </summary>
+        </member>
+        <member name="P:TicketScalper.SalesAPI.Models.TicketRequestModel.TicketIds">
+            <summary>
+            Gets or sets the ticket ids.
+            </summary>
+            <value>
+            The ticket ids.
+            </value>
+        </member>
+        <member name="P:TicketScalper.SalesAPI.Models.TicketRequestModel.CreditCard">
+            <summary>
+            Gets or sets the credit card.
+            </summary>
+            <value>
+            The credit card.
+            </value>
+        </member>
+        <member name="P:TicketScalper.SalesAPI.Models.TicketRequestModel.ExpirationMonth">
+            <summary>
+            Gets or sets the expiration month.
+            </summary>
+            <value>
+            The expiration month.
+            </value>
+        </member>
+        <member name="P:TicketScalper.SalesAPI.Models.TicketRequestModel.ExpirationYear">
+            <summary>
+            Gets or sets the expiration year.
+            </summary>
+            <value>
+            The expiration year.
+            </value>
+        </member>
+        <member name="P:TicketScalper.SalesAPI.Models.TicketRequestModel.ValidationCode">
+            <summary>
+            Gets or sets the validation code.
+            </summary>
+            <value>
+            The validation code.
+            </value>
+        </member>
+        <member name="P:TicketScalper.SalesAPI.Models.TicketRequestModel.PostalCode">
+            <summary>
+            Gets or sets the postal code.
+            </summary>
+            <value>
+            The postal code.
+            </value>
+        </member>
+        <member name="T:TicketScalper.SalesAPI.Models.TicketSaleModel">
+            <summary>
+            Model for a Ticket Sale
+            </summary>
+        </member>
+        <member name="P:TicketScalper.SalesAPI.Models.TicketSaleModel.Id">
+            <summary>
+            Gets or sets the identifier.
+            </summary>
+            <value>
+            The identifier.
+            </value>
+        </member>
+        <member name="P:TicketScalper.SalesAPI.Models.TicketSaleModel.ApprovalCode">
+            <summary>
+            Gets or sets the approval code.
+            </summary>
+            <value>
+            The approval code.
+            </value>
+        </member>
+        <member name="P:TicketScalper.SalesAPI.Models.TicketSaleModel.PaymentType">
+            <summary>
+            Gets or sets the type of the payment.
+            </summary>
+            <value>
+            The type of the payment.
+            </value>
+        </member>
+        <member name="P:TicketScalper.SalesAPI.Models.TicketSaleModel.TransactionNumber">
+            <summary>
+            Gets or sets the transaction number.
+            </summary>
+            <value>
+            The transaction number.
+            </value>
+        </member>
+        <member name="P:TicketScalper.SalesAPI.Models.TicketSaleModel.Completed">
+            <summary>
+            Gets or sets a value indicating whether this <see cref="T:TicketScalper.SalesAPI.Models.TicketSaleModel"/> is completed.
+            </summary>
+            <value>
+              <c>true</c> if completed; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:TicketScalper.SalesAPI.Models.TicketSaleModel.TransactionTotal">
+            <summary>
+            Gets or sets the transaction total.
+            </summary>
+            <value>
+            The transaction total.
+            </value>
+        </member>
+        <member name="P:TicketScalper.SalesAPI.Models.TicketSaleModel.CustomerId">
+            <summary>
+            Gets or sets the customer identifier.
+            </summary>
+            <value>
+            The customer identifier.
+            </value>
+        </member>
+        <member name="P:TicketScalper.SalesAPI.Models.TicketSaleModel.Tickets">
+            <summary>
+            Gets or sets the tickets.
+            </summary>
+            <value>
+            The tickets.
+            </value>
+        </member>
+        <member name="T:TicketScalper.SalesAPI.Services.ITicketChannelProvider">
+            <summary>
+            Interface for providing a gRPC channel
+            </summary>
+        </member>
+        <member name="M:TicketScalper.SalesAPI.Services.ITicketChannelProvider.ProvideChannel">
+            <summary>
+            Provides the channel.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:TicketScalper.SalesAPI.Services.ITicketService">
+            <summary>
+            Interface for the ticket service
+            </summary>
+        </member>
+        <member name="M:TicketScalper.SalesAPI.Services.ITicketService.FinalizeTickets(System.Int32[])">
+            <summary>
+            Finalizes the tickets.
+            </summary>
+            <param name="tickets">The tickets.</param>
+            <returns></returns>
+        </member>
+        <member name="M:TicketScalper.SalesAPI.Services.ITicketService.ReserveTickets(System.Int32[])">
+            <summary>
+            Reserves the tickets.
+            </summary>
+            <param name="tickets">The tickets.</param>
+            <returns></returns>
+        </member>
+        <member name="T:TicketScalper.SalesAPI.Services.TicketChannelProvider">
+            <summary>
+            Service for providing the gRPC channel
+            </summary>
+            <seealso cref="T:TicketScalper.SalesAPI.Services.ITicketChannelProvider" />
+        </member>
+        <member name="M:TicketScalper.SalesAPI.Services.TicketChannelProvider.#ctor(Microsoft.AspNetCore.Hosting.IWebHostEnvironment,Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            Initializes a new instance of the <see cref="T:TicketScalper.SalesAPI.Services.TicketChannelProvider" /> class.
+            </summary>
+            <param name="environment">The environment.</param>
+            <param name="config">The configuration.</param>
+        </member>
+        <member name="M:TicketScalper.SalesAPI.Services.TicketChannelProvider.ProvideChannel">
+            <summary>
+            Provides the channel.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:TicketScalper.SalesAPI.Services.TicketService">
+            <summary>
+            Service for returning Tickets
+            </summary>
+            <seealso cref="T:TicketScalper.SalesAPI.Services.ITicketService" />
+        </member>
+        <member name="M:TicketScalper.SalesAPI.Services.TicketService.#ctor(TicketScalper.SalesAPI.Services.ITicketChannelProvider,AutoMapper.IMapper)">
+            <summary>
+            Initializes a new instance of the <see cref="T:TicketScalper.SalesAPI.Services.TicketService"/> class.
+            </summary>
+            <param name="channelProvider">The channel provider.</param>
+            <param name="mapper">The mapper.</param>
+        </member>
+        <member name="M:TicketScalper.SalesAPI.Services.TicketService.ReserveTickets(System.Int32[])">
+            <summary>
+            Reserves the tickets.
+            </summary>
+            <param name="tickets">The tickets.</param>
+            <returns></returns>
+        </member>
+        <member name="M:TicketScalper.SalesAPI.Services.TicketService.FinalizeTickets(System.Int32[])">
+            <summary>
+            Finalizes the tickets.
+            </summary>
+            <param name="tickets">The tickets.</param>
+            <returns></returns>
+        </member>
+        <member name="T:TicketScalper.ShowsAPI.Services.TicketMessageServiceReflection">
+            <summary>Holder for reflection information generated from TicketMessageService.proto</summary>
+        </member>
+        <member name="P:TicketScalper.ShowsAPI.Services.TicketMessageServiceReflection.Descriptor">
+            <summary>File descriptor for TicketMessageService.proto</summary>
+        </member>
+        <member name="F:TicketScalper.ShowsAPI.Services.TicketRequest.TicketIdsFieldNumber">
+            <summary>Field number for the "TicketIds" field.</summary>
+        </member>
+        <member name="F:TicketScalper.ShowsAPI.Services.TicketResponse.SuccessFieldNumber">
+            <summary>Field number for the "Success" field.</summary>
+        </member>
+        <member name="F:TicketScalper.ShowsAPI.Services.TicketResponse.UserMessageFieldNumber">
+            <summary>Field number for the "UserMessage" field.</summary>
+        </member>
+        <member name="F:TicketScalper.ShowsAPI.Services.TicketMessage.IdFieldNumber">
+            <summary>Field number for the "Id" field.</summary>
+        </member>
+        <member name="F:TicketScalper.ShowsAPI.Services.TicketMessage.SeatFieldNumber">
+            <summary>Field number for the "Seat" field.</summary>
+        </member>
+        <member name="F:TicketScalper.ShowsAPI.Services.TicketMessage.ShowNameFieldNumber">
+            <summary>Field number for the "ShowName" field.</summary>
+        </member>
+        <member name="F:TicketScalper.ShowsAPI.Services.TicketMessage.ShowDateFieldNumber">
+            <summary>Field number for the "ShowDate" field.</summary>
+        </member>
+        <member name="F:TicketScalper.ShowsAPI.Services.TicketMessage.ActsFieldNumber">
+            <summary>Field number for the "Acts" field.</summary>
+        </member>
+        <member name="F:TicketScalper.ShowsAPI.Services.TicketMessage.PriceFieldNumber">
+            <summary>Field number for the "Price" field.</summary>
+        </member>
+        <member name="F:TicketScalper.ShowsAPI.Services.TicketMessage.VenueNameFieldNumber">
+            <summary>Field number for the "VenueName" field.</summary>
+        </member>
+        <member name="F:TicketScalper.ShowsAPI.Services.TicketMessage.PhoneFieldNumber">
+            <summary>Field number for the "Phone" field.</summary>
+        </member>
+        <member name="F:TicketScalper.ShowsAPI.Services.TicketMessage.Address1FieldNumber">
+            <summary>Field number for the "Address1" field.</summary>
+        </member>
+        <member name="F:TicketScalper.ShowsAPI.Services.TicketMessage.Address2FieldNumber">
+            <summary>Field number for the "Address2" field.</summary>
+        </member>
+        <member name="F:TicketScalper.ShowsAPI.Services.TicketMessage.Address3FieldNumber">
+            <summary>Field number for the "Address3" field.</summary>
+        </member>
+        <member name="F:TicketScalper.ShowsAPI.Services.TicketMessage.CityTownFieldNumber">
+            <summary>Field number for the "CityTown" field.</summary>
+        </member>
+        <member name="F:TicketScalper.ShowsAPI.Services.TicketMessage.StateProvinceFieldNumber">
+            <summary>Field number for the "StateProvince" field.</summary>
+        </member>
+        <member name="F:TicketScalper.ShowsAPI.Services.TicketMessage.PostalCodeFieldNumber">
+            <summary>Field number for the "PostalCode" field.</summary>
+        </member>
+        <member name="F:TicketScalper.ShowsAPI.Services.TicketMessage.CountryFieldNumber">
+            <summary>Field number for the "Country" field.</summary>
+        </member>
+        <member name="F:TicketScalper.ShowsAPI.Services.ConfirmedTicketResponse.SuccessFieldNumber">
+            <summary>Field number for the "Success" field.</summary>
+        </member>
+        <member name="F:TicketScalper.ShowsAPI.Services.ConfirmedTicketResponse.UserMessageFieldNumber">
+            <summary>Field number for the "UserMessage" field.</summary>
+        </member>
+        <member name="F:TicketScalper.ShowsAPI.Services.ConfirmedTicketResponse.TicketsFieldNumber">
+            <summary>Field number for the "Tickets" field.</summary>
+        </member>
+        <member name="P:TicketScalper.ShowsAPI.Services.TicketMessageService.Descriptor">
+            <summary>Service descriptor</summary>
+        </member>
+        <member name="T:TicketScalper.ShowsAPI.Services.TicketMessageService.TicketMessageServiceClient">
+            <summary>Client for TicketMessageService</summary>
+        </member>
+        <member name="M:TicketScalper.ShowsAPI.Services.TicketMessageService.TicketMessageServiceClient.#ctor(Grpc.Core.ChannelBase)">
+            <summary>Creates a new client for TicketMessageService</summary>
+            <param name="channel">The channel to use to make remote calls.</param>
+        </member>
+        <member name="M:TicketScalper.ShowsAPI.Services.TicketMessageService.TicketMessageServiceClient.#ctor(Grpc.Core.CallInvoker)">
+            <summary>Creates a new client for TicketMessageService that uses a custom <c>CallInvoker</c>.</summary>
+            <param name="callInvoker">The callInvoker to use to make remote calls.</param>
+        </member>
+        <member name="M:TicketScalper.ShowsAPI.Services.TicketMessageService.TicketMessageServiceClient.#ctor">
+            <summary>Protected parameterless constructor to allow creation of test doubles.</summary>
+        </member>
+        <member name="M:TicketScalper.ShowsAPI.Services.TicketMessageService.TicketMessageServiceClient.#ctor(Grpc.Core.ClientBase.ClientBaseConfiguration)">
+            <summary>Protected constructor to allow creation of configured clients.</summary>
+            <param name="configuration">The client configuration.</param>
+        </member>
+        <member name="M:TicketScalper.ShowsAPI.Services.TicketMessageService.TicketMessageServiceClient.NewInstance(Grpc.Core.ClientBase.ClientBaseConfiguration)">
+            <summary>Creates a new instance of client from given <c>ClientBaseConfiguration</c>.</summary>
+        </member>
+    </members>
+</doc>
