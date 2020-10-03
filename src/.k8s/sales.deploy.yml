@@ -13,7 +13,8 @@ spec:
     spec:
       containers:
       - name: tssales
-        image: shawnwildermuth/ticketscalpersales:test
+        image: ticketscalpersales:dev
+        imagePullPolicy: IfNotPresent
         ports:
           - containerPort: 80
         resources:

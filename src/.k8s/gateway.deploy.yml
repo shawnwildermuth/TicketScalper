@@ -13,7 +13,8 @@ spec:
     spec:
       containers:
       - name: tsgateway
-        image: shawnwildermuth/ticketscalpergateway:test
+        image: ticketscalpergateway:dev
+        imagePullPolicy: IfNotPresent
         ports:
           - containerPort: 80
         resources:

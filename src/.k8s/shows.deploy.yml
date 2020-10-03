@@ -13,7 +13,8 @@ spec:
     spec:
       containers:
       - name: tsshows
-        image: shawnwildermuth/ticketscalpershows:test
+        image: ticketscalpershows:dev
+        imagePullPolicy: IfNotPresent
         ports:
           - containerPort: 80
         resources:
